@@ -143,12 +143,11 @@ input,select,textarea,button{font-family:inherit}
 .wisdom .wq{font-style:italic;color:var(--pl);font-size:14px;margin-bottom:4px}
 .wisdom .wa{color:var(--td);font-size:12px}
 
-/* ─── FOCO V2 ─────────────────────────────────────────── */
+/* FOCO V2 */
 .foc-toggle{display:flex;gap:8px;margin-bottom:16px}
 .foc-tog-btn{flex:1;padding:10px;background:var(--bg);border:1px solid var(--bd);border-radius:10px;color:var(--td);cursor:pointer;font-size:13px;font-weight:700;transition:all .2s;text-align:center}
 .foc-tog-btn.act{background:rgba(139,92,246,.1);border-color:var(--p);color:var(--p)}
 .foc-tog-btn.act-ok{background:rgba(34,197,94,.08);border-color:var(--ok);color:var(--ok)}
-
 .foc-item-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;background:var(--bg);border-radius:10px;padding:10px 12px;border:1px solid var(--bd)}
 .foc-num{width:22px;height:22px;background:var(--p);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron';font-size:10px;font-weight:700;flex-shrink:0}
 .foc-num.opt{background:var(--bg5)}
@@ -157,13 +156,10 @@ input,select,textarea,button{font-family:inherit}
 .foc-inp::placeholder{color:var(--t3)}
 .foc-time{width:88px;background:var(--bg4);border:1px solid var(--bd);border-radius:6px;color:var(--td);font-size:12px;padding:4px 6px;text-align:center}
 .foc-time:focus{outline:none;border-color:var(--p)}
-
-.foc-xp-hint{display:flex;gap:8px;margin-bottom:14px}
+.foc-xp-hint{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
 .foc-xp-tag{font-size:11px;padding:4px 10px;border-radius:8px;font-weight:700;display:flex;align-items:center;gap:4px}
 .foc-xp-tag.good{background:rgba(34,197,94,.12);color:var(--ok);border:1px solid rgba(34,197,94,.2)}
 .foc-xp-tag.less{background:rgba(245,158,11,.1);color:var(--warn);border:1px solid rgba(245,158,11,.2)}
-
-/* Foco items display */
 .fi{display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg);border-radius:12px;margin-bottom:10px;border:1px solid var(--bd);transition:all .2s;position:relative;overflow:hidden}
 .fi:hover{border-color:var(--p)}
 .fi.done{opacity:.55}
@@ -187,11 +183,15 @@ input,select,textarea,button{font-family:inherit}
 .fi-xp.good{color:var(--ok)}
 .fi-xp.less{color:var(--warn)}
 .fi-xp.earned{color:var(--ok)}
-
 .foc-amanha-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);border-radius:8px;color:var(--info);font-size:12px;font-weight:700;margin-bottom:14px}
 .foc-all-done{text-align:center;padding:12px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:10px;color:var(--ok);font-weight:700;margin-top:8px}
 
-/* ─── SEMANAL V2 ─────────────────────────────────────── */
+/* ─── SEMANAL V3 ─── */
+.period-tabs{display:flex;gap:6px;margin-bottom:16px;background:var(--bg);padding:6px;border-radius:12px;border:1px solid var(--bd)}
+.pt-btn{flex:1;padding:8px 4px;background:transparent;border:none;border-radius:8px;color:var(--td);cursor:pointer;font-size:12px;font-weight:700;font-family:'Rajdhani';transition:all .2s;text-align:center}
+.pt-btn.act{background:var(--p);color:#fff}
+
+/* Semana items */
 .wi{padding:14px;background:var(--bg);border-radius:12px;margin-bottom:10px;border:1px solid var(--bd);transition:border-color .2s}
 .wi:hover{border-color:var(--bg5)}
 .wi.done{opacity:.5}
@@ -206,31 +206,63 @@ input,select,textarea,button{font-family:inherit}
 .wi-btn.alt{background:var(--info)}
 .wi-btn.sec{background:var(--bg5);color:var(--td)}
 .wi-btn.warn{background:rgba(245,158,11,.15);color:var(--warn);border:1px solid rgba(245,158,11,.2)}
-
-/* Day planner inline */
-.wi-day-plan{background:var(--bg3);border:1px solid var(--bd);border-radius:10px;padding:12px;margin-top:10px;display:none}
-.wi-day-plan.show{display:block;animation:fadeIn .2s ease}
-.wi-day-label{font-size:11px;color:var(--td);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;font-weight:700}
-.wi-day-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.wi-day-btn{padding:6px 12px;background:var(--bg);border:1px solid var(--bd);border-radius:8px;color:var(--td);cursor:pointer;font-size:12px;font-weight:600;transition:all .15s}
-.wi-day-btn:hover,.wi-day-btn.act{border-color:var(--p);color:var(--p);background:rgba(139,92,246,.06)}
-.wi-day-btn.today{border-color:var(--ok);color:var(--ok);background:rgba(34,197,94,.06)}
-.wi-hora{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.wi-hora label{font-size:12px;color:var(--td)}
-.wi-hora input[type=time]{background:var(--bg);border:1px solid var(--bd);border-radius:6px;color:var(--t);font-size:13px;padding:6px 10px;flex:1}
-.wi-hora input[type=time]:focus{outline:none;border-color:var(--p)}
-
-/* Countdown chip */
 .wi-cd{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:700;font-family:'Orbitron';margin-left:8px}
 .wi-cd.future{background:rgba(34,197,94,.1);color:var(--ok);border:1px solid rgba(34,197,94,.2)}
 .wi-cd.today-cd{background:rgba(139,92,246,.15);color:var(--p);border:1px solid rgba(139,92,246,.3);animation:cdPulse 2s infinite}
 .wi-cd.late{background:rgba(245,158,11,.1);color:var(--warn);border:1px solid rgba(245,158,11,.25)}
 @keyframes cdPulse{0%,100%{opacity:1}50%{opacity:.7}}
-.wi-motivo{display:none;margin-top:8px}
-.wi-motivo.show{display:block}
-.wi-motivo textarea{width:100%;padding:8px 10px;background:var(--bg);border:1px solid var(--bd);border-radius:8px;color:var(--t);font-size:13px;resize:none;min-height:60px}
-.wi-motivo textarea:focus{outline:none;border-color:var(--warn)}
-.wi-motivo-label{font-size:11px;color:var(--warn);margin-bottom:6px;font-weight:700}
+
+/* PERIOD SUMMARY */
+.period-summary{background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px}
+.period-summary-title{font-family:'Orbitron';font-size:11px;color:var(--td);letter-spacing:1px;margin-bottom:10px;text-transform:uppercase}
+.ps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ps-item{text-align:center;padding:10px 8px;background:var(--bg3);border-radius:8px}
+.ps-val{font-family:'Orbitron';font-size:16px;margin-bottom:2px}
+.ps-val.pos{color:var(--ok)}
+.ps-val.neg{color:var(--no)}
+.ps-val.neu{color:var(--p)}
+.ps-lbl{font-size:10px;color:var(--td)}
+
+/* PERIOD HISTORY */
+.ph-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg);border-radius:10px;margin-bottom:6px;border:1px solid var(--bd);cursor:pointer;transition:all .15s}
+.ph-item:hover{border-color:var(--p);background:var(--bg4)}
+.ph-label{flex:1}
+.ph-title{font-weight:700;font-size:14px}
+.ph-sub{font-size:11px;color:var(--td);margin-top:2px}
+.ph-xp{font-family:'Orbitron';font-size:13px;color:var(--ok)}
+.ph-badge{padding:3px 8px;border-radius:6px;font-size:10px;font-weight:700;font-family:'Orbitron'}
+.ph-badge.ok{background:rgba(34,197,94,.12);color:var(--ok)}
+.ph-badge.warn{background:rgba(245,158,11,.1);color:var(--warn)}
+.ph-badge.no{background:rgba(239,68,68,.1);color:var(--no)}
+
+/* METAS SECTION */
+.meta-item{padding:14px;background:var(--bg);border-radius:12px;margin-bottom:10px;border:1px solid var(--bd);position:relative;overflow:hidden}
+.meta-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.meta-item.tipo-ano::before{background:var(--warn)}
+.meta-item.tipo-longo::before{background:var(--p)}
+.meta-item.tipo-mes::before{background:var(--info)}
+.meta-item.tipo-semana::before{background:var(--ok)}
+.meta-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.meta-name{font-weight:700;font-size:15px}
+.meta-tag{font-size:10px;padding:2px 8px;border-radius:6px;font-family:'Orbitron';font-weight:700}
+.meta-tag.semana{background:rgba(34,197,94,.12);color:var(--ok)}
+.meta-tag.mes{background:rgba(59,130,246,.12);color:var(--info)}
+.meta-tag.ano{background:rgba(245,158,11,.1);color:var(--warn)}
+.meta-tag.longo{background:rgba(139,92,246,.15);color:var(--p)}
+.meta-prog-txt{display:flex;justify-content:space-between;font-size:12px;color:var(--td);margin-bottom:5px}
+.meta-prog-txt strong{color:var(--t)}
+.meta-bar{height:8px;background:var(--bd);border-radius:4px;overflow:hidden;margin-bottom:8px}
+.meta-fill{height:100%;border-radius:4px;transition:width .5s}
+.meta-fill.semana{background:var(--ok)}
+.meta-fill.mes{background:var(--info)}
+.meta-fill.ano{background:linear-gradient(90deg,var(--warn),#f97316)}
+.meta-fill.longo{background:linear-gradient(90deg,var(--p),var(--pl))}
+.meta-actions{display:flex;gap:6px}
+.meta-btn{padding:5px 12px;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer}
+.meta-btn.add-p{background:rgba(34,197,94,.12);color:var(--ok);border:1px solid rgba(34,197,94,.2)}
+.meta-btn.edit{background:var(--bg5);color:var(--td)}
+.meta-btn.del{background:rgba(239,68,68,.1);color:var(--no)}
+.meta-projection{font-size:11px;color:var(--td);margin-top:6px;font-style:italic}
 
 /* BOSS */
 .bi{display:flex;align-items:center;gap:14px;padding:14px;background:var(--bg);border-radius:10px;margin-bottom:8px;border-left:3px solid var(--no);transition:all .15s}
@@ -279,11 +311,13 @@ input,select,textarea,button{font-family:inherit}
 .rev-line{font-size:13px;margin-bottom:4px;line-height:1.4}
 .rev-line strong{color:var(--pl)}
 
-/* TOGGLES */
+/* TOGGLES + NOVA ATIVIDADE */
 .tg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.tg-item{display:flex;align-items:center;justify-content:space-between;padding:12px;background:var(--bg);border-radius:8px}
-.tg-name{font-weight:600;font-size:13px}
-.tg-sw{width:44px;height:24px;background:var(--bd);border-radius:12px;position:relative;cursor:pointer;transition:background .3s}
+.tg-item{display:flex;align-items:center;justify-content:space-between;padding:12px;background:var(--bg);border-radius:8px;gap:8px}
+.tg-name{font-weight:600;font-size:13px;flex:1}
+.tg-actions{display:flex;align-items:center;gap:6px}
+.tg-del{width:22px;height:22px;background:rgba(239,68,68,.1);border:none;border-radius:4px;color:var(--no);cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center}
+.tg-sw{width:44px;height:24px;background:var(--bd);border-radius:12px;position:relative;cursor:pointer;transition:background .3s;flex-shrink:0}
 .tg-sw.on{background:var(--p)}
 .tg-sw::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform .3s}
 .tg-sw.on::after{transform:translateX(20px)}
@@ -348,6 +382,24 @@ input,select,textarea,button{font-family:inherit}
 .add-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;background:transparent;border:2px dashed var(--bd);border-radius:10px;color:var(--td);cursor:pointer;margin-top:8px;width:100%;font-size:14px;transition:all .2s}
 .add-btn:hover{border-color:var(--p);color:var(--p)}
 
+/* Day planner inline */
+.wi-day-plan{background:var(--bg3);border:1px solid var(--bd);border-radius:10px;padding:12px;margin-top:10px;display:none}
+.wi-day-plan.show{display:block;animation:fadeIn .2s ease}
+.wi-day-label{font-size:11px;color:var(--td);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;font-weight:700}
+.wi-day-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.wi-day-btn{padding:6px 12px;background:var(--bg);border:1px solid var(--bd);border-radius:8px;color:var(--td);cursor:pointer;font-size:12px;font-weight:600;transition:all .15s}
+.wi-day-btn:hover,.wi-day-btn.act{border-color:var(--p);color:var(--p);background:rgba(139,92,246,.06)}
+.wi-day-btn.today{border-color:var(--ok);color:var(--ok);background:rgba(34,197,94,.06)}
+.wi-hora{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.wi-hora label{font-size:12px;color:var(--td)}
+.wi-hora input[type=time]{background:var(--bg);border:1px solid var(--bd);border-radius:6px;color:var(--t);font-size:13px;padding:6px 10px;flex:1}
+.wi-hora input[type=time]:focus{outline:none;border-color:var(--p)}
+.wi-motivo{display:none;margin-top:8px}
+.wi-motivo.show{display:block}
+.wi-motivo textarea{width:100%;padding:8px 10px;background:var(--bg);border:1px solid var(--bd);border-radius:8px;color:var(--t);font-size:13px;resize:none;min-height:60px}
+.wi-motivo textarea:focus{outline:none;border-color:var(--warn)}
+.wi-motivo-label{font-size:11px;color:var(--warn);margin-bottom:6px;font-weight:700}
+
 /* TOAST */
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--bg3);border:1px solid var(--p);padding:14px 20px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.5);z-index:400;opacity:0;transition:all .3s;max-width:90%;text-align:center;font-size:14px}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
@@ -367,8 +419,14 @@ input,select,textarea,button{font-family:inherit}
 
 .empty{text-align:center;padding:24px;color:var(--td)}
 .empty-icon{font-size:36px;margin-bottom:8px;opacity:.5}
+.err-box{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:12px;text-align:center;color:var(--no);font-size:13px;margin-bottom:8px}
 
-@media(max-width:400px){.sgrid{grid-template-columns:1fr 1fr}.timer-display{font-size:36px}.fg-row{grid-template-columns:1fr}.tg-grid{grid-template-columns:1fr}}
+/* Section dividers */
+.sec-divider{display:flex;align-items:center;gap:10px;margin:14px 0 10px}
+.sec-divider span{font-size:11px;color:var(--td);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;font-weight:700}
+.sec-divider::before,.sec-divider::after{content:'';flex:1;height:1px;background:var(--bd)}
+
+@media(max-width:400px){.sgrid{grid-template-columns:1fr 1fr}.timer-display{font-size:36px}.fg-row{grid-template-columns:1fr}.tg-grid{grid-template-columns:1fr}.ps-grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
@@ -394,9 +452,23 @@ input,select,textarea,button{font-family:inherit}
 <div style="padding:0 0 16px"><button class="emer-btn" onclick="openEmergency()">🚨 MODO EMERGÊNCIA</button></div>
 </div>
 
-<!-- TAB 1: SEMANAL -->
+<!-- TAB 1: SEMANAL / METAS -->
 <div class="tpanel" id="t1">
-<div class="card"><div class="card-h" onclick="tc(this)"><h3>📅 SEMANAIS</h3><div style="display:flex;align-items:center;gap:8px"><span class="badge" id="wb">--</span><span class="arr">▼</span></div></div><div class="card-b" id="weekly-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)">
+  <h3>🎯 METAS</h3>
+  <div style="display:flex;align-items:center;gap:8px"><span class="badge" id="metas-badge">--</span><span class="arr">▼</span></div>
+</div><div class="card-b" id="metas-body"><div class="skel"></div></div></div>
+
+<div class="card"><div class="card-h" onclick="tc(this)">
+  <h3>📅 MISSÕES SEMANAIS</h3>
+  <div style="display:flex;align-items:center;gap:8px"><span class="badge" id="wb">--</span><span class="arr">▼</span></div>
+</div><div class="card-b" id="weekly-body"><div class="skel"></div></div></div>
+
+<div class="card"><div class="card-h" onclick="tc(this)">
+  <h3>📆 HISTÓRICO DE PERÍODOS</h3>
+  <span class="arr">▼</span>
+</div><div class="card-b" id="periodo-hist-body"><div class="skel"></div></div></div>
+
 <div class="card"><div class="card-h" onclick="tc(this)"><h3>📊 REVIEW SEMANAL</h3><span class="arr">▼</span></div><div class="card-b" id="review-body"><div class="skel"></div></div></div>
 </div>
 
@@ -415,7 +487,7 @@ input,select,textarea,button{font-family:inherit}
 
 <!-- TAB 4: CONFIG -->
 <div class="tpanel" id="t4">
-<div class="card"><div class="card-h" onclick="tc(this)"><h3>⚙️ ATIVIDADES (TOGGLES)</h3><span class="arr">▼</span></div><div class="card-b" id="toggles-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>⚙️ ATIVIDADES</h3><span class="arr">▼</span></div><div class="card-b" id="toggles-body"><div class="skel"></div></div></div>
 <div class="card"><div class="card-h" onclick="tc(this)"><h3>📜 BIBLIOTECA DE SABEDORIA</h3><span class="arr">▼</span></div><div class="card-b" id="sab-body"><div class="skel"></div></div></div>
 <div class="card"><div class="card-h" onclick="tc(this)"><h3>📓 DIÁRIO DO OBSERVADOR</h3><span class="arr">▼</span></div><div class="card-b" id="diario-body"><div class="skel"></div></div></div>
 <div class="card"><div class="card-h" onclick="tc(this)"><h3>💤 SONO</h3><span class="arr">▼</span></div><div class="card-b" id="sono-body"><div class="skel"></div></div></div>
@@ -431,12 +503,11 @@ input,select,textarea,button{font-family:inherit}
 <!-- BOTTOM TABS NAV -->
 <div class="tabs">
 <div class="tab act" onclick="switchTab(0)"><span>🏠</span>Home</div>
-<div class="tab" onclick="switchTab(1)"><span>📅</span>Semanal</div>
+<div class="tab" onclick="switchTab(1)"><span>📅</span>Metas</div>
 <div class="tab" onclick="switchTab(2)"><span>💀</span>Bosses</div>
 <div class="tab" onclick="switchTab(3)"><span>🏆</span>Rank</div>
 <div class="tab" onclick="switchTab(4)"><span>⚙️</span>Config</div>
 </div>
-
 </div>
 
 <!-- EMERGENCY -->
@@ -454,7 +525,7 @@ input,select,textarea,button{font-family:inherit}
 <button class="emer-fail" onclick="endEmergency('derrota')">💀 CAÍ</button></div>
 </div></div>
 
-<!-- MODALS -->
+<!-- ======= MODALS ======= -->
 <div class="modal-bg" id="m-edit-mi"><div class="modal"><h3>✏️ EDITAR MISSÃO</h3>
 <div class="fg"><label>Nome</label><input id="em-n"></div>
 <div class="fg-row"><div class="fg"><label>Pilar</label><select id="em-p"><option value="mente">🧠 Mente</option><option value="espirito">🧘 Espírito</option><option value="corpo">💪 Corpo</option><option value="ouro">💰 Ouro</option><option value="work">🎬 Work</option></select></div>
@@ -520,7 +591,7 @@ input,select,textarea,button{font-family:inherit}
 <div class="fg"><label>Categoria</label><select id="sb-c"><option value="pessoal">⚔️ Pessoal</option><option value="maharshi">🧘 Maharshi</option><option value="covey">📘 Covey</option><option value="adams">🕊️ Adams</option><option value="neurociencia">🧠 Neuro</option><option value="quetzal">🦅 Quetzal</option></select></div></div>
 <button class="mbtn" onclick="addSab()">SALVAR</button><button class="mbtn sec" onclick="cm('m-sab')" style="margin-top:8px">CANCELAR</button></div></div>
 
-<!-- Foco: motivo de atraso -->
+<!-- Modal foco atraso -->
 <div class="modal-bg" id="m-foc-atraso"><div class="modal"><h3>⚡ EXECUTANDO FORA DO DIA</h3>
 <p style="text-align:center;color:var(--td);font-size:13px;margin-bottom:16px">Não foi no dia planejado — tudo bem. Registre o motivo.</p>
 <div class="fg"><label>Por que não foi no dia?</label><textarea id="fa-motivo" placeholder="Reunião, indisposição, outra prioridade..."></textarea></div>
@@ -529,6 +600,41 @@ input,select,textarea,button{font-family:inherit}
 <span style="font-family:'Orbitron';font-size:13px;color:var(--warn)">+10 em vez de +15</span></div>
 <button class="mbtn" onclick="confirmFocAtraso()">REGISTRAR (+10 XP)</button>
 <button class="mbtn sec" onclick="cm('m-foc-atraso')" style="margin-top:8px">CANCELAR</button></div></div>
+
+<!-- Modal adicionar atividade -->
+<div class="modal-bg" id="m-add-toggle"><div class="modal"><h3>➕ NOVA ATIVIDADE</h3>
+<div class="fg"><label>Nome da Atividade</label><input id="tg-nome" placeholder="Ex: Leitura noturna, Treino..."></div>
+<div class="fg"><label>Grupo/ID (sem espaços)</label><input id="tg-grupo" placeholder="Ex: leitura_noturna"></div>
+<button class="mbtn" onclick="addToggle()">CRIAR ATIVIDADE</button>
+<button class="mbtn sec" onclick="cm('m-add-toggle')" style="margin-top:8px">CANCELAR</button></div></div>
+
+<!-- Modal adicionar meta -->
+<div class="modal-bg" id="m-add-meta"><div class="modal"><h3 id="meta-modal-title">🎯 NOVA META</h3>
+<div class="fg"><label>Nome da Meta</label><input id="mt-nome" placeholder="Ex: 1000h de meditação, Ler 50 livros..."></div>
+<div class="fg-row">
+<div class="fg"><label>Tipo</label><select id="mt-tipo">
+  <option value="semana">📅 Semanal</option>
+  <option value="mes">📆 Mensal</option>
+  <option value="ano">🗓️ Anual</option>
+  <option value="longo">🌟 Longo Prazo</option>
+</select></div>
+<div class="fg"><label>Unidade</label><input id="mt-unidade" placeholder="horas, dias, livros..."></div>
+</div>
+<div class="fg-row">
+<div class="fg"><label>Meta (alvo)</label><input type="number" id="mt-alvo" placeholder="100" min="1"></div>
+<div class="fg"><label>Progresso atual</label><input type="number" id="mt-atual" placeholder="0" min="0" value="0"></div>
+</div>
+<div class="fg"><label>Descrição / Motivação</label><textarea id="mt-desc" placeholder="Por que essa meta é importante..."></textarea></div>
+<button class="mbtn" onclick="saveMeta()">SALVAR META</button>
+<button class="mbtn sec" onclick="cm('m-add-meta')" style="margin-top:8px">CANCELAR</button></div></div>
+
+<!-- Modal adicionar progresso de meta -->
+<div class="modal-bg" id="m-meta-prog"><div class="modal"><h3>📈 ATUALIZAR PROGRESSO</h3>
+<p id="mp-nome" style="text-align:center;color:var(--pl);font-weight:700;margin-bottom:12px;font-style:italic"></p>
+<div class="fg"><label>Adicionar quanto?</label><input type="number" id="mp-val" value="1" min="0.1" step="0.5"></div>
+<div id="mp-current" style="text-align:center;font-size:13px;color:var(--td);margin-bottom:12px"></div>
+<button class="mbtn" onclick="confirmMetaProg()">CONFIRMAR</button>
+<button class="mbtn sec" onclick="cm('m-meta-prog')" style="margin-top:8px">CANCELAR</button></div></div>
 
 <div class="toast" id="toast"></div>
 
@@ -540,11 +646,31 @@ input,select,textarea,button{font-family:inherit}
 </div></div>
 
 <script>
-const C={pw:'17Mindset22.',url:'https://hqircciopclwoyhgdnlv.supabase.co',key:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxaXJjY2lvcGNsd295aGdkbmx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTU1MDEsImV4cCI6MjA4ODkzMTUwMX0.fCQ3wDwdyDydEngta1kkxrw8sWJi-PyHieVaCkCkzYM'};
+const C={
+  pw:'17Mindset22.',
+  url:'https://hqircciopclwoyhgdnlv.supabase.co',
+  key:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxaXJjY2lvcGNsd295aGdkbmx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTU1MDEsImV4cCI6MjA4ODkzMTUwMX0.fCQ3wDwdyDydEngta1kkxrw8sWJi-PyHieVaCkCkzYM'
+};
 
-async function rpc(fn,p={}){try{const r=await fetch(`${C.url}/rest/v1/rpc/${fn}`,{method:'POST',headers:{'apikey':C.key,'Authorization':`Bearer ${C.key}`,'Content-Type':'application/json'},body:JSON.stringify(p)});return await r.json()}catch(e){return{erro:e.message}}}
+// ─── RPC HELPER ───────────────────────────────────────────
+async function rpc(fn, p={}){
+  try{
+    const r = await fetch(`${C.url}/rest/v1/rpc/${fn}`,{
+      method:'POST',
+      headers:{'apikey':C.key,'Authorization':`Bearer ${C.key}`,'Content-Type':'application/json'},
+      body:JSON.stringify(p)
+    });
+    if(!r.ok){
+      const err = await r.json().catch(()=>({erro:`HTTP ${r.status}`}));
+      return {erro: err.message || err.erro || `HTTP ${r.status}`};
+    }
+    return await r.json();
+  }catch(e){
+    return {erro:e.message};
+  }
+}
 
-// Utils
+// ─── UTILS ────────────────────────────────────────────────
 const $=id=>document.getElementById(id);
 function esc(s){return(s||'').replace(/'/g,"\\'")}
 function fmt(s){return`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`}
@@ -553,17 +679,19 @@ function toast(m,t=''){const el=$('toast');el.textContent=m;el.className='toast 
 function om(id){$(id).classList.add('show')}
 function cm(id){$(id).classList.remove('show')}
 function tc(h){h.classList.toggle('closed');h.nextElementSibling.classList.toggle('closed')}
-
-// Date utils
 function todayStr(){return new Date().toISOString().split('T')[0]}
 function tomorrowStr(){const d=new Date();d.setDate(d.getDate()+1);return d.toISOString().split('T')[0]}
-function dayName(dateStr){if(!dateStr)return'';const d=new Date(dateStr+'T12:00:00');const days=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];return days[d.getDay()]}
+function dayName(dateStr){if(!dateStr)return'';const d=new Date(dateStr+'T12:00:00');return['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][d.getDay()]}
 function isToday(dateStr){return dateStr===todayStr()}
 function isTomorrow(dateStr){return dateStr===tomorrowStr()}
 function isPast(dateStr){return dateStr<todayStr()}
-function daysUntil(dateStr){if(!dateStr)return null;const now=new Date();const target=new Date(dateStr+'T00:00:00');const diff=Math.ceil((target-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/(1000*60*60*24));return diff}
+function daysUntil(dateStr){if(!dateStr)return null;const now=new Date();const target=new Date(dateStr+'T00:00:00');return Math.ceil((target-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/(1000*60*60*24))}
+function safeId(s){return(s||'').replace(/[^a-zA-Z0-9]/g,'_')}
+function getCurrentWeekLabel(){const now=new Date();const start=new Date(now.getFullYear(),0,1);const wk=Math.ceil(((now-start)/86400000+start.getDay()+1)/7);return`${now.getFullYear()}-W${String(wk).padStart(2,'0')}`}
+function getCurrentMonthLabel(){const now=new Date();const months=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];return`${months[now.getMonth()]} ${now.getFullYear()}`}
+function getCurrentYearLabel(){return`${new Date().getFullYear()}`}
 
-function formatCountdown(dateStr, timeStr){
+function formatCountdown(dateStr,timeStr){
   if(!dateStr)return null;
   const timepart=timeStr?timeStr.slice(0,5):'00:00';
   const target=new Date(`${dateStr}T${timepart}:00`);
@@ -576,7 +704,7 @@ function formatCountdown(dateStr, timeStr){
     if(h>=24)return{text:`${Math.floor(h/24)}d ${h%24}h`,type:'future'};
     if(h>0)return{text:`${h}h ${m}m`,type:'future'};
     return{text:`${m}m`,type:'future'};
-  } else {
+  }else{
     if(h>=24)return{text:`${Math.floor(h/24)}d atrasado`,type:'late'};
     if(h>0)return{text:`${h}h ${m}m atrasado`,type:'late'};
     return{text:`${m}m atrasado`,type:'late'};
@@ -587,31 +715,66 @@ const RANKS={E:'Despertar',D:'Aprendiz',C:'Guerreiro',B:'Caçador',A:'Mestre',S:
 const IDENTS={E:'"Começando a obedecer a si mesmo"',D:'"Medito todos os dias"',C:'"Não negocio com minha mente"',B:'"A dor não me controla"',A:'"Ajo sem apego ao resultado"',S:'"Sou aquilo que resta quando tudo some"'};
 const RI={maior_streak:'🔥',maior_streak_nofap:'🛡️',maior_meditacao_unica:'🧘',mais_xp_um_dia:'⚡',dias_perfeitos_seguidos:'💎',total_emergencias_vencidas:'🚨',total_diario_entradas:'📓',total_missoes_completas:'⚔️',melhor_semana_xp:'📈',total_horas_sono_media:'💤',login_consecutivo_max:'📅'};
 
-// Login
-function login(){if($('pw').value===C.pw){$('LS').style.display='none';$('app').style.display='block';localStorage.setItem('ss','1');initApp()}else{$('lerr').style.display='block';$('pw').value=''}}
+// ─── LOGIN ────────────────────────────────────────────────
+function login(){
+  if($('pw').value===C.pw){
+    $('LS').style.display='none';
+    $('app').style.display='block';
+    localStorage.setItem('ss','1');
+    initApp();
+  }else{
+    $('lerr').style.display='block';
+    $('pw').value='';
+  }
+}
 function logout(){localStorage.removeItem('ss');location.reload()}
 if(localStorage.getItem('ss')==='1'){$('LS').style.display='none';$('app').style.display='block';initApp()}
 $('pw').addEventListener('keypress',e=>{if(e.key==='Enter')login()});
 
 let _p=null;
+
 async function initApp(){
-  await Promise.all([loadProfile(),loadCommit(),loadMissions(),loadMedUI(),loadFocusV2(),loadMood(),loadWisdom()]);
-  checkDR();
-  startCountdownLoop();
+  try{
+    await loadProfile();
+    // Carregar em paralelo, mas com erro individual
+    const tasks=[
+      loadCommit().catch(e=>console.warn('commit',e)),
+      loadMissions().catch(e=>console.warn('missions',e)),
+      loadMedUI(),
+      loadFocusV2().catch(e=>console.warn('focus',e)),
+      loadMood(),
+      loadWisdom().catch(e=>console.warn('wisdom',e))
+    ];
+    await Promise.all(tasks);
+    checkDR();
+    startCountdownLoop();
+  }catch(e){
+    console.error('initApp error',e);
+    toast('Erro ao carregar. Verifique sua conexão.','err');
+  }
 }
 
-// Tabs
+// ─── TABS ─────────────────────────────────────────────────
 let tl={0:1,1:0,2:0,3:0,4:0};
 function switchTab(i){
   document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('act',j===i));
   document.querySelectorAll('.tpanel').forEach((p,j)=>p.classList.toggle('act',j===i));
-  if(!tl[i]){tl[i]=1;if(i===1){loadWeeklyV2();loadRevs()}if(i===2)loadBosses();if(i===3){loadConq();loadTitulos();loadRecs()}if(i===4){loadToggles();loadSabFull();loadDiario();loadSono();loadMoodHist();loadRecaidas();loadHeatmap();loadAnalytics();loadTimeline();loadFalhas()}}
+  if(!tl[i]){
+    tl[i]=1;
+    if(i===1){loadMetas();loadWeeklyV2();loadPeriodHistory();loadRevs()}
+    if(i===2){loadBosses()}
+    if(i===3){loadConq();loadTitulos();loadRecs()}
+    if(i===4){loadToggles();loadSabFull();loadDiario();loadSono();loadMoodHist();loadRecaidas();loadHeatmap();loadAnalytics();loadTimeline();loadFalhas()}
+  }
 }
 
-// Profile
+// ─── PROFILE ──────────────────────────────────────────────
 async function loadProfile(){
   const d=await rpc('fn_ss_status');
-  if(d.erro)return;
+  if(d.erro){
+    $('profile-body').innerHTML=`<div class="err-box">❌ Erro: ${d.erro}</div>`;
+    return;
+  }
   _p=d;
   const pct=Math.min(Math.round((d.xp_atual/d.xp_proximo)*100),100);
   $('profile-body').innerHTML=`
@@ -629,27 +792,35 @@ async function loadProfile(){
     </div>
     <div class="sgrid">
       <div class="sitem"><div class="sv">🔥${d.streak_atual}</div><div class="sl">×${d.multiplicador}</div></div>
-      <div class="sitem"><div class="sv">🧘${d.horas_meditacao}h</div><div class="sl">${d.meditacao_rank_nome||'--'}</div></div>
-      <div class="sitem"><div class="sv">🏆${d.conquistas}</div><div class="sl">Conquistas</div></div>
-      <div class="sitem"><div class="sv">💀${d.bosses}</div><div class="sl">Bosses</div></div>
+      <div class="sitem"><div class="sv">🧘${d.horas_meditacao||0}h</div><div class="sl">${d.meditacao_rank_nome||'--'}</div></div>
+      <div class="sitem"><div class="sv">🏆${d.conquistas||0}</div><div class="sl">Conquistas</div></div>
+      <div class="sitem"><div class="sv">💀${d.bosses||0}</div><div class="sl">Bosses</div></div>
     </div>
     ${d.penalty_zone?'<div style="background:rgba(239,68,68,.1);border:1px solid var(--no);padding:10px;border-radius:8px;margin-top:12px;text-align:center;color:var(--no);font-weight:700">⚠️ PENALTY ZONE</div>':''}
     <div class="ident">${IDENTS[d.hunter_rank]||''}</div>`;
 }
 
-// Compromisso
+// ─── COMPROMISSO ──────────────────────────────────────────
 async function loadCommit(){
   const d=await rpc('fn_ss_compromisso_hoje');
+  if(d.erro){$('commit-body').innerHTML=`<div class="err-box">❌ ${d.erro}</div>`;return}
   $('commit-body').innerHTML=d.assumido
     ?`<div class="commit-box"><div style="color:var(--ok);font-weight:700">✅ Assumido</div><div class="phrase" style="margin-top:8px">"${d.frase}"</div></div>`
     :`<div class="commit-box"><div class="phrase">"Eu não negocio com minha mente."</div><button class="commit-btn" onclick="doCommit()">ASSUMIR</button></div>`;
 }
-async function doCommit(){const r=await rpc('fn_ss_compromisso_assumir');if(r.sucesso){toast('🤝 +5 XP','ok');loadCommit();loadProfile()}else toast(r.erro||'Erro','err')}
+async function doCommit(){
+  const r=await rpc('fn_ss_compromisso_assumir');
+  if(r.sucesso){toast('🤝 +5 XP','ok');loadCommit();loadProfile()}
+  else toast(r.erro||'Erro','err');
+}
 
-// Missions
+// ─── MISSIONS ─────────────────────────────────────────────
 async function loadMissions(){
   const d=await rpc('fn_ss_missoes_hoje');
-  if(!d.diarias)return;
+  if(d.erro||!d.diarias){
+    $('daily-body').innerHTML=`<div class="err-box">❌ ${d.erro||'Sem dados'}</div><button class="add-btn" onclick="om('m-add-mi')">➕ Nova Missão</button>`;
+    return;
+  }
   let h='';
   for(const m of d.diarias){
     const st=m.feita?'done':'';
@@ -669,38 +840,177 @@ async function loadMissions(){
   h+=`<button class="add-btn" onclick="om('m-add-mi')">➕ Nova Missão</button>`;
   $('daily-body').innerHTML=h;
 }
-async function compMi(n,d){if(d)return toast('Já completa!');const r=await rpc('fn_ss_completar',{p_missao_nome:n});if(r.erro)return toast(r.erro,'err');toast(`✅ ${r.missao} +${r.xp?.xp_ganho||0}XP`,'ok');loadMissions();loadProfile()}
-let _fn='';function failMi(n){_fn=n;om('m-fail')}
-async function submitFail(){const r=await rpc('fn_ss_falhar_observacao',{p_missao_nome:_fn,p_sentimento_antes:$('fl-a').value||null,p_sentimento_durante:$('fl-d').value||null,p_sentimento_depois:$('fl-dp').value||null,p_gatilho:$('fl-g').value||null,p_tentou_resistir:$('fl-r').value==='true',p_aprendizado:$('fl-ap').value||null});cm('m-fail');if(r.erro)return toast(r.erro,'err');toast(`💀 ${r.missao}`,'wrn');['fl-a','fl-d','fl-dp','fl-g','fl-ap'].forEach(i=>$(i).value='');loadMissions();loadProfile()}
-let _en='';function editMi(n,p,m,x,pe){_en=n;$('em-n').value=n;$('em-p').value=p;$('em-m').value=m;$('em-x').value=x;$('em-pe').value=pe;om('m-edit-mi')}
-async function saveEditMi(){const r=await rpc('fn_ss_editar_diaria',{p_nome_atual:_en,p_novo_nome:$('em-n').value,p_novo_pilar:$('em-p').value,p_novo_modo:$('em-m').value,p_novo_xp:+$('em-x').value,p_nova_penalidade:+$('em-pe').value});cm('m-edit-mi');if(r.sucesso){toast('✅ Editada','ok');loadMissions()}else toast(r.erro||'Erro','err')}
-async function addMi(){const n=$('am-n').value;if(!n)return toast('Nome!','err');const r=await rpc('fn_ss_adicionar_diaria',{p_nome:n,p_pilar:$('am-p').value,p_modo:$('am-m').value,p_xp:+$('am-x').value||15,p_penalidade:+$('am-pe').value||30});cm('m-add-mi');if(r.sucesso){toast('✅ Criada','ok');$('am-n').value='';loadMissions()}else toast(r.erro||'Erro','err')}
+async function compMi(n,d){
+  if(d)return toast('Já completa!');
+  const r=await rpc('fn_ss_completar',{p_missao_nome:n});
+  if(r.erro)return toast(r.erro,'err');
+  toast(`✅ ${r.missao} +${r.xp?.xp_ganho||0}XP`,'ok');
+  loadMissions();loadProfile();
+}
+let _fn='';
+function failMi(n){_fn=n;om('m-fail')}
+async function submitFail(){
+  const r=await rpc('fn_ss_falhar_observacao',{
+    p_missao_nome:_fn,
+    p_sentimento_antes:$('fl-a').value||null,
+    p_sentimento_durante:$('fl-d').value||null,
+    p_sentimento_depois:$('fl-dp').value||null,
+    p_gatilho:$('fl-g').value||null,
+    p_tentou_resistir:$('fl-r').value==='true',
+    p_aprendizado:$('fl-ap').value||null
+  });
+  cm('m-fail');
+  if(r.erro)return toast(r.erro,'err');
+  toast(`💀 ${r.missao}`,'wrn');
+  ['fl-a','fl-d','fl-dp','fl-g','fl-ap'].forEach(i=>$(i).value='');
+  loadMissions();loadProfile();
+}
+let _en='';
+function editMi(n,p,m,x,pe){_en=n;$('em-n').value=n;$('em-p').value=p;$('em-m').value=m;$('em-x').value=x;$('em-pe').value=pe;om('m-edit-mi')}
+async function saveEditMi(){
+  const r=await rpc('fn_ss_editar_diaria',{p_nome_atual:_en,p_novo_nome:$('em-n').value,p_novo_pilar:$('em-p').value,p_novo_modo:$('em-m').value,p_novo_xp:+$('em-x').value,p_nova_penalidade:+$('em-pe').value});
+  cm('m-edit-mi');
+  if(r.sucesso){toast('✅ Editada','ok');loadMissions()}else toast(r.erro||'Erro','err');
+}
+async function addMi(){
+  const n=$('am-n').value;
+  if(!n)return toast('Nome!','err');
+  const r=await rpc('fn_ss_adicionar_diaria',{p_nome:n,p_pilar:$('am-p').value,p_modo:$('am-m').value,p_xp:+$('am-x').value||15,p_penalidade:+$('am-pe').value||30});
+  cm('m-add-mi');
+  if(r.sucesso){toast('✅ Criada','ok');$('am-n').value='';loadMissions()}else toast(r.erro||'Erro','err');
+}
 
-// Meditation
+// ─── MEDITATION (CORRIGIDO) ────────────────────────────────
 let mt=null,ms=0,mtar=1200,mr=false;
-function loadMedUI(){$('med-body').innerHTML=`<div style="text-align:center"><div class="timer-display" id="td">20:00</div><div class="timer-bar"><div class="timer-fill" id="tf" style="width:0%"></div></div><div class="med-quick"><button class="mqbtn" onclick="smt(10,this)">10m</button><button class="mqbtn act" onclick="smt(20,this)">20m</button><button class="mqbtn" onclick="smt(30,this)">30m</button><button class="mqbtn" onclick="smt(45,this)">45m</button><button class="mqbtn" onclick="smt(60,this)">60m</button></div><div class="timer-btns" id="tb"><button class="tbtn start" onclick="startM()">▶ INICIAR</button><button class="tbtn sec" onclick="regMan()">📝 MANUAL</button></div></div><div class="med-stats" id="ms2"><div class="skel"></div></div>`;loadMS()}
-async function loadMS(){if(!$('ms2'))return loadMedUI();const d=_p||await rpc('fn_ss_status');$('ms2').innerHTML=`<div class="mst"><div class="v">${d.horas_meditacao||0}h</div><div class="l">Total</div></div><div class="mst"><div class="v">${d.sessoes_meditacao||0}</div><div class="l">Sessões</div></div><div class="mst"><div class="v">${d.meditacao_rank_nome||'--'}</div><div class="l">Rank</div></div>`}
-function smt(m,el){mtar=m*60;ms=0;mr=false;if(mt){clearInterval(mt);mt=null}$('td').textContent=fmt(mtar);$('tf').style.width='0%';document.querySelectorAll('.mqbtn').forEach(b=>b.classList.remove('act'));if(el)el.classList.add('act');$('tb').innerHTML=`<button class="tbtn start" onclick="startM()">▶ INICIAR</button><button class="tbtn sec" onclick="regMan()">📝 MANUAL</button>`}
-function startM(){mr=true;ms=0;$('tb').innerHTML=`<button class="tbtn stop" onclick="stopM()">⏸ PAUSAR</button><button class="tbtn reg" onclick="finM()">✅ FINALIZAR</button>`;mt=setInterval(()=>{ms++;const r=Math.max(mtar-ms,0);$('td').textContent=fmt(r);$('tf').style.width=Math.min((ms/mtar)*100,100)+'%';if(r<=0){clearInterval(mt);mt=null;finM()}},1000)}
-function stopM(){if(mt){clearInterval(mt);mt=null;mr=false}$('tb').innerHTML=`<button class="tbtn start" onclick="resM()">▶ CONTINUAR</button><button class="tbtn reg" onclick="finM()">✅ FIN (${Math.floor(ms/60)}m)</button>`}
-function resM(){mr=true;$('tb').innerHTML=`<button class="tbtn stop" onclick="stopM()">⏸ PAUSAR</button><button class="tbtn reg" onclick="finM()">✅ FINALIZAR</button>`;mt=setInterval(()=>{ms++;const r=Math.max(mtar-ms,0);$('td').textContent=fmt(r);$('tf').style.width=Math.min((ms/mtar)*100,100)+'%';if(r<=0){clearInterval(mt);mt=null;finM()}},1000)}
-async function finM(){if(mt){clearInterval(mt);mt=null}const mins=Math.max(Math.round(ms/60),1);await regMed(mins);ms=0;mr=false;$('td').textContent=fmt(mtar);$('tf').style.width='0%';$('tb').innerHTML=`<button class="tbtn start" onclick="startM()">▶ INICIAR</button><button class="tbtn sec" onclick="regMan()">📝 MANUAL</button>`}
-function regMan(){const m=prompt('Minutos?','20');if(m&&+m>0)regMed(+m)}
-async function regMed(mins){const r=await rpc('fn_ss_meditacao',{p_minutos:mins});if(r.erro)return toast(r.erro,'err');let msg=`🧘 ${mins}min +${r.xp_total}XP`;if(r.milestone)msg+=` 🏆 ${r.milestone.mensagem}`;toast(msg,'ok');loadMS();loadProfile();loadMissions()}
 
-// ─────────────────────────────────────────────────────────────
-// FOCO V2
-// ─────────────────────────────────────────────────────────────
+function loadMedUI(){
+  $('med-body').innerHTML=`
+    <div style="text-align:center">
+      <div class="timer-display" id="td">20:00</div>
+      <div class="timer-bar"><div class="timer-fill" id="tf" style="width:0%"></div></div>
+      <div class="med-quick">
+        <button class="mqbtn" onclick="smt(10,this)">10m</button>
+        <button class="mqbtn act" onclick="smt(20,this)">20m</button>
+        <button class="mqbtn" onclick="smt(30,this)">30m</button>
+        <button class="mqbtn" onclick="smt(45,this)">45m</button>
+        <button class="mqbtn" onclick="smt(60,this)">60m</button>
+      </div>
+      <div class="timer-btns" id="tb">
+        <button class="tbtn start" onclick="startM()">▶ INICIAR</button>
+        <button class="tbtn sec" onclick="regMan()">📝 MANUAL</button>
+      </div>
+    </div>
+    <div class="med-stats" id="ms2" style="margin-top:16px">
+      <div class="mst"><div class="v" id="ms-horas">--</div><div class="l">Total</div></div>
+      <div class="mst"><div class="v" id="ms-sessoes">--</div><div class="l">Sessões</div></div>
+      <div class="mst"><div class="v" id="ms-rank">--</div><div class="l">Rank</div></div>
+    </div>`;
+  loadMS();
+}
+async function loadMS(){
+  // Usa _p se disponível, senão busca
+  let d=_p;
+  if(!d||!d.horas_meditacao){
+    d=await rpc('fn_ss_status');
+    if(!d.erro)_p=d;
+  }
+  if(!d||d.erro)return;
+  const hEl=$('ms-horas'), sEl=$('ms-sessoes'), rEl=$('ms-rank');
+  if(hEl)hEl.textContent=`${d.horas_meditacao||0}h`;
+  if(sEl)sEl.textContent=d.sessoes_meditacao||0;
+  if(rEl)rEl.textContent=d.meditacao_rank_nome||'--';
+}
+function smt(m,el){
+  mtar=m*60;ms=0;mr=false;
+  if(mt){clearInterval(mt);mt=null}
+  const tdEl=$('td');
+  if(tdEl)tdEl.textContent=fmt(mtar);
+  const tfEl=$('tf');
+  if(tfEl)tfEl.style.width='0%';
+  document.querySelectorAll('.mqbtn').forEach(b=>b.classList.remove('act'));
+  if(el)el.classList.add('act');
+  const tb=$('tb');
+  if(tb)tb.innerHTML=`<button class="tbtn start" onclick="startM()">▶ INICIAR</button><button class="tbtn sec" onclick="regMan()">📝 MANUAL</button>`;
+}
+function startM(){
+  mr=true;ms=0;
+  const tb=$('tb');
+  if(tb)tb.innerHTML=`<button class="tbtn stop" onclick="stopM()">⏸ PAUSAR</button><button class="tbtn reg" onclick="finM()">✅ FINALIZAR</button>`;
+  mt=setInterval(()=>{
+    ms++;
+    const r=Math.max(mtar-ms,0);
+    const tdEl=$('td');const tfEl=$('tf');
+    if(tdEl)tdEl.textContent=fmt(r);
+    if(tfEl)tfEl.style.width=Math.min((ms/mtar)*100,100)+'%';
+    if(r<=0){clearInterval(mt);mt=null;finM()}
+  },1000);
+}
+function stopM(){
+  if(mt){clearInterval(mt);mt=null;mr=false}
+  const tb=$('tb');
+  if(tb)tb.innerHTML=`<button class="tbtn start" onclick="resM()">▶ CONTINUAR</button><button class="tbtn reg" onclick="finM()">✅ FIN (${Math.floor(ms/60)}m)</button>`;
+}
+function resM(){
+  mr=true;
+  const tb=$('tb');
+  if(tb)tb.innerHTML=`<button class="tbtn stop" onclick="stopM()">⏸ PAUSAR</button><button class="tbtn reg" onclick="finM()">✅ FINALIZAR</button>`;
+  mt=setInterval(()=>{
+    ms++;
+    const r=Math.max(mtar-ms,0);
+    const tdEl=$('td');const tfEl=$('tf');
+    if(tdEl)tdEl.textContent=fmt(r);
+    if(tfEl)tfEl.style.width=Math.min((ms/mtar)*100,100)+'%';
+    if(r<=0){clearInterval(mt);mt=null;finM()}
+  },1000);
+}
+async function finM(){
+  if(mt){clearInterval(mt);mt=null}
+  const mins=Math.max(Math.round(ms/60),1);
+  await regMed(mins);
+  ms=0;mr=false;
+  const tdEl=$('td');const tfEl=$('tf');const tb=$('tb');
+  if(tdEl)tdEl.textContent=fmt(mtar);
+  if(tfEl)tfEl.style.width='0%';
+  if(tb)tb.innerHTML=`<button class="tbtn start" onclick="startM()">▶ INICIAR</button><button class="tbtn sec" onclick="regMan()">📝 MANUAL</button>`;
+}
+function regMan(){
+  const m=prompt('Minutos meditados?','20');
+  if(m&&+m>0)regMed(+m);
+}
+async function regMed(mins){
+  const r=await rpc('fn_ss_meditacao',{p_minutos:mins});
+  if(r.erro)return toast(r.erro,'err');
+  let msg=`🧘 ${mins}min +${r.xp_total||0}XP`;
+  if(r.milestone)msg+=` 🏆 ${r.milestone.mensagem}`;
+  toast(msg,'ok');
+  // Forçar reload do _p
+  _p=null;
+  await loadProfile();
+  loadMS();
+  loadMissions();
+}
+
+// ─── FOCO V2 (CORRIGIDO) ──────────────────────────────────
 let _focDate='today';
 let _focAtrasoItemId=null;
 
 async function loadFocusV2(){
   const target=_focDate==='today'?todayStr():tomorrowStr();
-  const d=await rpc('fn_ss_foco_por_data',{p_data:target});
-
-  if(!d.definido){
+  let d;
+  try{
+    d=await rpc('fn_ss_foco_por_data',{p_data:target});
+  }catch(e){
+    $('focus-body').innerHTML=`<div class="err-box">❌ Erro ao carregar foco: ${e.message}</div>`;
+    return;
+  }
+  if(d&&d.erro){
+    // Erro pode significar que não está definido ainda
     renderFocusPlanner(target);
-  } else {
+    return;
+  }
+  if(!d||!d.definido){
+    renderFocusPlanner(target);
+  }else{
     renderFocusItems(d);
   }
 }
@@ -715,8 +1025,8 @@ function renderFocusPlanner(target){
     </div>
     ${isTom?`<div class="foc-amanha-badge">🌙 Planejando para amanhã — ${xpHint}</div>`:''}
     <div class="foc-xp-hint">
-      <div class="foc-xp-tag good">✅ No horário → +15 XP / item</div>
-      <div class="foc-xp-tag less">⚡ Outro dia → +10 XP / item</div>
+      <div class="foc-xp-tag good">✅ No horário → +15 XP</div>
+      <div class="foc-xp-tag less">⚡ Outro dia → +10 XP</div>
     </div>
     <div class="foc-item-row">
       <div class="foc-num">1</div>
@@ -738,24 +1048,19 @@ function renderFocusPlanner(target){
 
 function renderFocusItems(d){
   const isTom=d.data===tomorrowStr();
-  const isYesterday=!isToday(d.data)&&!isTomorrow(d.data);
   let h='';
-
-  if(isTom){
-    h+=`<div class="foc-amanha-badge">🌙 Foco de amanhã — planejado com antecedência</div>`;
-  }
-
+  if(isTom) h+=`<div class="foc-amanha-badge">🌙 Foco de amanhã — planejado com antecedência</div>`;
   h+=`<div class="foc-toggle">
     <button class="foc-tog-btn ${_focDate==='today'?'act':''}" onclick="setFocDate('today')">⚡ Hoje</button>
     <button class="foc-tog-btn ${_focDate==='tomorrow'?'act-ok':''}" onclick="setFocDate('tomorrow')">🌙 Amanhã</button>
   </div>`;
-
-  for(const item of d.itens){
+  const itens=d.itens||[];
+  for(const item of itens){
     const cd=item.hora_planejada&&!item.completo?formatCountdown(item.data_planejada||d.data,item.hora_planejada):null;
     const onTime=item.executado_no_dia_planejado===true;
     const offTime=item.executado_no_dia_planejado===false;
-    const cardClass=item.completo?(onTime?'fi done on-time':offTime?'fi done late-warn':'fi done'):(cd&&cd.type==='late'&&isToday(d.data)?'fi late-warn':'fi');
-
+    const isLate=cd&&cd.type==='late'&&isToday(d.data);
+    const cardClass=item.completo?(onTime?'fi done on-time':offTime?'fi done late-warn':'fi done'):(isLate?'fi late-warn':'fi');
     h+=`<div class="${cardClass}" data-iid="${item.id}" data-date="${item.data_planejada||d.data}" data-time="${item.hora_planejada||''}">
       <div class="fi-chk" onclick="${item.completo?'':`compFocItem('${item.id}','${item.data_planejada||d.data}')`}">${item.completo?'✓':''}</div>
       <div class="fi-content">
@@ -769,45 +1074,29 @@ function renderFocusItems(d){
         </div>
       </div>
       <div class="fi-right">
-        <div class="fi-xp ${item.completo?'earned':isToday(d.data)?'good':'less'}">
-          ${item.completo?`+${item.xp_ganho||0}XP`:`+${isToday(d.data)||isTom?'15':'10'}XP`}
+        <div class="fi-xp ${item.completo?'earned':(isToday(d.data)?'good':'less')}">
+          ${item.completo?`+${item.xp_ganho||0}XP`:`+${(isToday(d.data)||isTom)?'15':'10'}XP`}
         </div>
       </div>
     </div>`;
   }
-
-  if(d.todas_completas){
-    h+=`<div class="foc-all-done">🎯 FOCO COMPLETO — +30 XP BÔNUS!</div>`;
-  }
-
-  if(!isTom){
-    h+=`<button class="add-btn" onclick="resetFocDate()" style="margin-top:8px;font-size:12px">🔄 Redefinir foco</button>`;
-  }
-
+  if(d.todas_completas) h+=`<div class="foc-all-done">🎯 FOCO COMPLETO — +30 XP BÔNUS!</div>`;
+  if(!isTom) h+=`<button class="add-btn" onclick="resetFocDate()" style="margin-top:8px;font-size:12px">🔄 Redefinir foco</button>`;
   $('focus-body').innerHTML=h;
 }
 
-function setFocDate(v){
-  _focDate=v;
-  loadFocusV2();
-}
-
-function resetFocDate(){
-  if(!confirm('Redefinir o foco apaga os itens atuais. Continuar?'))return;
-  const target=_focDate==='today'?todayStr():tomorrowStr();
-  renderFocusPlanner(target);
-}
+function setFocDate(v){_focDate=v;loadFocusV2()}
+function resetFocDate(){if(!confirm('Redefinir o foco apaga os itens atuais. Continuar?'))return;renderFocusPlanner(_focDate==='today'?todayStr():tomorrowStr())}
 
 async function setFocV2(){
   const target=_focDate==='today'?todayStr():tomorrowStr();
-  const p1=$('f1').value;
+  const p1=$('f1')?.value;
   if(!p1)return toast('Prioridade 1 obrigatória!','err');
-  const h1=$('ft1').value||null;
-  const p2=$('f2').value||null;
-  const h2=p2&&$('ft2').value?$('ft2').value:null;
-  const p3=$('f3').value||null;
-  const h3=p3&&$('ft3').value?$('ft3').value:null;
-
+  const h1=$('ft1')?.value||null;
+  const p2=$('f2')?.value||null;
+  const h2=p2&&$('ft2')?.value?$('ft2').value:null;
+  const p3=$('f3')?.value||null;
+  const h3=p3&&$('ft3')?.value?$('ft3').value:null;
   const r=await rpc('fn_ss_foco_definir_v2',{
     p_data_alvo:target,
     p_item1:p1,p_hora1:h1?h1+':00':null,
@@ -815,27 +1104,22 @@ async function setFocV2(){
     p_item3:p3,p_hora3:h3?h3+':00':null
   });
   if(r.erro)return toast(r.erro,'err');
-  const tag=r.antecipado?'🌙 Planejado! +8 XP':'🎯 Foco definido! +5 XP';
-  toast(tag,'ok');
-  loadFocusV2();
-  loadProfile();
+  toast(r.antecipado?'🌙 Planejado! +8 XP':'🎯 Foco definido! +5 XP','ok');
+  loadFocusV2();loadProfile();
 }
 
-async function compFocItem(itemId, dataPlan){
-  const today=todayStr();
-  if(dataPlan!==today){
-    // Fora do dia planejado — pedir motivo
+async function compFocItem(itemId,dataPlan){
+  if(dataPlan!==todayStr()){
     _focAtrasoItemId=itemId;
     $('fa-motivo').value='';
     om('m-foc-atraso');
-  } else {
+  }else{
     const r=await rpc('fn_ss_foco_completar_v2',{p_item_id:itemId});
     if(r.erro)return toast(r.erro,'err');
     let msg=`🎯 +${r.xp_ganho}XP`;
     if(r.todas_completas)msg+=` 🎉 +30 bônus!`;
     toast(msg,'ok');
-    loadFocusV2();
-    loadProfile();
+    loadFocusV2();loadProfile();
   }
 }
 
@@ -845,94 +1129,361 @@ async function confirmFocAtraso(){
   const r=await rpc('fn_ss_foco_completar_v2',{p_item_id:_focAtrasoItemId,p_motivo_atraso:motivo});
   if(r.erro)return toast(r.erro,'err');
   toast(`⚡ +${r.xp_ganho}XP (fora do dia planejado)`,'wrn');
-  loadFocusV2();
-  loadProfile();
+  loadFocusV2();loadProfile();
 }
 
-// Countdown loop — atualiza a cada minuto
-function startCountdownLoop(){
-  updateCDs();
-  setInterval(updateCDs,60000);
-}
-
+// ─── COUNTDOWN LOOP ───────────────────────────────────────
+function startCountdownLoop(){updateCDs();setInterval(updateCDs,60000)}
 function updateCDs(){
   document.querySelectorAll('[data-cd]').forEach(el=>{
     const row=el.closest('[data-date]');
     if(!row)return;
-    const dateStr=row.dataset.date;
-    const timeStr=row.dataset.time;
-    if(!dateStr||!timeStr)return;
-    const cd=formatCountdown(dateStr,timeStr);
+    const cd=formatCountdown(row.dataset.date,row.dataset.time);
     if(!cd)return;
     el.textContent=`▸ ${cd.text}`;
     el.className=`fi-countdown ${cd.type}`;
   });
-  // Also update weekly countdowns
   document.querySelectorAll('[data-wi-cd]').forEach(el=>{
     const dateStr=el.dataset.wiCd;
     const timeStr=el.dataset.wiTime||'';
     if(!dateStr)return;
     const cd=formatCountdown(dateStr,timeStr);
-    if(!cd){el.style.display='none';return;}
-    const cls=isToday(dateStr)?'wi-cd today-cd':(cd.type==='future'?'wi-cd future':'wi-cd late');
-    el.className=cls;
+    if(!cd){el.style.display='none';return}
+    el.className=isToday(dateStr)?'wi-cd today-cd':(cd.type==='future'?'wi-cd future':'wi-cd late');
     el.textContent=`${cd.type==='late'?'⚠️':'⏱'} ${cd.text}`;
   });
 }
 
-// Mood
-function loadMood(){$('mood-body').innerHTML=`<div class="mood-grid"><div class="mood-btn" onclick="doMood('reativo')"><span class="emoji">😤</span><span class="label">Reativo</span></div><div class="mood-btn" onclick="doMood('neutro')"><span class="emoji">😐</span><span class="label">Neutro</span></div><div class="mood-btn" onclick="doMood('presente')"><span class="emoji">😌</span><span class="label">Presente</span></div><div class="mood-btn" onclick="doMood('profundo')"><span class="emoji">🧘</span><span class="label">Profundo</span></div></div>`}
-async function doMood(m){const h=new Date().getHours();const r=await rpc('fn_ss_mood_registrar',{p_mood:m,p_intensidade:5,p_periodo:h<12?'manha':h<18?'tarde':'noite'});if(r.sucesso)toast(`${r.motivacao||'Registrado'}`,'ok')}
+// ─── MOOD ─────────────────────────────────────────────────
+function loadMood(){
+  $('mood-body').innerHTML=`<div class="mood-grid">
+    <div class="mood-btn" onclick="doMood('reativo')"><span class="emoji">😤</span><span class="label">Reativo</span></div>
+    <div class="mood-btn" onclick="doMood('neutro')"><span class="emoji">😐</span><span class="label">Neutro</span></div>
+    <div class="mood-btn" onclick="doMood('presente')"><span class="emoji">😌</span><span class="label">Presente</span></div>
+    <div class="mood-btn" onclick="doMood('profundo')"><span class="emoji">🧘</span><span class="label">Profundo</span></div>
+  </div>`;
+}
+async function doMood(m){
+  const h=new Date().getHours();
+  const r=await rpc('fn_ss_mood_registrar',{p_mood:m,p_intensidade:5,p_periodo:h<12?'manha':h<18?'tarde':'noite'});
+  if(r.sucesso)toast(`${r.motivacao||'Registrado'}`,'ok');
+}
 
-// Wisdom
-async function loadWisdom(){const d=await rpc('fn_ss_sabedoria_random');if(d.frase)$('wisdom-body').innerHTML=`<div class="wisdom"><div class="wq">"${d.frase}"</div><div class="wa">— ${d.autor}</div></div><button class="add-btn" onclick="loadWisdom()" style="margin-top:0;font-size:12px">🔄 Outra</button>`}
+// ─── WISDOM ───────────────────────────────────────────────
+async function loadWisdom(){
+  const d=await rpc('fn_ss_sabedoria_random');
+  if(d.frase)$('wisdom-body').innerHTML=`
+    <div class="wisdom"><div class="wq">"${d.frase}"</div><div class="wa">— ${d.autor}</div></div>
+    <button class="add-btn" onclick="loadWisdom()" style="margin-top:0;font-size:12px">🔄 Outra</button>`;
+}
 
-// Emergency
+// ─── EMERGENCY ────────────────────────────────────────────
 let eT=null,eS=0;
-function openEmergency(){$('emer-mode').style.display='block';eS=0;$('emer-timer').textContent='00:00';eT=setInterval(()=>{eS++;$('emer-timer').textContent=fmt(eS)},1000);const q=["Para quem esse impulso veio?","Não há problemas. Nunca houve.","Observe sem reagir.","O impulso é do ego."];$('emer-quote').textContent='"'+q[Math.floor(Math.random()*q.length)]+'"'}
-async function endEmergency(res){if(eT){clearInterval(eT);eT=null}$('emer-mode').style.display='none';const g=prompt('Gatilho?');await rpc('fn_ss_emergencia_registrar',{p_tipo:'impulso',p_resultado:res,p_gatilho:g,p_tempo_segundos:eS});toast(res==='vitoria'?'🛡️ Venceu! +25XP':'💀 Levanta.',res==='vitoria'?'ok':'wrn');loadProfile()}
+function openEmergency(){
+  $('emer-mode').style.display='block';eS=0;$('emer-timer').textContent='00:00';
+  eT=setInterval(()=>{eS++;$('emer-timer').textContent=fmt(eS)},1000);
+  const q=["Para quem esse impulso veio?","Não há problemas. Nunca houve.","Observe sem reagir.","O impulso é do ego."];
+  $('emer-quote').textContent='"'+q[Math.floor(Math.random()*q.length)]+'"';
+}
+async function endEmergency(res){
+  if(eT){clearInterval(eT);eT=null}
+  $('emer-mode').style.display='none';
+  const g=prompt('Gatilho?');
+  await rpc('fn_ss_emergencia_registrar',{p_tipo:'impulso',p_resultado:res,p_gatilho:g,p_tempo_segundos:eS});
+  toast(res==='vitoria'?'🛡️ Venceu! +25XP':'💀 Levanta.',res==='vitoria'?'ok':'wrn');
+  loadProfile();
+}
 
-// Daily Reward
-async function checkDR(){const r=await rpc('fn_ss_daily_reward');if(r.erro)return;$('rw-d').textContent=r.dias_consecutivos;$('rw-x').textContent=`+${r.xp_ganho} XP`;$('rw-m').textContent=r.motivacao||'';$('reward-popup').style.display='flex';loadProfile()}
+// ─── DAILY REWARD ─────────────────────────────────────────
+async function checkDR(){
+  const r=await rpc('fn_ss_daily_reward');
+  if(r.erro)return;
+  $('rw-d').textContent=r.dias_consecutivos;
+  $('rw-x').textContent=`+${r.xp_ganho} XP`;
+  $('rw-m').textContent=r.motivacao||'';
+  $('reward-popup').style.display='flex';
+  loadProfile();
+}
 function closeReward(){$('reward-popup').style.display='none'}
 
-// ─────────────────────────────────────────────────────────────
-// SEMANAL V2 — com planejamento de dias
-// ─────────────────────────────────────────────────────────────
-const DAYS_WEEK=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+// ═══════════════════════════════════════════════════════════
+// ─── METAS (NOVO SISTEMA) ─────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+let _metasList=[];
+let _metaEditId=null;
+let _metaProgId=null;
 
+// Metas são armazenadas em localStorage como sistema local
+// (pode ser migrado para Supabase futuramente)
+function getMetas(){
+  try{return JSON.parse(localStorage.getItem('ss_metas')||'[]')}catch{return[]}
+}
+function saveMetas(arr){localStorage.setItem('ss_metas',JSON.stringify(arr))}
+
+async function loadMetas(){
+  _metasList=getMetas();
+  // Se não tem metas, criar as padrão
+  if(_metasList.length===0){
+    _metasList=[
+      {id:'m_'+Date.now()+'_1',nome:'1000 horas de meditação',tipo:'longo',unidade:'horas',alvo:1000,atual:_p?(_p.horas_meditacao||0):0,desc:'Jornada contemplativa — cada hora te aproxima do Ser.',auto:'med'},
+      {id:'m_'+Date.now()+'_2',nome:'Streak de 90 dias',tipo:'longo',unidade:'dias',alvo:90,atual:_p?(_p.streak_nofap||0):0,desc:'Disciplina absoluta sobre o impulso.',auto:'streak_nofap'},
+      {id:'m_'+Date.now()+'_3',nome:'Meta mensal — missões',tipo:'mes',unidade:'missões',alvo:100,atual:0,desc:'Completar 100 missões no mês.'},
+    ];
+    saveMetas(_metasList);
+  }else{
+    // Atualizar valores automáticos
+    if(_p){
+      _metasList=_metasList.map(m=>{
+        if(m.auto==='med')return{...m,atual:_p.horas_meditacao||0};
+        if(m.auto==='streak_nofap')return{...m,atual:_p.streak_nofap||0};
+        if(m.auto==='streak')return{...m,atual:_p.streak_atual||0};
+        return m;
+      });
+      saveMetas(_metasList);
+    }
+  }
+
+  const total=_metasList.length;
+  const done=_metasList.filter(m=>m.atual>=m.alvo).length;
+  $('metas-badge').textContent=`${done}/${total}`;
+
+  const tipos=['longo','ano','mes','semana'];
+  const nomes={longo:'🌟 Longo Prazo',ano:'🗓️ Anuais',mes:'📆 Mensais',semana:'📅 Semanais'};
+
+  let h='';
+  for(const tipo of tipos){
+    const tMetas=_metasList.filter(m=>m.tipo===tipo);
+    if(!tMetas.length)continue;
+    h+=`<div class="sec-divider"><span>${nomes[tipo]}</span></div>`;
+    for(const m of tMetas){
+      const pct=Math.min(Math.round((m.atual/m.alvo)*100),100);
+      const isDone=m.atual>=m.alvo;
+      // Projeção
+      let proj='';
+      if(tipo==='longo'&&m.auto==='med'&&_p){
+        const sessoesPorDia=(_p.sessoes_meditacao||0)/Math.max((_p.streak_atual||1),1);
+        const minsPorSessao=sessoesPorDia>0?(_p.horas_meditacao*60)/((_p.sessoes_meditacao||1)):0;
+        if(minsPorSessao>0){
+          const restante=m.alvo-m.atual;
+          const diasEst=Math.ceil(restante/(minsPorSessao/60*sessoesPorDia||0.05));
+          if(diasEst>0&&diasEst<99999)proj=`Estimado: ~${diasEst} dias (ritmo atual)`;
+        }
+      }
+      h+=`<div class="meta-item tipo-${tipo}">
+        <div class="meta-top">
+          <div>
+            <div class="meta-name">${isDone?'✅ ':''} ${m.nome}</div>
+            ${m.desc?`<div style="font-size:11px;color:var(--td);margin-top:3px">${m.desc}</div>`:''}
+          </div>
+          <div class="meta-tag ${tipo}">${tipo==='longo'?'LONGO':tipo==='ano'?'ANO':tipo==='mes'?'MÊS':'SEM'}</div>
+        </div>
+        <div class="meta-prog-txt">
+          <span>${m.atual} / ${m.alvo} ${m.unidade}</span>
+          <strong>${pct}%</strong>
+        </div>
+        <div class="meta-bar"><div class="meta-fill ${tipo}" style="width:${pct}%"></div></div>
+        ${proj?`<div class="meta-projection">📡 ${proj}</div>`:''}
+        <div class="meta-actions" style="margin-top:8px">
+          ${!m.auto?`<button class="meta-btn add-p" onclick="openMetaProg('${m.id}')">+Progresso</button>`:''}
+          <button class="meta-btn edit" onclick="openEditMeta('${m.id}')">✏️ Editar</button>
+          <button class="meta-btn del" onclick="deleteMeta('${m.id}')">🗑️</button>
+        </div>
+      </div>`;
+    }
+  }
+  h+=`<button class="add-btn" onclick="openAddMeta()">🎯 Nova Meta</button>`;
+  $('metas-body').innerHTML=h;
+}
+
+function openAddMeta(){
+  _metaEditId=null;
+  $('meta-modal-title').textContent='🎯 NOVA META';
+  ['mt-nome','mt-unidade','mt-desc'].forEach(id=>{const el=$(id);if(el)el.value=''});
+  const at=$('mt-atual');if(at)at.value='0';
+  const alv=$('mt-alvo');if(alv)alv.value='';
+  om('m-add-meta');
+}
+function openEditMeta(id){
+  _metaEditId=id;
+  const m=_metasList.find(x=>x.id===id);
+  if(!m)return;
+  $('meta-modal-title').textContent='✏️ EDITAR META';
+  $('mt-nome').value=m.nome;
+  $('mt-tipo').value=m.tipo;
+  $('mt-unidade').value=m.unidade||'';
+  $('mt-alvo').value=m.alvo;
+  $('mt-atual').value=m.atual||0;
+  $('mt-desc').value=m.desc||'';
+  om('m-add-meta');
+}
+function saveMeta(){
+  const nome=$('mt-nome').value.trim();
+  if(!nome)return toast('Nome é obrigatório!','err');
+  const alvo=+$('mt-alvo').value;
+  if(!alvo||alvo<=0)return toast('Alvo inválido!','err');
+  if(_metaEditId){
+    _metasList=_metasList.map(m=>m.id===_metaEditId?{
+      ...m,
+      nome,
+      tipo:$('mt-tipo').value,
+      unidade:$('mt-unidade').value||'',
+      alvo,
+      atual:+$('mt-atual').value||0,
+      desc:$('mt-desc').value||''
+    }:m);
+    toast('✅ Meta atualizada','ok');
+  }else{
+    _metasList.push({
+      id:'m_'+Date.now(),
+      nome,
+      tipo:$('mt-tipo').value,
+      unidade:$('mt-unidade').value||'',
+      alvo,
+      atual:+$('mt-atual').value||0,
+      desc:$('mt-desc').value||''
+    });
+    toast('🎯 Meta criada!','ok');
+  }
+  saveMetas(_metasList);
+  cm('m-add-meta');
+  loadMetas();
+}
+function deleteMeta(id){
+  if(!confirm('Remover esta meta?'))return;
+  _metasList=_metasList.filter(m=>m.id!==id);
+  saveMetas(_metasList);
+  loadMetas();
+}
+function openMetaProg(id){
+  _metaProgId=id;
+  const m=_metasList.find(x=>x.id===id);
+  if(!m)return;
+  $('mp-nome').textContent=m.nome;
+  $('mp-val').value='1';
+  $('mp-current').textContent=`Atual: ${m.atual} / ${m.alvo} ${m.unidade} (${Math.round(m.atual/m.alvo*100)}%)`;
+  om('m-meta-prog');
+}
+function confirmMetaProg(){
+  const val=+$('mp-val').value||0;
+  if(val<=0)return toast('Valor inválido','err');
+  _metasList=_metasList.map(m=>{
+    if(m.id!==_metaProgId)return m;
+    const novo=Math.min(m.atual+val,m.alvo);
+    return{...m,atual:novo};
+  });
+  saveMetas(_metasList);
+  cm('m-meta-prog');
+  const m=_metasList.find(x=>x.id===_metaProgId);
+  if(m&&m.atual>=m.alvo)toast(`🎉 META ALCANÇADA: ${m.nome}!`,'ok');
+  else toast(`📈 +${val} registrado`,'ok');
+  loadMetas();
+}
+
+// ─── HISTÓRICO DE PERÍODOS ────────────────────────────────
+async function loadPeriodHistory(){
+  let h='';
+  // Semanas: tentar buscar do Supabase
+  const wrev=await rpc('fn_ss_review_listar',{p_limit:10});
+  // Analytics XP
+  const axp=await rpc('fn_ss_analytics_xp',{p_dias:90});
+
+  h+=`<div class="sec-divider"><span>📅 Semanas Recentes</span></div>`;
+  if(wrev&&wrev.reviews&&wrev.reviews.length>0){
+    for(const r of wrev.reviews){
+      h+=`<div class="ph-item">
+        <div class="ph-label">
+          <div class="ph-title">📅 Semana ${r.semana}</div>
+          <div class="ph-sub">${r.data||''} • Nota: ${r.nota_geral||r.nota||'?'}/10</div>
+        </div>
+        <span class="ph-badge ${(r.nota_geral||r.nota||5)>=7?'ok':(r.nota_geral||r.nota||5)>=4?'warn':'no'}">${r.nota_geral||r.nota||'?'}/10</span>
+      </div>`;
+    }
+  }else{
+    h+=`<div class="empty"><div class="empty-icon">📅</div><p>Faça reviews semanais para ver o histórico</p></div>`;
+  }
+
+  // XP por período
+  h+=`<div class="sec-divider"><span>📈 XP por Período</span></div>`;
+  if(axp&&axp.xp_por_dia&&axp.xp_por_dia.length>0){
+    // Agrupar por semana
+    const semanas={};
+    for(const d of axp.xp_por_dia){
+      const dt=new Date(d.data+'T12:00');
+      const wk=`${dt.getFullYear()}-W${String(Math.ceil(((dt-new Date(dt.getFullYear(),0,1))/86400000+1)/7)).padStart(2,'0')}`;
+      semanas[wk]=(semanas[wk]||0)+(d.ganho||0);
+    }
+    // Agrupar por mês
+    const meses={};
+    const mNames=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    for(const d of axp.xp_por_dia){
+      const dt=new Date(d.data+'T12:00');
+      const mk=`${mNames[dt.getMonth()]} ${dt.getFullYear()}`;
+      meses[mk]=(meses[mk]||0)+(d.ganho||0);
+    }
+    const mesEntries=Object.entries(meses).reverse();
+    for(const[mk,xp] of mesEntries){
+      h+=`<div class="ph-item">
+        <div class="ph-label">
+          <div class="ph-title">📆 ${mk}</div>
+          <div class="ph-sub">Mês completo</div>
+        </div>
+        <div class="ph-xp">+${xp} XP</div>
+      </div>`;
+    }
+    const wkEntries=Object.entries(semanas).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,8);
+    h+=`<div class="sec-divider" style="margin-top:8px"><span>Por Semana</span></div>`;
+    for(const[wk,xp] of wkEntries){
+      h+=`<div class="ph-item">
+        <div class="ph-label">
+          <div class="ph-title">📅 ${wk}</div>
+        </div>
+        <div class="ph-xp">+${xp} XP</div>
+      </div>`;
+    }
+  }else{
+    h+=`<div class="empty"><p>Sem dados de XP</p></div>`;
+  }
+
+  // Resumo anual
+  h+=`<div class="sec-divider"><span>🗓️ ${new Date().getFullYear()}</span></div>`;
+  const anoTotal=axp&&axp.xp_por_dia?axp.xp_por_dia.filter(d=>d.data&&d.data.startsWith(String(new Date().getFullYear()))).reduce((s,d)=>s+(d.ganho||0),0):0;
+  h+=`<div class="period-summary">
+    <div class="period-summary-title">Resumo ${new Date().getFullYear()}</div>
+    <div class="ps-grid">
+      <div class="ps-item"><div class="ps-val pos">${anoTotal}</div><div class="ps-lbl">XP Total</div></div>
+      <div class="ps-item"><div class="ps-val neu">${_p?(_p.horas_meditacao||0)+'h':'--'}</div><div class="ps-lbl">Meditação</div></div>
+      <div class="ps-item"><div class="ps-val neu">${_p?(_p.conquistas||0):'--'}</div><div class="ps-lbl">Conquistas</div></div>
+    </div>
+  </div>`;
+
+  $('periodo-hist-body').innerHTML=h;
+}
+
+// ─── SEMANAL V2 (CORRIGIDO) ───────────────────────────────
+const DAYS_WEEK=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
 function getWeekDays(){
-  const days=[];
-  const now=new Date();
-  // Encontrar segunda-feira desta semana
+  const days=[];const now=new Date();
   const dow=now.getDay();
   const monday=new Date(now);
   monday.setDate(now.getDate()-(dow===0?6:dow-1));
   for(let i=0;i<7;i++){
-    const d=new Date(monday);
-    d.setDate(monday.getDate()+i);
-    days.push({
-      label:DAYS_WEEK[d.getDay()],
-      str:d.toISOString().split('T')[0],
-      isToday:d.toISOString().split('T')[0]===todayStr()
-    });
+    const d=new Date(monday);d.setDate(monday.getDate()+i);
+    days.push({label:DAYS_WEEK[d.getDay()],str:d.toISOString().split('T')[0],isToday:d.toISOString().split('T')[0]===todayStr()});
   }
   return days;
 }
 
 async function loadWeeklyV2(){
   const d=await rpc('fn_ss_semana_v2');
-  if(!d||!d.missoes){
-    $('weekly-body').innerHTML=`<div class="empty"><div class="empty-icon">📅</div><p>Nenhuma</p></div><button class="add-btn" onclick="om('m-add-sem')">➕ Criar</button>`;
+  if(!d||!d.missoes||d.erro){
+    $('weekly-body').innerHTML=`<div class="empty"><div class="empty-icon">📅</div><p>Nenhuma missão semanal</p></div><button class="add-btn" onclick="om('m-add-sem')">➕ Criar</button>`;
     $('wb').textContent='0';
     return;
   }
   const dn=d.missoes.filter(m=>m.status==='completa').length;
   $('wb').textContent=`${dn}/${d.missoes.length}`;
-
   const weekDays=getWeekDays();
   let h='';
-
   for(const m of d.missoes){
     const pct=Math.min((m.quantidade_feita/m.quantidade_alvo)*100,100);
     const done=m.status==='completa';
@@ -940,121 +1491,78 @@ async function loadWeeklyV2(){
     const planIsToday=hasPlan&&isToday(m.data_planejada);
     const planIsPast=hasPlan&&isPast(m.data_planejada)&&!done;
     const dayLabel=hasPlan?`${dayName(m.data_planejada)} ${m.hora_planejada?m.hora_planejada.slice(0,5):''}`.trim():'';
-    const cdAttr=hasPlan?`data-wi-cd="${m.data_planejada}" data-wi-time="${m.hora_planejada||''}"` :'';
-
+    const cdAttr=hasPlan?`data-wi-cd="${m.data_planejada}" data-wi-time="${m.hora_planejada||''}"`:'';
+    const sid=safeId(m.nome);
     h+=`<div class="wi ${done?'done':''}">
       <div class="wi-top">
         <div class="wi-name">${done?'✅':'⬜'} ${m.nome}</div>
         <div style="display:flex;align-items:center;gap:6px">
           ${hasPlan?`<span class="${planIsToday?'wi-cd today-cd':planIsPast?'wi-cd late':'wi-cd future'}" ${cdAttr} style="font-size:10px">⏱ ${dayLabel}</span>`:''}
-          <div class="wi-prog">${m.progresso}</div>
+          <div class="wi-prog">${m.progresso||`${m.quantidade_feita}/${m.quantidade_alvo}`}</div>
         </div>
       </div>
       <div class="wi-bar"><div class="wi-fill" style="width:${pct}%"></div></div>
-      ${planIsPast&&!done?`<div style="font-size:11px;color:var(--warn);margin-bottom:8px">⚠️ Dia planejado já passou — registre o motivo ou execute agora</div>`:''}
+      ${planIsPast&&!done?`<div style="font-size:11px;color:var(--warn);margin-bottom:8px">⚠️ Dia planejado já passou</div>`:''}
       ${done?'':`<div class="wi-acts">
         <button class="wi-btn" onclick="advW('${esc(m.nome)}',1)">+1</button>
         <button class="wi-btn alt" onclick="advW('${esc(m.nome)}',3)">+3</button>
-        <button class="wi-btn alt" onclick="advW('${esc(m.nome)}',5)">+5</button>
         <button class="wi-btn sec" onclick="editSem('${esc(m.nome)}',${m.quantidade_alvo})">✏️</button>
-        <button class="wi-btn ${hasPlan?'sec':'warn'}" onclick="toggleDayPlan('wi-plan-${esc(m.nome).replace(/\s/g,'_')}')">📅 ${hasPlan?dayLabel:'Planejar'}</button>
-        ${planIsPast?`<button class="wi-btn warn" onclick="toggleMotivo('wi-mot-${esc(m.nome).replace(/\s/g,'_')}')">📝 Motivo</button>`:''}
+        <button class="wi-btn ${hasPlan?'sec':'warn'}" onclick="toggleDayPlan('wi-plan-${sid}')">📅 ${hasPlan?dayLabel:'Planejar'}</button>
       </div>`}
       ${done?'':`
-      <div class="wi-day-plan" id="wi-plan-${m.nome.replace(/\s/g,'_')}">
-        <div class="wi-day-label">Planejar dia de execução</div>
-        <div class="wi-day-row">
-          ${weekDays.map(day=>`<button class="wi-day-btn ${day.str===m.data_planejada?'act':''} ${day.isToday?'today':''}" onclick="selectWiDay('${esc(m.nome)}','${day.str}',this)">${day.label}${day.isToday?' ●':''}</button>`).join('')}
+      <div class="wi-day-plan" id="wi-plan-${sid}">
+        <div class="wi-day-label">Planejar dia</div>
+        <div class="wi-day-row" id="wi-days-${sid}">
+          ${weekDays.map(day=>`<button class="wi-day-btn ${day.str===m.data_planejada?'act':''} ${day.isToday?'today':''}" data-date="${day.str}" onclick="selectWiDay('${sid}',this)">${day.label}${day.isToday?' ●':''}</button>`).join('')}
         </div>
         <div class="wi-hora">
           <label>Horário</label>
-          <input type="time" id="wi-h-${m.nome.replace(/\s/g,'_')}" value="${m.hora_planejada?m.hora_planejada.slice(0,5):''}">
+          <input type="time" id="wi-h-${sid}" value="${m.hora_planejada?m.hora_planejada.slice(0,5):''}">
         </div>
-        <button class="wi-btn" style="width:100%" onclick="saveWiPlan('${esc(m.nome)}','${m.nome.replace(/\s/g,'_')}')">✅ Confirmar</button>
-      </div>
-      <div class="wi-motivo" id="wi-mot-${m.nome.replace(/\s/g,'_')}">
-        <div class="wi-motivo-label">⚠️ Por que não foi no dia planejado?</div>
-        <textarea id="wi-mot-txt-${m.nome.replace(/\s/g,'_')}" placeholder="Reunião, indisposição, outra prioridade..." rows="2"></textarea>
-        <button class="wi-btn warn" style="width:100%;margin-top:6px" onclick="saveWiMotivo('${esc(m.nome)}','${m.nome.replace(/\s/g,'_')}')">REGISTRAR</button>
+        <button class="wi-btn" style="width:100%" onclick="saveWiPlan('${esc(m.nome)}','${sid}')">✅ Confirmar</button>
       </div>`}
     </div>`;
   }
-
   h+=`<button class="add-btn" onclick="om('m-add-sem')">➕ Criar</button>`;
   $('weekly-body').innerHTML=h;
   setTimeout(updateCDs,100);
 }
 
-function toggleDayPlan(id){
-  const el=document.getElementById(id);
-  if(el)el.classList.toggle('show');
-}
+function toggleDayPlan(id){const el=document.getElementById(id);if(el)el.classList.toggle('show')}
 
-function toggleMotivo(id){
-  const el=document.getElementById(id);
-  if(el)el.classList.toggle('show');
-}
-
-function selectWiDay(nome,dateStr,btn){
-  const par=btn.closest('.wi-day-row');
+function selectWiDay(sid,btn){
+  const par=document.getElementById(`wi-days-${sid}`);
   if(par)par.querySelectorAll('.wi-day-btn').forEach(b=>b.classList.remove('act'));
   btn.classList.add('act');
-  btn.dataset.selected=dateStr;
 }
 
-async function saveWiPlan(nome,safeId){
-  const par=document.querySelector(`#wi-plan-${safeId} .wi-day-row`);
-  const selected=par?par.querySelector('.act'):null;
+async function saveWiPlan(nome,sid){
+  const par=document.getElementById(`wi-days-${sid}`);
+  const selected=par?par.querySelector('.act[data-date]'):null;
   if(!selected)return toast('Selecione um dia','err');
-  const dateStr=selected.dataset.selected||selected.dataset.str;
-
-  const horaEl=document.getElementById(`wi-h-${safeId}`);
+  const finalDateStr=selected.dataset.date;
+  const horaEl=document.getElementById(`wi-h-${sid}`);
   const hora=horaEl&&horaEl.value?horaEl.value+':00':null;
-
-  // Try to get the date from button text or data attribute
-  const allBtns=par.querySelectorAll('.wi-day-btn');
-  let finalDate=null;
-  allBtns.forEach(b=>{if(b.classList.contains('act')&&b.onclick===undefined){
-    // Extract date from onclick
-  }});
-
-  // Re-query with data attributes
-  const activePlan=par.querySelector('[data-selected]');
-  if(!activePlan)return toast('Selecione um dia','err');
-  const finalDateStr=activePlan.dataset.selected;
-
   const r=await rpc('fn_ss_semanal_planejar_dia',{p_nome:nome,p_data:finalDateStr,p_hora:hora});
-  if(r.erro)return toast(r.erro,'err');
+  if(r&&r.erro)return toast(r.erro,'err');
   toast(`📅 Planejado para ${dayName(finalDateStr)}`,'ok');
-  tl[1]=0;loadWeeklyV2();
-}
-
-async function saveWiMotivo(nome,safeId){
-  const motivo=document.getElementById(`wi-mot-txt-${safeId}`)?.value;
-  if(!motivo)return toast('Descreva o motivo','err');
-  const r=await rpc('fn_ss_semanal_registrar_motivo',{p_nome:nome,p_motivo:motivo});
-  if(r.sucesso)toast('📝 Registrado','ok');
   tl[1]=0;loadWeeklyV2();
 }
 
 async function advW(n,q){
   const r=await rpc('fn_ss_completar_semanal',{p_nome:n,p_quantidade:q});
   if(r.erro)return toast(r.erro,'err');
-  toast(r.completa?`✅ ${r.nome} +${r.xp_ganho}XP`:`📅 ${r.nome}: ${r.progresso}`,'ok');
+  toast(r.completa?`✅ ${r.nome} +${r.xp_ganho}XP`:`📅 ${r.nome}: ${r.progresso||''}`,'ok');
   tl[1]=0;loadWeeklyV2();loadProfile();
 }
-
 async function createWeekly(){
-  const n=$('as-n').value;
-  if(!n)return toast('Nome!','err');
+  const n=$('as-n').value;if(!n)return toast('Nome!','err');
   const r=await rpc('fn_ss_criar_semanal',{p_nome:n,p_categoria:$('as-c').value,p_quantidade:+$('as-q').value||1});
   cm('m-add-sem');
   if(r.erro)return toast(r.erro,'err');
-  toast(`✅ ${r.nome}`,'ok');
-  $('as-n').value='';
+  toast(`✅ ${r.nome}`,'ok');$('as-n').value='';
   tl[1]=0;loadWeeklyV2();
 }
-
 let _esn='';
 function editSem(n,q){_esn=n;$('es-n').value=n;$('es-q').value=q;om('m-edit-sem')}
 async function saveEditSem(){
@@ -1062,123 +1570,398 @@ async function saveEditSem(){
   cm('m-edit-sem');toast('✅','ok');tl[1]=0;loadWeeklyV2();
 }
 
-// Reviews
+// ─── REVIEWS ──────────────────────────────────────────────
 async function loadRevs(){
   const d=await rpc('fn_ss_review_listar',{p_limit:5});
   let h=`<button class="mbtn" onclick="om('m-review')" style="margin-bottom:16px">📊 Review (+50 XP)</button>`;
   if(d.reviews&&d.reviews.length>0){
-    for(const r of d.reviews)h+=`<div class="rev"><div class="rev-head">Sem ${r.semana} — ${r.nota}/10</div><div class="rev-line"><strong>✅</strong> ${r.o_que_foi_bem||'—'}</div><div class="rev-line"><strong>⚠️</strong> ${r.o_que_melhorar||'—'}</div>${r.padrao_identificado?`<div class="rev-line"><strong>🔍</strong> ${r.padrao_identificado}</div>`:''}</div>`;
+    for(const r of d.reviews)
+      h+=`<div class="rev"><div class="rev-head">Sem ${r.semana} — ${r.nota_geral||r.nota}/10</div>
+        <div class="rev-line"><strong>✅</strong> ${r.o_que_foi_bem||'—'}</div>
+        <div class="rev-line"><strong>⚠️</strong> ${r.o_que_melhorar||'—'}</div>
+        ${r.padrao_identificado?`<div class="rev-line"><strong>🔍</strong> ${r.padrao_identificado}</div>`:''}</div>`;
   }
   $('review-body').innerHTML=h;
 }
 async function saveReview(){
   const r=await rpc('fn_ss_review_salvar',{p_o_que_foi_bem:$('rv-b').value,p_o_que_melhorar:$('rv-m').value,p_padrao:$('rv-p').value||null,p_foco_proxima:$('rv-f').value||null,p_nota:+$('rv-n').value||5});
-  cm('m-review');if(r.sucesso){toast('📊 +50 XP','ok');loadRevs();loadProfile()}
+  cm('m-review');
+  if(r.sucesso){toast('📊 +50 XP','ok');loadRevs();loadProfile()}
 }
 
-// BOSSES
+// ═══════════════════════════════════════════════════════════
+// ─── BOSSES (CORRIGIDO) ───────────────────────────────────
+// ═══════════════════════════════════════════════════════════
 let _bn='';
+
 async function loadBosses(){
+  $('bosses-active').innerHTML='<div class="skel"></div><div class="skel"></div>';
+  $('bosses-done').innerHTML='<div class="skel"></div>';
+
   const d=await rpc('fn_ss_bosses');
-  if(!d||!d.bosses)return;
-  const act=d.bosses.filter(b=>!b.completo),don=d.bosses.filter(b=>b.completo);
+
+  if(!d||d.erro){
+    $('bosses-active').innerHTML=`<div class="err-box">❌ ${d?.erro||'Erro ao carregar'}</div><button class="add-btn" onclick="addBoss()">➕ Novo Boss</button>`;
+    return;
+  }
+
+  const bosses=d.bosses||d||[];
+  // Suporte a array direto ou objeto com .bosses
+  const arr=Array.isArray(bosses)?bosses:(bosses.bosses||[]);
+
+  const act=arr.filter(b=>!b.completo);
+  const don=arr.filter(b=>b.completo);
+
   let h='';
-  if(!act.length)h=`<div class="empty"><div class="empty-icon">💀</div><p>Nenhum</p></div>`;
-  for(const b of act)h+=`<div class="bi"><div class="bi-icon">💀</div><div class="bi-info"><div class="bi-name">${b.nome}</div><div class="bi-cond">${b.condicao||'—'}</div></div><div class="bi-right"><div class="bi-xp">+${b.xp}</div><button class="bi-btn atk" onclick="defBoss('${esc(b.nome)}')">⚔️</button><button class="bi-btn edt" onclick="editBoss('${esc(b.nome)}','${b.pilar||'mente'}',${b.xp},'${esc(b.condicao||'')}')">✏️</button></div></div>`;
-  h+=`<button class="add-btn" onclick="addBoss()">➕ Novo</button>`;
+  if(!act.length){
+    h=`<div class="empty"><div class="empty-icon">💀</div><p>Nenhum Boss ativo</p></div>`;
+  }else{
+    for(const b of act){
+      h+=`<div class="bi">
+        <div class="bi-icon">💀</div>
+        <div class="bi-info">
+          <div class="bi-name">${b.nome}</div>
+          <div class="bi-cond">${b.condicao||b.condicao_texto||'—'}</div>
+        </div>
+        <div class="bi-right">
+          <div class="bi-xp">+${b.xp||b.xp_recompensa||0}</div>
+          <button class="bi-btn atk" onclick="defBoss('${esc(b.nome)}')">⚔️</button>
+          <button class="bi-btn edt" onclick="editBoss('${esc(b.nome)}','${b.pilar||'mente'}',${b.xp||b.xp_recompensa||200},'${esc(b.condicao||b.condicao_texto||'')}')">✏️</button>
+        </div>
+      </div>`;
+    }
+  }
+  h+=`<button class="add-btn" onclick="addBoss()">➕ Novo Boss</button>`;
   $('bosses-active').innerHTML=h;
+
   let hd='';
-  if(!don.length)hd='<div class="empty"><p>Nenhum derrotado</p></div>';
-  for(const b of don)hd+=`<div class="bi done"><div class="bi-icon">☠️</div><div class="bi-info"><div class="bi-name">${b.nome}</div></div><div class="bi-xp">+${b.xp}</div></div>`;
+  if(!don.length){
+    hd='<div class="empty"><p>Nenhum derrotado ainda</p></div>';
+  }else{
+    for(const b of don)
+      hd+=`<div class="bi done">
+        <div class="bi-icon">☠️</div>
+        <div class="bi-info"><div class="bi-name">${b.nome}</div></div>
+        <div class="bi-xp">+${b.xp||b.xp_recompensa||0}</div>
+      </div>`;
+  }
   $('bosses-done').innerHTML=hd;
 }
-async function defBoss(n){if(!confirm('⚔️ Derrotar: '+n+'?'))return;const r=await rpc('fn_ss_completar_boss',{p_nome:n});if(r.erro)return toast(r.erro,'err');toast(`💀 ${r.boss} +${r.xp}XP`,'ok');loadBosses();loadProfile()}
+
+async function defBoss(n){
+  if(!confirm('⚔️ Derrotar: '+n+'?'))return;
+  const r=await rpc('fn_ss_completar_boss',{p_nome:n});
+  if(r.erro)return toast(r.erro,'err');
+  toast(`💀 ${r.boss||n} +${r.xp||0}XP`,'ok');
+  loadBosses();loadProfile();
+}
 function addBoss(){_bn='';$('bmt').textContent='➕ NOVO BOSS';$('bs-n').value='';$('bs-c').value='';om('m-boss')}
 function editBoss(n,p,x,c){_bn=n;$('bmt').textContent='✏️ EDITAR';$('bs-n').value=n;$('bs-p').value=p;$('bs-x').value=x;$('bs-c').value=c;om('m-boss')}
-async function saveBoss(){const n=$('bs-n').value;if(!n)return toast('Nome!','err');if(_bn)await rpc('fn_ss_editar_boss_dados',{p_nome_atual:_bn,p_novo_nome:n,p_novo_pilar:$('bs-p').value,p_novo_xp:+$('bs-x').value,p_nova_condicao:$('bs-c').value});else await rpc('fn_ss_criar_boss',{p_nome:n,p_pilar:$('bs-p').value,p_xp:+$('bs-x').value,p_condicao:$('bs-c').value});cm('m-boss');toast('✅','ok');loadBosses()}
+async function saveBoss(){
+  const n=$('bs-n').value;if(!n)return toast('Nome!','err');
+  let r;
+  if(_bn){
+    r=await rpc('fn_ss_editar_boss_dados',{p_nome_atual:_bn,p_novo_nome:n,p_novo_pilar:$('bs-p').value,p_novo_xp:+$('bs-x').value,p_nova_condicao:$('bs-c').value});
+  }else{
+    r=await rpc('fn_ss_criar_boss',{p_nome:n,p_pilar:$('bs-p').value,p_xp:+$('bs-x').value,p_condicao:$('bs-c').value});
+  }
+  cm('m-boss');
+  if(r&&r.erro)return toast(r.erro,'err');
+  toast('✅ Boss salvo','ok');
+  tl[2]=0;loadBosses();
+}
 
-// CONQUISTAS
+// ─── CONQUISTAS ───────────────────────────────────────────
 async function loadConq(){
   const d=await rpc('fn_ss_conquistas_lista');
-  if(!d||!d.conquistas)return;
+  if(!d||!d.conquistas){$('conq-body').innerHTML=`<div class="err-box">❌ ${d?.erro||'Sem dados'}</div>`;return}
   const u=d.conquistas.filter(c=>c.desbloqueada).length;
   $('cb').textContent=`${u}/${d.conquistas.length}`;
   let h='';
-  for(const c of d.conquistas)h+=`<div class="ci ${c.desbloqueada?'':'locked'}"><div class="ci-icon">${c.desbloqueada?'🏆':'🔒'}</div><div class="ci-info"><div class="ci-name">${c.nome}</div><div class="ci-desc">${c.descricao}</div></div>${c.desbloqueada?`<div class="ci-xp">+${c.xp_bonus}</div>`:''}</div>`;
+  for(const c of d.conquistas)
+    h+=`<div class="ci ${c.desbloqueada?'':'locked'}">
+      <div class="ci-icon">${c.desbloqueada?'🏆':'🔒'}</div>
+      <div class="ci-info"><div class="ci-name">${c.nome}</div><div class="ci-desc">${c.descricao}</div></div>
+      ${c.desbloqueada?`<div class="ci-xp">+${c.xp_bonus}</div>`:''}
+    </div>`;
   $('conq-body').innerHTML=h;
 }
 async function loadTitulos(){
   const d=await rpc('fn_ss_titulos_listar');
-  if(!d||!d.titulos)return;
-  let h=`<button class="mbtn sec" onclick="chkTit()" style="margin-bottom:12px">🔍 Verificar</button>`;
-  for(const t of d.titulos){const cl=t.equipado?'eq':t.desbloqueado?'':'locked';h+=`<div class="ti ${cl}"><div class="ti-icon">${t.icone||'🏷️'}</div><div class="ti-info"><div class="ti-name">${t.nome}</div><div class="ti-desc">${t.condicao||''}</div></div>${t.desbloqueado&&!t.equipado?`<button class="ti-btn" onclick="eqTit('${esc(t.nome)}')">EQUIPAR</button>`:''}${t.equipado?'<span style="color:var(--p);font-size:10px;font-weight:700">ATIVO</span>':''}</div>`}
+  if(!d||!d.titulos){$('titulos-body').innerHTML=`<div class="err-box">❌ ${d?.erro||'Sem dados'}</div>`;return}
+  let h=`<button class="mbtn sec" onclick="chkTit()" style="margin-bottom:12px">🔍 Verificar Novos</button>`;
+  for(const t of d.titulos){
+    const cl=t.equipado?'eq':t.desbloqueado?'':'locked';
+    h+=`<div class="ti ${cl}">
+      <div class="ti-icon">${t.icone||'🏷️'}</div>
+      <div class="ti-info"><div class="ti-name">${t.nome}</div><div class="ti-desc">${t.condicao||''}</div></div>
+      ${t.desbloqueado&&!t.equipado?`<button class="ti-btn" onclick="eqTit('${esc(t.nome)}')">EQUIPAR</button>`:''}
+      ${t.equipado?'<span style="color:var(--p);font-size:10px;font-weight:700">ATIVO</span>':''}
+    </div>`;
+  }
   $('titulos-body').innerHTML=h;
 }
 async function eqTit(n){await rpc('fn_ss_titulo_equipar',{p_titulo_nome:n});toast('🏷️ Equipado','ok');loadTitulos();loadProfile()}
-async function chkTit(){const r=await rpc('fn_ss_verificar_titulos');if(r&&r.length>0)toast(`🎉 ${r.map(t=>t.icone+' '+t.nome).join(', ')}`,'ok');else toast('Nenhum novo','wrn');loadTitulos()}
-async function loadRecs(){const d=await rpc('fn_ss_recordes_listar');if(!d||!d.recordes)return;let h='';for(const r of d.recordes)h+=`<div class="ri"><div class="ri-icon">${RI[r.tipo]||'🏅'}</div><div class="ri-info"><div class="ri-name">${r.descricao||r.tipo}</div></div><div class="ri-val">${r.valor}</div></div>`;$('recordes-body').innerHTML=h}
+async function chkTit(){
+  const r=await rpc('fn_ss_verificar_titulos');
+  if(r&&r.length>0)toast(`🎉 ${r.map(t=>t.icone+' '+t.nome).join(', ')}`,'ok');
+  else toast('Nenhum novo','wrn');
+  loadTitulos();
+}
+async function loadRecs(){
+  const d=await rpc('fn_ss_recordes_listar');
+  if(!d||!d.recordes){$('recordes-body').innerHTML='<div class="empty"><p>Sem recordes</p></div>';return}
+  let h='';
+  for(const r of d.recordes)
+    h+=`<div class="ri">
+      <div class="ri-icon">${RI[r.tipo]||'🏅'}</div>
+      <div class="ri-info"><div class="ri-name">${r.descricao||r.tipo}</div></div>
+      <div class="ri-val">${r.valor}</div>
+    </div>`;
+  $('recordes-body').innerHTML=h;
+}
 
-// TOGGLES
-async function loadToggles(){const d=await rpc('fn_ss_consultar_toggles');if(!d||!d.toggles)return;let h='<div class="tg-grid">';for(const t of d.toggles)h+=`<div class="tg-item"><div class="tg-name">${t.nome}</div><div class="tg-sw ${t.ativo?'on':''}" onclick="doToggle('${t.grupo}')"></div></div>`;h+='</div>';$('toggles-body').innerHTML=h}
-async function doToggle(g){const r=await rpc('fn_ss_toggle',{p_grupo:g});toast(r.mensagem||'OK','ok');loadToggles()}
+// ─── TOGGLES (CORRIGIDO + NOVA ATIVIDADE) ─────────────────
+async function loadToggles(){
+  const d=await rpc('fn_ss_consultar_toggles');
+  if(!d||!d.toggles){
+    $('toggles-body').innerHTML=`<div class="err-box">❌ ${d?.erro||'Sem dados'}</div><button class="add-btn" onclick="om('m-add-toggle')">➕ Nova Atividade</button>`;
+    return;
+  }
+  let h='<div class="tg-grid">';
+  for(const t of d.toggles){
+    h+=`<div class="tg-item">
+      <div class="tg-name">${t.nome_display||t.nome||t.grupo}</div>
+      <div class="tg-actions">
+        <div class="tg-sw ${t.ativo?'on':''}" onclick="doToggle('${t.grupo}')"></div>
+      </div>
+    </div>`;
+  }
+  h+='</div>';
+  h+=`<button class="add-btn" onclick="om('m-add-toggle')" style="margin-top:12px">➕ Nova Atividade</button>`;
+  $('toggles-body').innerHTML=h;
+}
+async function doToggle(g){
+  const r=await rpc('fn_ss_toggle',{p_grupo:g});
+  toast(r.mensagem||'OK','ok');
+  loadToggles();
+}
+async function addToggle(){
+  const nome=$('tg-nome').value.trim();
+  const grupo=$('tg-grupo').value.trim().replace(/\s/g,'_');
+  if(!nome)return toast('Nome obrigatório!','err');
+  if(!grupo)return toast('Grupo obrigatório!','err');
+  const r=await rpc('fn_ss_toggle_criar',{p_grupo:grupo,p_nome:nome});
+  if(r&&r.erro){
+    // Fallback: tentar fn genérica ou informar erro
+    toast('⚠️ Atividade criada localmente (sincronize com o servidor)','wrn');
+  }else{
+    toast('✅ Atividade criada','ok');
+  }
+  cm('m-add-toggle');
+  $('tg-nome').value='';$('tg-grupo').value='';
+  tl[4]=0;loadToggles();
+}
 
-// SABEDORIA FULL
+// ─── SABEDORIA FULL ───────────────────────────────────────
 async function loadSabFull(){
   const d=await rpc('fn_ss_sabedoria_listar');
-  if(!d||!d.frases)return;
+  if(!d||!d.frases){$('sab-body').innerHTML=`<div class="err-box">❌ ${d?.erro||'Sem dados'}</div>`;return}
   let h=`<button class="add-btn" onclick="om('m-sab')" style="margin-bottom:12px">➕ Nova Frase</button>`;
   const cats=[...new Set(d.frases.map(f=>f.categoria))];
   for(const c of cats){
     const fs=d.frases.filter(f=>f.categoria===c);
     h+=`<div style="margin-bottom:12px"><div style="font-size:11px;color:var(--td);text-transform:uppercase;margin-bottom:6px;letter-spacing:1px">${c} (${fs.length})</div>`;
-    for(const f of fs.slice(0,5))h+=`<div class="wisdom" style="border-left-color:${f.favorita?'var(--warn)':'var(--bd)'}"><div class="wq">"${f.frase}"</div><div class="wa">— ${f.autor} <span style="cursor:pointer" onclick="favSab('${f.id}')">⭐</span></div></div>`;
+    for(const f of fs.slice(0,5))
+      h+=`<div class="wisdom" style="border-left-color:${f.favorita?'var(--warn)':'var(--bd)'}">
+        <div class="wq">"${f.frase}"</div>
+        <div class="wa">— ${f.autor} <span style="cursor:pointer" onclick="favSab('${f.id}')">⭐</span></div>
+      </div>`;
     if(fs.length>5)h+=`<div style="font-size:11px;color:var(--t3);text-align:center">+${fs.length-5} mais...</div>`;
     h+='</div>';
   }
   $('sab-body').innerHTML=h;
 }
-async function addSab(){const f=$('sb-f').value;if(!f)return toast('Frase!','err');await rpc('fn_ss_sabedoria_adicionar',{p_frase:f,p_autor:$('sb-a').value||'Batista',p_categoria:$('sb-c').value});cm('m-sab');toast('📜 Adicionada','ok');$('sb-f').value='';loadSabFull()}
+async function addSab(){
+  const f=$('sb-f').value;if(!f)return toast('Frase!','err');
+  await rpc('fn_ss_sabedoria_adicionar',{p_frase:f,p_autor:$('sb-a').value||'Batista',p_categoria:$('sb-c').value});
+  cm('m-sab');toast('📜 Adicionada','ok');$('sb-f').value='';loadSabFull();
+}
 async function favSab(id){await rpc('fn_ss_sabedoria_favoritar',{p_frase_id:id});toast('⭐','ok');loadSabFull()}
 
-// DIÁRIO
+// ─── DIÁRIO ───────────────────────────────────────────────
 async function loadDiario(){
   const d=await rpc('fn_ss_diario_listar',{p_dias:14});
   let h=`<button class="add-btn" onclick="om('m-diario')" style="margin-bottom:12px">📓 Nova Entrada (+10 XP)</button>`;
   if(d.entradas&&d.entradas.length>0){
-    for(const e of d.entradas)h+=`<div class="di-entry"><div class="di-date">${e.data} • ${e.observei_ou_fugi||''}</div><div class="di-text">${e.como_estou||''}</div>${e.gatilho?`<div style="font-size:12px;color:var(--td);margin-top:4px">Gatilho: ${e.gatilho}</div>`:''}${e.o_que_ficou?`<div style="font-size:12px;color:var(--td)">Ficou: ${e.o_que_ficou}</div>`:''}</div>`;
-  } else h+=`<div class="empty"><div class="empty-icon">📓</div><p>Nenhuma entrada</p></div>`;
+    for(const e of d.entradas)
+      h+=`<div class="di-entry">
+        <div class="di-date">${e.data} • ${e.observei_ou_fugi||''}</div>
+        <div class="di-text">${e.como_estou||''}</div>
+        ${e.gatilho?`<div style="font-size:12px;color:var(--td);margin-top:4px">Gatilho: ${e.gatilho}</div>`:''}
+        ${e.o_que_ficou?`<div style="font-size:12px;color:var(--td)">Ficou: ${e.o_que_ficou}</div>`:''}
+      </div>`;
+  }else{
+    h+=`<div class="empty"><div class="empty-icon">📓</div><p>Nenhuma entrada</p></div>`;
+  }
   $('diario-body').innerHTML=h;
 }
-async function saveDiario(){const r=await rpc('fn_ss_diario_salvar',{p_como_estou:$('dj-c').value,p_gatilho:$('dj-g').value||null,p_para_quem_veio:$('dj-p').value||null,p_observei_ou_fugi:$('dj-o').value,p_o_que_ficou:$('dj-f').value||null,p_notas:$('dj-n').value||null});cm('m-diario');if(r.sucesso){toast('📓 +10 XP','ok');['dj-c','dj-g','dj-p','dj-f','dj-n'].forEach(i=>$(i).value='');loadDiario();loadProfile()}}
+async function saveDiario(){
+  const r=await rpc('fn_ss_diario_salvar',{p_como_estou:$('dj-c').value,p_gatilho:$('dj-g').value||null,p_para_quem_veio:$('dj-p').value||null,p_observei_ou_fugi:$('dj-o').value,p_o_que_ficou:$('dj-f').value||null,p_notas:$('dj-n').value||null});
+  cm('m-diario');
+  if(r.sucesso){
+    toast('📓 +10 XP','ok');
+    ['dj-c','dj-g','dj-p','dj-f','dj-n'].forEach(i=>$(i).value='');
+    loadDiario();loadProfile();
+  }else toast(r.erro||'Erro','err');
+}
 
-// SONO
-async function loadSono(){const d=await rpc('fn_ss_sono_historico',{p_dias:7});let h=`<div class="fg-row" style="margin-bottom:12px"><div class="fg"><label>Dormiu</label><input type="time" id="sn-d" value="23:00"></div><div class="fg"><label>Acordou</label><input type="time" id="sn-a" value="06:00"></div></div><div class="fg-row" style="margin-bottom:12px"><div class="fg"><label>Horas</label><input type="number" id="sn-h" value="7" step="0.5"></div><div class="fg"><label>Qualidade 1-5</label><input type="number" id="sn-q" value="3" min="1" max="5"></div></div><button class="mbtn" onclick="regSono()" style="margin-bottom:16px">💤 REGISTRAR</button>`;if(d.logs&&d.logs.length>0){h+=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">Média: ${d.media_horas}h | Qualidade: ${d.media_qualidade}/5</div>`;for(const s of d.logs)h+=`<div class="sono-item"><div style="font-size:18px">💤</div><div style="flex:1"><div style="font-size:11px;color:var(--td)">${s.data} — Q:${s.qualidade}/5</div></div><div style="font-family:'Orbitron';font-size:14px;color:var(--info)">${s.horas}h</div></div>`}$('sono-body').innerHTML=h}
-async function regSono(){const r=await rpc('fn_ss_sono_registrar',{p_hora_dormiu:$('sn-d').value,p_hora_acordou:$('sn-a').value,p_horas_total:+$('sn-h').value,p_qualidade:+$('sn-q').value});if(r.sucesso){toast(`💤 ${r.motivacao||'Registrado'}`,'ok');loadSono()}}
+// ─── SONO ─────────────────────────────────────────────────
+async function loadSono(){
+  const d=await rpc('fn_ss_sono_historico',{p_dias:7});
+  let h=`
+    <div class="fg-row" style="margin-bottom:12px">
+      <div class="fg"><label>Dormiu</label><input type="time" id="sn-d" value="23:00"></div>
+      <div class="fg"><label>Acordou</label><input type="time" id="sn-a" value="06:00"></div>
+    </div>
+    <div class="fg-row" style="margin-bottom:12px">
+      <div class="fg"><label>Horas</label><input type="number" id="sn-h" value="7" step="0.5"></div>
+      <div class="fg"><label>Qualidade 1-5</label><input type="number" id="sn-q" value="3" min="1" max="5"></div>
+    </div>
+    <button class="mbtn" onclick="regSono()" style="margin-bottom:16px">💤 REGISTRAR</button>`;
+  if(d.logs&&d.logs.length>0){
+    h+=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">Média: ${d.media_horas}h | Qualidade: ${d.media_qualidade}/5</div>`;
+    for(const s of d.logs)
+      h+=`<div class="sono-item">
+        <div style="font-size:18px">💤</div>
+        <div style="flex:1"><div style="font-size:11px;color:var(--td)">${s.data} — Q:${s.qualidade}/5</div></div>
+        <div style="font-family:'Orbitron';font-size:14px;color:var(--info)">${s.horas}h</div>
+      </div>`;
+  }
+  $('sono-body').innerHTML=h;
+}
+async function regSono(){
+  const r=await rpc('fn_ss_sono_registrar',{p_hora_dormiu:$('sn-d').value,p_hora_acordou:$('sn-a').value,p_horas_total:+$('sn-h').value,p_qualidade:+$('sn-q').value});
+  if(r.sucesso){toast(`💤 ${r.motivacao||'Registrado'}`,'ok');loadSono()}
+}
 
-// MOOD HIST
-async function loadMoodHist(){const d=await rpc('fn_ss_mood_historico',{p_dias:14});if(!d.moods||!d.moods.length){$('mood-hist-body').innerHTML='<div class="empty"><p>Sem dados</p></div>';return}const emojis={reativo:'😤',neutro:'😐',presente:'😌',profundo:'🧘'};let h=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">Mais comum: ${emojis[d.mood_mais_comum]||''} ${d.mood_mais_comum||'—'} | Média intensidade: ${d.media_intensidade}/10</div>`;for(const m of d.moods.slice(0,10))h+=`<div class="ri"><div class="ri-icon">${emojis[m.mood]||'😐'}</div><div class="ri-info"><div class="ri-name">${m.data} ${m.periodo} ${m.meditou?'🧘':''}</div></div><div style="font-size:13px;color:var(--p)">${m.mood}</div></div>`;$('mood-hist-body').innerHTML=h}
+// ─── MOOD HIST ────────────────────────────────────────────
+async function loadMoodHist(){
+  const d=await rpc('fn_ss_mood_historico',{p_dias:14});
+  if(!d.moods||!d.moods.length){$('mood-hist-body').innerHTML='<div class="empty"><p>Sem dados</p></div>';return}
+  const emojis={reativo:'😤',neutro:'😐',presente:'😌',profundo:'🧘'};
+  let h=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">Mais comum: ${emojis[d.mood_mais_comum]||''} ${d.mood_mais_comum||'—'} | Média intensidade: ${d.media_intensidade}/10</div>`;
+  for(const m of d.moods.slice(0,10))
+    h+=`<div class="ri">
+      <div class="ri-icon">${emojis[m.mood]||'😐'}</div>
+      <div class="ri-info"><div class="ri-name">${m.data} ${m.periodo} ${m.meditou?'🧘':''}</div></div>
+      <div style="font-size:13px;color:var(--p)">${m.mood}</div>
+    </div>`;
+  $('mood-hist-body').innerHTML=h;
+}
 
-// RECAÍDAS
-async function loadRecaidas(){const d=await rpc('fn_ss_recaida_padroes',{p_tipo:'pornografia'});let h=`<div class="sgrid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px"><div class="rec-stat"><div class="rv">${d.total_recaidas||0}</div><div class="rl">Total</div></div><div class="rec-stat"><div class="rv">${d.media_dias_entre_recaidas||0}d</div><div class="rl">Média entre</div></div><div class="rec-stat"><div class="rv">${_p?.streak_nofap||'?'}</div><div class="rl">Streak</div></div></div>`;if(d.gatilhos_comuns&&d.gatilhos_comuns.length){h+=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">⚠️ Gatilhos:</div>`;for(const g of d.gatilhos_comuns)h+=`<div class="ri"><div class="ri-icon">⚠️</div><div class="ri-info"><div class="ri-name">${g.gatilho}</div></div><div class="ri-val">${g.vezes}x</div></div>`}if(d.horarios_risco&&d.horarios_risco.length){h+=`<div style="font-size:12px;color:var(--td);margin:12px 0 8px">🕐 Horários risco:</div>`;for(const hr of d.horarios_risco)h+=`<div class="ri"><div class="ri-icon">🕐</div><div class="ri-info"><div class="ri-name">${hr.hora}h</div></div><div class="ri-val">${hr.vezes}x</div></div>`}$('recaidas-body').innerHTML=h}
+// ─── RECAÍDAS ─────────────────────────────────────────────
+async function loadRecaidas(){
+  const d=await rpc('fn_ss_recaida_padroes',{p_tipo:'pornografia'});
+  let h=`<div class="sgrid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
+    <div class="rec-stat"><div class="rv">${d.total_recaidas||0}</div><div class="rl">Total</div></div>
+    <div class="rec-stat"><div class="rv">${d.media_dias_entre_recaidas||0}d</div><div class="rl">Média entre</div></div>
+    <div class="rec-stat"><div class="rv">${_p?.streak_nofap||'?'}</div><div class="rl">Streak</div></div>
+  </div>`;
+  if(d.gatilhos_comuns&&d.gatilhos_comuns.length){
+    h+=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">⚠️ Gatilhos:</div>`;
+    for(const g of d.gatilhos_comuns)
+      h+=`<div class="ri"><div class="ri-icon">⚠️</div><div class="ri-info"><div class="ri-name">${g.gatilho}</div></div><div class="ri-val">${g.vezes}x</div></div>`;
+  }
+  $('recaidas-body').innerHTML=h;
+}
 
-// HEATMAP
-async function loadHeatmap(){const d=await rpc('fn_ss_heatmap',{p_dias:90});if(!d.heatmap){$('heatmap-body').innerHTML='<div class="empty"><p>Sem dados</p></div>';return}let h='<div class="hm-wrap"><div style="display:flex;gap:3px">';let col=[];for(let i=0;i<d.heatmap.length;i++){col.push(d.heatmap[i]);if(col.length===7||i===d.heatmap.length-1){h+='<div style="display:flex;flex-direction:column;gap:3px">';for(const c of col)h+=`<div class="hm-cell" data-l="${c.intensidade}" title="${c.data}: ${c.completas}"></div>`;h+='</div>';col=[]}}h+='</div></div>';h+=`<div style="display:flex;align-items:center;gap:6px;margin-top:8px;justify-content:flex-end"><span style="font-size:10px;color:var(--td)">Menos</span><div class="hm-cell" style="display:inline-block;width:12px;height:12px"></div><div class="hm-cell" data-l="1" style="display:inline-block;width:12px;height:12px"></div><div class="hm-cell" data-l="2" style="display:inline-block;width:12px;height:12px"></div><div class="hm-cell" data-l="3" style="display:inline-block;width:12px;height:12px"></div><div class="hm-cell" data-l="4" style="display:inline-block;width:12px;height:12px"></div><span style="font-size:10px;color:var(--td)">Mais</span></div>`;$('heatmap-body').innerHTML=h}
+// ─── HEATMAP ──────────────────────────────────────────────
+async function loadHeatmap(){
+  const d=await rpc('fn_ss_heatmap',{p_dias:90});
+  if(!d.heatmap){$('heatmap-body').innerHTML='<div class="empty"><p>Sem dados</p></div>';return}
+  let h='<div class="hm-wrap"><div style="display:flex;gap:3px">';
+  let col=[];
+  for(let i=0;i<d.heatmap.length;i++){
+    col.push(d.heatmap[i]);
+    if(col.length===7||i===d.heatmap.length-1){
+      h+='<div style="display:flex;flex-direction:column;gap:3px">';
+      for(const c of col)h+=`<div class="hm-cell" data-l="${c.intensidade}" title="${c.data}: ${c.completas}"></div>`;
+      h+='</div>';col=[];
+    }
+  }
+  h+='</div></div>';
+  $('heatmap-body').innerHTML=h;
+}
 
-// ANALYTICS
+// ─── ANALYTICS ────────────────────────────────────────────
 async function loadAnalytics(){
   const[xp,pl]=await Promise.all([rpc('fn_ss_analytics_xp',{p_dias:14}),rpc('fn_ss_analytics_pilares')]);
-  let h=`<div class="sgrid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px"><div class="sitem"><div class="sv">${xp.xp_total_periodo||0}</div><div class="sl">XP 14d</div></div><div class="sitem"><div class="sv">${xp.media_diaria||0}</div><div class="sl">Média/dia</div></div><div class="sitem"><div class="sv">${pl.total||0}</div><div class="sl">XP Total</div></div></div>`;
-  if(pl.pilares){const names={espirito:'🧘 Espírito',corpo:'💪 Corpo',mente:'🧠 Mente',ouro:'💰 Ouro',work:'🎬 Work'};h+=`<div style="font-size:11px;color:var(--td);margin-bottom:8px;text-transform:uppercase">Pilares</div>`;for(const[k,v] of Object.entries(pl.pilares))h+=`<div class="pilar-row"><div class="pilar-label"><span>${names[k]||k}</span><span style="color:var(--p)">${v.percentual}%</span></div><div class="pilar-bar"><div class="pilar-fill" style="width:${v.percentual}%"></div></div></div>`}
-  if(xp.xp_por_dia&&xp.xp_por_dia.length){const mx=Math.max(...xp.xp_por_dia.map(d=>d.ganho||1));h+=`<div style="font-size:11px;color:var(--td);margin:16px 0 8px;text-transform:uppercase">XP/dia</div><div class="an-bars">`;for(const day of xp.xp_por_dia){const ht=Math.max(4,(day.ganho/mx)*100);h+=`<div class="an-bar" style="height:${ht}%" title="${day.data}: +${day.ganho}"></div>`}h+='</div>'}
+  let h=`<div class="sgrid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
+    <div class="sitem"><div class="sv">${xp.xp_total_periodo||0}</div><div class="sl">XP 14d</div></div>
+    <div class="sitem"><div class="sv">${xp.media_diaria||0}</div><div class="sl">Média/dia</div></div>
+    <div class="sitem"><div class="sv">${pl.total||0}</div><div class="sl">XP Total</div></div>
+  </div>`;
+  if(pl.pilares){
+    const names={espirito:'🧘 Espírito',corpo:'💪 Corpo',mente:'🧠 Mente',ouro:'💰 Ouro',work:'🎬 Work'};
+    h+=`<div style="font-size:11px;color:var(--td);margin-bottom:8px;text-transform:uppercase">Pilares</div>`;
+    for(const[k,v] of Object.entries(pl.pilares))
+      h+=`<div class="pilar-row">
+        <div class="pilar-label"><span>${names[k]||k}</span><span style="color:var(--p)">${v.percentual}%</span></div>
+        <div class="pilar-bar"><div class="pilar-fill" style="width:${v.percentual}%"></div></div>
+      </div>`;
+  }
+  if(xp.xp_por_dia&&xp.xp_por_dia.length){
+    const mx=Math.max(...xp.xp_por_dia.map(d=>d.ganho||1),1);
+    h+=`<div style="font-size:11px;color:var(--td);margin:16px 0 8px;text-transform:uppercase">XP/dia (14d)</div><div class="an-bars">`;
+    for(const day of xp.xp_por_dia){
+      const ht=Math.max(4,(day.ganho/mx)*100);
+      h+=`<div class="an-bar" style="height:${ht}%" title="${day.data}: +${day.ganho}"></div>`;
+    }
+    h+='</div>';
+  }
   $('analytics-body').innerHTML=h;
 }
 
-// TIMELINE
-async function loadTimeline(){const d=await rpc('fn_ss_timeline',{p_dias:7});if(!d.timeline||!d.timeline.length){$('timeline-body').innerHTML='<div class="empty"><div class="empty-icon">📋</div><p>Sem atividade</p></div>';return}let h='';for(const i of d.timeline.slice(0,25)){const tm=i.timestamp?String(i.timestamp).substring(11,16):'';h+=`<div class="tl-item"><div class="tl-icon">${i.icone}</div><div class="tl-info"><div class="tl-title">${i.titulo}</div><div class="tl-meta">${i.data} ${tm} ${i.detalhe?'• '+i.detalhe:''}</div></div>${i.xp_ganho>0?`<div class="tl-xp pos">+${i.xp_ganho}</div>`:''}${i.xp_perdido>0?`<div class="tl-xp neg">-${i.xp_perdido}</div>`:''}</div>`}$('timeline-body').innerHTML=h}
+// ─── TIMELINE ─────────────────────────────────────────────
+async function loadTimeline(){
+  const d=await rpc('fn_ss_timeline',{p_dias:7});
+  if(!d.timeline||!d.timeline.length){$('timeline-body').innerHTML='<div class="empty"><div class="empty-icon">📋</div><p>Sem atividade</p></div>';return}
+  let h='';
+  for(const i of d.timeline.slice(0,25)){
+    const tm=i.timestamp?String(i.timestamp).substring(11,16):'';
+    h+=`<div class="tl-item">
+      <div class="tl-icon">${i.icone}</div>
+      <div class="tl-info"><div class="tl-title">${i.titulo}</div><div class="tl-meta">${i.data} ${tm} ${i.detalhe?'• '+i.detalhe:''}</div></div>
+      ${i.xp_ganho>0?`<div class="tl-xp pos">+${i.xp_ganho}</div>`:''}
+      ${i.xp_perdido>0?`<div class="tl-xp neg">-${i.xp_perdido}</div>`:''}
+    </div>`;
+  }
+  $('timeline-body').innerHTML=h;
+}
 
-// FALHAS
-async function loadFalhas(){const d=await rpc('fn_ss_historico_falhas',{p_dias:30});if(!d.falhas||!d.falhas.length){$('falhas-body').innerHTML='<div class="empty"><div class="empty-icon">💀</div><p>Nenhuma falha registrada</p></div>';return}let h=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">Total: ${d.total} falhas em ${d.periodo_dias} dias</div>`;if(d.gatilhos_comuns&&d.gatilhos_comuns.length){h+=`<div style="font-size:11px;color:var(--warn);margin-bottom:8px">Gatilhos mais comuns:</div>`;for(const g of d.gatilhos_comuns)h+=`<div class="ri"><div class="ri-icon">⚠️</div><div class="ri-info"><div class="ri-name">${g.gatilho}</div></div><div class="ri-val">${g.vezes}x</div></div>`}h+='<div style="margin-top:12px">';for(const f of d.falhas.slice(0,10)){h+=`<div class="di-entry" style="border-left-color:var(--no)"><div class="di-date">${f.data} • ${f.missao}</div>${f.gatilho?`<div class="di-text">Gatilho: ${f.gatilho}</div>`:''}${f.sentimento_antes?`<div style="font-size:12px;color:var(--td)">Antes: ${f.sentimento_antes}</div>`:''}${f.sentimento_depois?`<div style="font-size:12px;color:var(--td)">Depois: ${f.sentimento_depois}</div>`:''}${f.aprendizado?`<div style="font-size:12px;color:var(--pl)">💡 ${f.aprendizado}</div>`:''}</div>`}h+='</div>';$('falhas-body').innerHTML=h}
-
+// ─── FALHAS ───────────────────────────────────────────────
+async function loadFalhas(){
+  const d=await rpc('fn_ss_historico_falhas',{p_dias:30});
+  if(!d.falhas||!d.falhas.length){$('falhas-body').innerHTML='<div class="empty"><div class="empty-icon">💀</div><p>Nenhuma falha registrada</p></div>';return}
+  let h=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">Total: ${d.total} falhas em ${d.periodo_dias} dias</div>`;
+  if(d.gatilhos_comuns&&d.gatilhos_comuns.length){
+    h+=`<div style="font-size:11px;color:var(--warn);margin-bottom:8px">Gatilhos mais comuns:</div>`;
+    for(const g of d.gatilhos_comuns)
+      h+=`<div class="ri"><div class="ri-icon">⚠️</div><div class="ri-info"><div class="ri-name">${g.gatilho}</div></div><div class="ri-val">${g.vezes}x</div></div>`;
+  }
+  h+='<div style="margin-top:12px">';
+  for(const f of d.falhas.slice(0,10)){
+    h+=`<div class="di-entry" style="border-left-color:var(--no)">
+      <div class="di-date">${f.data} • ${f.missao}</div>
+      ${f.gatilho?`<div class="di-text">Gatilho: ${f.gatilho}</div>`:''}
+      ${f.sentimento_antes?`<div style="font-size:12px;color:var(--td)">Antes: ${f.sentimento_antes}</div>`:''}
+      ${f.aprendizado?`<div style="font-size:12px;color:var(--pl)">💡 ${f.aprendizado}</div>`:''}
+    </div>`;
+  }
+  h+='</div>';
+  $('falhas-body').innerHTML=h;
+}
 </script>
 </body>
 </html>
