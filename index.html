@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Shadow System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #7c3aed;
+      --primary-glow: rgba(139, 92, 246, 0.5);
+      --bg-dark: #0a0a0f;
+      --bg-card: #13131a;
+      --bg-card-hover: #1a1a24;
+      --text: #e2e8f0;
+      --text-dim: #94a3b8;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --border: #2d2d3a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at top, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* LOGIN SCREEN */
+    #login-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .login-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(139, 92, 246, 0.2);
+    }
+
+    .login-box h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      color: var(--primary);
+      margin-bottom: 8px;
+      text-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .login-box p {
+      color: var(--text-dim);
+      margin-bottom: 30px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 16px;
+      margin-bottom: 16px;
+      font-family: 'Rajdhani', sans-serif;
+    }
+
+    .login-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s;
+    }
+
+    .login-box button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--primary-glow);
+    }
+
+    .login-error {
+      color: var(--danger);
+      margin-top: 16px;
+      display: none;
+    }
+
+    /* MAIN APP */
+    #app {
+      display: none;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding-bottom: 100px;
+    }
+
+    /* HEADER */
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+
+    .header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      color: var(--primary);
+      text-shadow: 0 0 20px var(--primary-glow);
+      margin-bottom: 4px;
+    }
+
+    .header .subtitle {
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    /* PROFILE CARD */
+    .profile-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .profile-avatar {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      box-shadow: 0 0 30px var(--primary-glow);
+    }
+
+    .profile-info h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .profile-info .rank {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .profile-info .title {
+      color: var(--text-dim);
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    /* XP BAR */
+    .xp-section {
+      margin-bottom: 20px;
+    }
+
+    .xp-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .xp-bar {
+      height: 12px;
+      background: var(--bg-dark);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .xp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #a78bfa);
+      border-radius: 6px;
+      transition: width 0.5s ease;
+      position: relative;
+    }
+
+    .xp-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* STATS GRID */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .stat-item {
+      background: var(--bg-dark);
+      padding: 14px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat-item .value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      color: var(--primary);
+    }
+
+    .stat-item .label {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    /* SECTION */
+    .section {
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .section-header:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .section-header h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-header .toggle-icon {
+      transition: transform 0.3s;
+    }
+
+    .section-header.collapsed .toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    .section-content {
+      padding: 16px 20px;
+    }
+
+    .section-content.collapsed {
+      display: none;
+    }
+
+    /* MISSION ITEM */
+    .mission-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      background: var(--bg-dark);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mission-item:hover {
+      background: var(--bg-card-hover);
+      transform: translateX(4px);
+    }
+
+    .mission-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .mission-check {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .mission-item.completed .mission-check {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .mission-item.failed .mission-check {
+      background: var(--danger);
+      border-color: var(--danger);
+    }
+
+    .mission-info {
+      flex: 1;
+    }
+
+    .mission-name {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .mission-item.completed .mission-name {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .mission-meta {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .mission-xp {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      color: var(--success);
+    }
+
+    .mission-item.completed .mission-xp,
+    .mission-item.failed .mission-xp {
+      opacity: 0.5;
+    }
+
+    /* MEDITATION SECTION */
+    .meditation-input {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .meditation-input input {
+      flex: 1;
+      padding: 14px 18px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 18px;
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+    }
+
+    .meditation-input input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .meditation-input button {
+      padding: 14px 24px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    .meditation-input button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--primary-glow);
+    }
+
+    .meditation-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .med-stat {
+      background: var(--bg-dark);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .med-stat .value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 16px;
+      color: var(--primary);
+    }
+
+    .med-stat .label {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* BOSS ITEM */
+    .boss-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      background: var(--bg-dark);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border-left: 3px solid var(--danger);
+    }
+
+    .boss-item.completed {
+      border-left-color: var(--success);
+      opacity: 0.6;
+    }
+
+    .boss-icon {
+      font-size: 28px;
+    }
+
+    .boss-info {
+      flex: 1;
+    }
+
+    .boss-name {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .boss-condition {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .boss-progress {
+      font-size: 13px;
+      color: var(--warning);
+      margin-top: 4px;
+    }
+
+    .boss-xp {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      color: var(--warning);
+    }
+
+    .boss-btn {
+      padding: 8px 16px;
+      background: var(--danger);
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+
+    .boss-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .boss-item.completed .boss-btn {
+      display: none;
+    }
+
+    /* TOGGLE GRID */
+    .toggle-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px;
+      background: var(--bg-dark);
+      border-radius: 10px;
+    }
+
+    .toggle-name {
+      font-weight: 600;
+    }
+
+    .toggle-switch {
+      width: 50px;
+      height: 26px;
+      background: var(--border);
+      border-radius: 13px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .toggle-switch.active {
+      background: var(--primary);
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+
+    .toggle-switch.active::after {
+      transform: translateX(24px);
+    }
+
+    /* CONQUISTAS */
+    .conquista-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      background: var(--bg-dark);
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .conquista-item.locked {
+      opacity: 0.4;
+    }
+
+    .conquista-icon {
+      font-size: 24px;
+    }
+
+    .conquista-info {
+      flex: 1;
+    }
+
+    .conquista-name {
+      font-weight: 600;
+    }
+
+    .conquista-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .conquista-xp {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      color: var(--success);
+    }
+
+    /* SEMANAL */
+    .semanal-item {
+      padding: 14px;
+      background: var(--bg-dark);
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .semanal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .semanal-name {
+      font-weight: 600;
+    }
+
+    .semanal-progress-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 14px;
+      color: var(--primary);
+    }
+
+    .semanal-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .semanal-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 4px;
+      transition: width 0.3s;
+    }
+
+    .semanal-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .semanal-btn {
+      padding: 8px 16px;
+      background: var(--primary);
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .semanal-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .semanal-btn.complete {
+      background: var(--success);
+    }
+
+    /* ADD FORM */
+    .add-form {
+      display: none;
+      padding: 16px;
+      background: var(--bg-dark);
+      border-radius: 10px;
+      margin-top: 16px;
+    }
+
+    .add-form.show {
+      display: block;
+    }
+
+    .add-form input, .add-form select {
+      width: 100%;
+      padding: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+      margin-bottom: 10px;
+      font-family: 'Rajdhani', sans-serif;
+    }
+
+    .add-form input:focus, .add-form select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .add-form button {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .add-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      background: transparent;
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      color: var(--text-dim);
+      cursor: pointer;
+      margin-top: 12px;
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    .add-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--bg-card);
+      border: 1px solid var(--primary);
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success {
+      border-color: var(--success);
+    }
+
+    .toast.error {
+      border-color: var(--danger);
+    }
+
+    /* LOADING */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* NAV BAR */
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      z-index: 100;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 11px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      color: var(--primary);
+    }
+
+    .nav-item span {
+      font-size: 20px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 500px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .toggle-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .meditation-stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen">
+    <div class="login-box">
+      <h1>⚔️ SHADOW SYSTEM</h1>
+      <p>Digite a senha para acessar</p>
+      <input type="password" id="password-input" placeholder="Senha" autocomplete="off">
+      <button onclick="login()">ENTRAR</button>
+      <p class="login-error" id="login-error">Senha incorreta!</p>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app">
+    <div class="header">
+      <h1>⚔️ SHADOW SYSTEM</h1>
+      <p class="subtitle">Level Up Your Life</p>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="profile-card" id="profile-card">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+
+    <!-- DAILY MISSIONS -->
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <h3>📋 MISSÕES DIÁRIAS</h3>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="daily-missions">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+    </div>
+
+    <!-- MEDITATION -->
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <h3>🧘 MEDITAÇÃO</h3>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="meditation-section">
+        <div class="meditation-input">
+          <input type="number" id="med-minutes" placeholder="20" value="20">
+          <button onclick="registerMeditation()">REGISTRAR</button>
+        </div>
+        <div class="meditation-stats" id="meditation-stats">
+          <div class="loading"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEKLY MISSIONS -->
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <h3>📅 SEMANAIS</h3>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="weekly-missions">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+    </div>
+
+    <!-- BOSSES -->
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <h3>💀 BOSSES</h3>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content" id="bosses-section">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+    </div>
+
+    <!-- CONQUISTAS -->
+    <div class="section">
+      <div class="section-header collapsed" onclick="toggleSection(this)">
+        <h3>🏆 CONQUISTAS</h3>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content collapsed" id="conquistas-section">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+    </div>
+
+    <!-- TOGGLES -->
+    <div class="section">
+      <div class="section-header collapsed" onclick="toggleSection(this)">
+        <h3>⚙️ ATIVIDADES</h3>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="section-content collapsed" id="toggles-section">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- NAV BAR -->
+  <div class="nav-bar" id="nav-bar" style="display: none;">
+    <div class="nav-item active" onclick="scrollToSection('profile-card')">
+      <span>👤</span>
+      Status
+    </div>
+    <div class="nav-item" onclick="scrollToSection('daily-missions')">
+      <span>📋</span>
+      Diárias
+    </div>
+    <div class="nav-item" onclick="scrollToSection('meditation-section')">
+      <span>🧘</span>
+      Meditar
+    </div>
+    <div class="nav-item" onclick="scrollToSection('bosses-section')">
+      <span>💀</span>
+      Bosses
+    </div>
+    <div class="nav-item" onclick="refreshAll()">
+      <span>🔄</span>
+      Atualizar
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    // CONFIG
+    // ============================================================
+    const CONFIG = {
+      user: 'Batista',
+      password: '17Mindset22.',
+      supabaseUrl: 'https://hqircciopclwoyhgdnlv.supabase.co',
+      supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxaXJjY2lvcGNsd295aGdkbmx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTU1MDEsImV4cCI6MjA4ODkzMTUwMX0.fCQ3wDwdyDydEngta1kkxrw8sWJi-PyHieVaCkCkzYM'
+    };
+
+    // ============================================================
+    // SUPABASE RPC CALL
+    // ============================================================
+    async function rpc(fnName, params = {}) {
+      const res = await fetch(`${CONFIG.supabaseUrl}/rest/v1/rpc/${fnName}`, {
+        method: 'POST',
+        headers: {
+          'apikey': CONFIG.supabaseKey,
+          'Authorization': `Bearer ${CONFIG.supabaseKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
+      });
+      return res.json();
+    }
+
+    // ============================================================
+    // LOGIN
+    // ============================================================
+    function login() {
+      const pwd = document.getElementById('password-input').value;
+      if (pwd === CONFIG.password) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+        document.getElementById('nav-bar').style.display = 'flex';
+        localStorage.setItem('shadow_logged', 'true');
+        loadAll();
+      } else {
+        document.getElementById('login-error').style.display = 'block';
+        document.getElementById('password-input').value = '';
+      }
+    }
+
+    // Check saved login
+    if (localStorage.getItem('shadow_logged') === 'true') {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      document.getElementById('nav-bar').style.display = 'flex';
+      loadAll();
+    }
+
+    // Enter key login
+    document.getElementById('password-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') login();
+    });
+
+    // ============================================================
+    // LOAD ALL DATA
+    // ============================================================
+    async function loadAll() {
+      await Promise.all([
+        loadProfile(),
+        loadMissions(),
+        loadMeditation(),
+        loadWeekly(),
+        loadBosses(),
+        loadConquistas(),
+        loadToggles()
+      ]);
+    }
+
+    function refreshAll() {
+      showToast('🔄 Atualizando...');
+      loadAll().then(() => showToast('✅ Atualizado!', 'success'));
+    }
+
+    // ============================================================
+    // PROFILE
+    // ============================================================
+    async function loadProfile() {
+      const data = await rpc('fn_ss_status');
+      
+      const xpPercent = Math.round((data.xp_atual / data.xp_proximo) * 100);
+      
+      document.getElementById('profile-card').innerHTML = `
+        <div class="profile-top">
+          <div class="profile-avatar">${data.hunter_rank}</div>
+          <div class="profile-info">
+            <h2>${data.nome}</h2>
+            <div class="rank">⚔️ Rank ${data.hunter_rank} — Level ${data.hunter_level}</div>
+            <div class="title">"${data.titulo_hunter}"</div>
+          </div>
+        </div>
+        
+        <div class="xp-section">
+          <div class="xp-header">
+            <span>XP</span>
+            <span>${data.xp_atual} / ${data.xp_proximo}</span>
+          </div>
+          <div class="xp-bar">
+            <div class="xp-fill" style="width: ${xpPercent}%"></div>
+          </div>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="value">🔥 ${data.streak_atual}</div>
+            <div class="label">Streak (×${data.multiplicador})</div>
+          </div>
+          <div class="stat-item">
+            <div class="value">🧘 ${data.horas_meditacao}h</div>
+            <div class="label">${data.meditacao_rank_nome}</div>
+          </div>
+          <div class="stat-item">
+            <div class="value">🏆 ${data.conquistas}</div>
+            <div class="label">Conquistas</div>
+          </div>
+          <div class="stat-item">
+            <div class="value">💀 ${data.bosses}</div>
+            <div class="label">Bosses</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ============================================================
+    // DAILY MISSIONS
+    // ============================================================
+    async function loadMissions() {
+      const data = await rpc('fn_ss_missoes_hoje');
+      
+      let html = '';
+      for (const m of data.diarias) {
+        const status = m.feita ? 'completed' : '';
+        const check = m.feita ? '✓' : '';
+        html += `
+          <div class="mission-item ${status}" onclick="completeMission('${m.nome}', ${m.feita})">
+            <div class="mission-check">${check}</div>
+            <div class="mission-info">
+              <div class="mission-name">${m.nome}</div>
+              <div class="mission-meta">${m.pilar} • ${m.modo}</div>
+            </div>
+            <div class="mission-xp">+${m.xp}</div>
+          </div>
+        `;
+      }
+      
+      document.getElementById('daily-missions').innerHTML = html || '<p style="text-align:center;color:var(--text-dim)">Nenhuma missão</p>';
+    }
+
+    async function completeMission(name, alreadyDone) {
+      if (alreadyDone) {
+        showToast('Missão já completada hoje!');
+        return;
+      }
+      
+      const result = await rpc('fn_ss_completar', { p_missao_nome: name });
+      
+      if (result.erro) {
+        showToast(result.erro, 'error');
+      } else {
+        showToast(`✅ ${result.missao} — +${result.xp.xp_ganho} XP`, 'success');
+        loadMissions();
+        loadProfile();
+      }
+    }
+
+    async function failMission(name) {
+      const result = await rpc('fn_ss_falhar', { p_missao_nome: name });
+      
+      if (result.erro) {
+        showToast(result.erro, 'error');
+      } else {
+        showToast(`💀 ${result.missao} — -${result.xp_perdido} XP`, 'error');
+        loadMissions();
+        loadProfile();
+      }
+    }
+
+    // ============================================================
+    // MEDITATION
+    // ============================================================
+    async function loadMeditation() {
+      const data = await rpc('fn_ss_status');
+      
+      document.getElementById('meditation-stats').innerHTML = `
+        <div class="med-stat">
+          <div class="value">${data.horas_meditacao}h</div>
+          <div class="label">Total</div>
+        </div>
+        <div class="med-stat">
+          <div class="value">${data.sessoes_meditacao}</div>
+          <div class="label">Sessões</div>
+        </div>
+        <div class="med-stat">
+          <div class="value">${data.meditacao_rank_nome}</div>
+          <div class="label">Rank</div>
+        </div>
+      `;
+    }
+
+    async function registerMeditation() {
+      const minutes = parseInt(document.getElementById('med-minutes').value) || 20;
+      
+      const result = await rpc('fn_ss_meditacao', { p_minutos: minutes });
+      
+      if (result.erro) {
+        showToast(result.erro, 'error');
+      } else {
+        let msg = `🧘 ${minutes}min — +${result.xp_total} XP`;
+        if (result.milestone) {
+          msg += `\n🏆 MILESTONE: ${result.milestone.mensagem}`;
+        }
+        showToast(msg, 'success');
+        loadMeditation();
+        loadProfile();
+        loadMissions();
+      }
+    }
+
+    // ============================================================
+    // WEEKLY MISSIONS
+    // ============================================================
+    async function loadWeekly() {
+      const data = await rpc('fn_ss_semana');
+      
+      let html = '';
+      if (data.missoes && data.missoes.length > 0) {
+        for (const m of data.missoes) {
+          const progress = (m.quantidade_feita / m.quantidade_alvo) * 100;
+          const isComplete = m.status === 'completa';
+          
+          html += `
+            <div class="semanal-item">
+              <div class="semanal-header">
+                <div class="semanal-name">${isComplete ? '✅' : '⬜'} ${m.nome}</div>
+                <div class="semanal-progress-text">${m.progresso}</div>
+              </div>
+              <div class="semanal-bar">
+                <div class="semanal-fill" style="width: ${progress}%"></div>
+              </div>
+              ${!isComplete ? `
+                <div class="semanal-actions">
+                  <button class="semanal-btn" onclick="advanceWeekly('${m.nome}')">+1</button>
+                </div>
+              ` : ''}
+            </div>
+          `;
+        }
+      } else {
+        html = '<p style="text-align:center;color:var(--text-dim)">Nenhuma missão semanal definida</p>';
+      }
+      
+      html += `
+        <button class="add-btn" onclick="toggleAddSemanal()">
+          + Adicionar Semanal
+        </button>
+        <div class="add-form" id="add-semanal-form">
+          <input type="text" id="semanal-nome" placeholder="Nome (ex: Postar 2 vídeos)">
+          <select id="semanal-categoria">
+            <option value="conteudo">🎬 Conteúdo</option>
+            <option value="entrega_cliente">📄 Entrega Cliente</option>
+            <option value="atividade_fisica">💪 Atividade Física</option>
+            <option value="caminhada">🚶 Caminhada</option>
+            <option value="corrida">🏃 Corrida</option>
+            <option value="meditacao_extra">🧘 Meditação Extra</option>
+            <option value="jejum">🍽️ Jejum</option>
+            <option value="estudo">📚 Estudo</option>
+            <option value="automacao">🔧 Automação</option>
+            <option value="custom">⚡ Custom</option>
+          </select>
+          <input type="number" id="semanal-qtd" placeholder="Quantidade" value="1">
+          <button onclick="createWeekly()">CRIAR</button>
+        </div>
+      `;
+      
+      document.getElementById('weekly-missions').innerHTML = html;
+    }
+
+    function toggleAddSemanal() {
+      document.getElementById('add-semanal-form').classList.toggle('show');
+    }
+
+    async function createWeekly() {
+      const nome = document.getElementById('semanal-nome').value;
+      const categoria = document.getElementById('semanal-categoria').value;
+      const qtd = parseInt(document.getElementById('semanal-qtd').value) || 1;
+      
+      if (!nome) {
+        showToast('Digite o nome da missão', 'error');
+        return;
+      }
+      
+      const result = await rpc('fn_ss_criar_semanal', {
+        p_nome: nome,
+        p_categoria: categoria,
+        p_quantidade: qtd
+      });
+      
+      if (result.erro) {
+        showToast(result.erro, 'error');
+      } else {
+        showToast(`✅ Semanal criada: ${result.nome}`, 'success');
+        document.getElementById('semanal-nome').value = '';
+        document.getElementById('add-semanal-form').classList.remove('show');
+        loadWeekly();
+      }
+    }
+
+    async function advanceWeekly(nome) {
+      const result = await rpc('fn_ss_completar_semanal', {
+        p_nome: nome,
+        p_quantidade: 1
+      });
+      
+      if (result.erro) {
+        showToast(result.erro, 'error');
+      } else {
+        let msg = `📅 ${result.nome}: ${result.progresso}`;
+        if (result.completa) {
+          msg = `✅ ${result.nome} COMPLETA! +${result.xp_ganho} XP`;
+        }
+        showToast(msg, 'success');
+        loadWeekly();
+        loadProfile();
+      }
+    }
+
+    // ============================================================
+    // BOSSES
+    // ============================================================
+    async function loadBosses() {
+      const data = await rpc('fn_ss_bosses');
+      
+      let html = '';
+      for (const b of data.bosses) {
+        const status = b.completo ? 'completed' : '';
+        
+        html += `
+          <div class="boss-item ${status}">
+            <div class="boss-icon">💀</div>
+            <div class="boss-info">
+              <div class="boss-name">${b.nome}</div>
+              <div class="boss-condition">${b.condicao}</div>
+              <div class="boss-progress">${b.progresso}</div>
+            </div>
+            <div class="boss-xp">+${b.xp}</div>
+            ${!b.completo ? `<button class="boss-btn" onclick="defeatBoss('${b.nome}')">DERROTAR</button>` : ''}
+          </div>
+        `;
+      }
+      
+      document.getElementById('bosses-section').innerHTML = html;
+    }
+
+    async function defeatBoss(nome) {
+      if (!confirm(`Derrotar boss: ${nome}?`)) return;
+      
+      const result = await rpc('fn_ss_completar_boss', { p_nome: nome });
+      
+      if (result.erro) {
+        showToast(result.erro, 'error');
+      } else {
+        showToast(`💀 BOSS DERROTADO: ${result.boss} — +${result.xp} XP`, 'success');
+        loadBosses();
+        loadProfile();
+      }
+    }
+
+    // ============================================================
+    // CONQUISTAS
+    // ============================================================
+    async function loadConquistas() {
+      const data = await rpc('fn_ss_conquistas_lista');
+      
+      let html = '';
+      for (const c of data.conquistas) {
+        const status = c.desbloqueada ? '' : 'locked';
+        
+        html += `
+          <div class="conquista-item ${status}">
+            <div class="conquista-icon">${c.desbloqueada ? '🏆' : '🔒'}</div>
+            <div class="conquista-info">
+              <div class="conquista-name">${c.nome}</div>
+              <div class="conquista-desc">${c.descricao}</div>
+            </div>
+            ${c.desbloqueada ? `<div class="conquista-xp">+${c.xp_bonus}</div>` : ''}
+          </div>
+        `;
+      }
+      
+      document.getElementById('conquistas-section').innerHTML = html;
+    }
+
+    // ============================================================
+    // TOGGLES
+    // ============================================================
+    async function loadToggles() {
+      const data = await rpc('fn_ss_consultar_toggles');
+      
+      let html = '<div class="toggle-grid">';
+      for (const t of data.toggles) {
+        const active = t.ativo ? 'active' : '';
+        
+        html += `
+          <div class="toggle-item">
+            <div class="toggle-name">${t.nome}</div>
+            <div class="toggle-switch ${active}" onclick="toggleActivity('${t.grupo}')"></div>
+          </div>
+        `;
+      }
+      html += '</div>';
+      
+      document.getElementById('toggles-section').innerHTML = html;
+    }
+
+    async function toggleActivity(grupo) {
+      const result = await rpc('fn_ss_toggle', { p_grupo: grupo });
+      
+      showToast(result.mensagem, 'success');
+      loadToggles();
+    }
+
+    // ============================================================
+    // UTILS
+    // ============================================================
+    function toggleSection(header) {
+      header.classList.toggle('collapsed');
+      header.nextElementSibling.classList.toggle('collapsed');
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function showToast(message, type = '') {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = 'toast show ' + type;
+      
+      setTimeout(() => {
+        toast.className = 'toast';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
