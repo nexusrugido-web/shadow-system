@@ -1,1442 +1,614 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Shadow System</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #8b5cf6;
-      --primary-dark: #7c3aed;
-      --primary-glow: rgba(139, 92, 246, 0.5);
-      --bg-dark: #0a0a0f;
-      --bg-card: #13131a;
-      --bg-card-hover: #1a1a24;
-      --text: #e2e8f0;
-      --text-dim: #94a3b8;
-      --success: #22c55e;
-      --danger: #ef4444;
-      --warning: #f59e0b;
-      --border: #2d2d3a;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Rajdhani', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(ellipse at top, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse at bottom, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    /* LOGIN SCREEN */
-    #login-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--bg-dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-
-    .login-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 40px;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      box-shadow: 0 0 60px rgba(139, 92, 246, 0.2);
-    }
-
-    .login-box h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 28px;
-      color: var(--primary);
-      margin-bottom: 8px;
-      text-shadow: 0 0 20px var(--primary-glow);
-    }
-
-    .login-box p {
-      color: var(--text-dim);
-      margin-bottom: 30px;
-    }
-
-    .login-box input {
-      width: 100%;
-      padding: 14px 18px;
-      background: var(--bg-dark);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 16px;
-      margin-bottom: 16px;
-      font-family: 'Rajdhani', sans-serif;
-    }
-
-    .login-box input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 10px var(--primary-glow);
-    }
-
-    .login-box button {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Orbitron', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      transition: all 0.3s;
-    }
-
-    .login-box button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px var(--primary-glow);
-    }
-
-    .login-error {
-      color: var(--danger);
-      margin-top: 16px;
-      display: none;
-    }
-
-    /* MAIN APP */
-    #app {
-      display: none;
-      padding: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-      padding-bottom: 100px;
-    }
-
-    /* HEADER */
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-      padding: 20px;
-      background: var(--bg-card);
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--primary), transparent);
-    }
-
-    .header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 24px;
-      color: var(--primary);
-      text-shadow: 0 0 20px var(--primary-glow);
-      margin-bottom: 4px;
-    }
-
-    .header .subtitle {
-      color: var(--text-dim);
-      font-size: 14px;
-    }
-
-    /* PROFILE CARD */
-    .profile-card {
-      background: var(--bg-card);
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      padding: 24px;
-      margin-bottom: 20px;
-    }
-
-    .profile-top {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .profile-avatar {
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 28px;
-      font-weight: 900;
-      box-shadow: 0 0 30px var(--primary-glow);
-    }
-
-    .profile-info h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-
-    .profile-info .rank {
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .profile-info .title {
-      color: var(--text-dim);
-      font-size: 14px;
-      font-style: italic;
-    }
-
-    /* XP BAR */
-    .xp-section {
-      margin-bottom: 20px;
-    }
-
-    .xp-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 14px;
-    }
-
-    .xp-bar {
-      height: 12px;
-      background: var(--bg-dark);
-      border-radius: 6px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .xp-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary), #a78bfa);
-      border-radius: 6px;
-      transition: width 0.5s ease;
-      position: relative;
-    }
-
-    .xp-fill::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-
-    /* STATS GRID */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .stat-item {
-      background: var(--bg-dark);
-      padding: 14px;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .stat-item .value {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
-      color: var(--primary);
-    }
-
-    .stat-item .label {
-      font-size: 12px;
-      color: var(--text-dim);
-      margin-top: 4px;
-    }
-
-    /* SECTION */
-    .section {
-      background: var(--bg-card);
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .section-header:hover {
-      background: var(--bg-card-hover);
-    }
-
-    .section-header h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-header .toggle-icon {
-      transition: transform 0.3s;
-    }
-
-    .section-header.collapsed .toggle-icon {
-      transform: rotate(-90deg);
-    }
-
-    .section-content {
-      padding: 16px 20px;
-    }
-
-    .section-content.collapsed {
-      display: none;
-    }
-
-    /* MISSION ITEM */
-    .mission-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px;
-      background: var(--bg-dark);
-      border-radius: 10px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .mission-item:hover {
-      background: var(--bg-card-hover);
-      transform: translateX(4px);
-    }
-
-    .mission-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .mission-check {
-      width: 24px;
-      height: 24px;
-      border: 2px solid var(--border);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: all 0.2s;
-    }
-
-    .mission-item.completed .mission-check {
-      background: var(--success);
-      border-color: var(--success);
-    }
-
-    .mission-item.failed .mission-check {
-      background: var(--danger);
-      border-color: var(--danger);
-    }
-
-    .mission-info {
-      flex: 1;
-    }
-
-    .mission-name {
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .mission-item.completed .mission-name {
-      text-decoration: line-through;
-      opacity: 0.6;
-    }
-
-    .mission-meta {
-      font-size: 12px;
-      color: var(--text-dim);
-    }
-
-    .mission-xp {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 14px;
-      color: var(--success);
-    }
-
-    .mission-item.completed .mission-xp,
-    .mission-item.failed .mission-xp {
-      opacity: 0.5;
-    }
-
-    /* MEDITATION SECTION */
-    .meditation-input {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .meditation-input input {
-      flex: 1;
-      padding: 14px 18px;
-      background: var(--bg-dark);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--text);
-      font-size: 18px;
-      font-family: 'Orbitron', sans-serif;
-      text-align: center;
-    }
-
-    .meditation-input input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 10px var(--primary-glow);
-    }
-
-    .meditation-input button {
-      padding: 14px 24px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 16px;
-      transition: all 0.3s;
-    }
-
-    .meditation-input button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px var(--primary-glow);
-    }
-
-    .meditation-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .med-stat {
-      background: var(--bg-dark);
-      padding: 12px;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    .med-stat .value {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 16px;
-      color: var(--primary);
-    }
-
-    .med-stat .label {
-      font-size: 11px;
-      color: var(--text-dim);
-      margin-top: 2px;
-    }
-
-    /* BOSS ITEM */
-    .boss-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px;
-      background: var(--bg-dark);
-      border-radius: 12px;
-      margin-bottom: 12px;
-      border-left: 3px solid var(--danger);
-    }
-
-    .boss-item.completed {
-      border-left-color: var(--success);
-      opacity: 0.6;
-    }
-
-    .boss-icon {
-      font-size: 28px;
-    }
-
-    .boss-info {
-      flex: 1;
-    }
-
-    .boss-name {
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .boss-condition {
-      font-size: 12px;
-      color: var(--text-dim);
-    }
-
-    .boss-progress {
-      font-size: 13px;
-      color: var(--warning);
-      margin-top: 4px;
-    }
-
-    .boss-xp {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 14px;
-      color: var(--warning);
-    }
-
-    .boss-btn {
-      padding: 8px 16px;
-      background: var(--danger);
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 12px;
-      transition: all 0.2s;
-    }
-
-    .boss-btn:hover {
-      transform: scale(1.05);
-    }
-
-    .boss-item.completed .boss-btn {
-      display: none;
-    }
-
-    /* TOGGLE GRID */
-    .toggle-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .toggle-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px;
-      background: var(--bg-dark);
-      border-radius: 10px;
-    }
-
-    .toggle-name {
-      font-weight: 600;
-    }
-
-    .toggle-switch {
-      width: 50px;
-      height: 26px;
-      background: var(--border);
-      border-radius: 13px;
-      position: relative;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .toggle-switch.active {
-      background: var(--primary);
-    }
-
-    .toggle-switch::after {
-      content: '';
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 20px;
-      height: 20px;
-      background: white;
-      border-radius: 50%;
-      transition: transform 0.3s;
-    }
-
-    .toggle-switch.active::after {
-      transform: translateX(24px);
-    }
-
-    /* CONQUISTAS */
-    .conquista-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px;
-      background: var(--bg-dark);
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-
-    .conquista-item.locked {
-      opacity: 0.4;
-    }
-
-    .conquista-icon {
-      font-size: 24px;
-    }
-
-    .conquista-info {
-      flex: 1;
-    }
-
-    .conquista-name {
-      font-weight: 600;
-    }
-
-    .conquista-desc {
-      font-size: 12px;
-      color: var(--text-dim);
-    }
-
-    .conquista-xp {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 12px;
-      color: var(--success);
-    }
-
-    /* SEMANAL */
-    .semanal-item {
-      padding: 14px;
-      background: var(--bg-dark);
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-
-    .semanal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .semanal-name {
-      font-weight: 600;
-    }
-
-    .semanal-progress-text {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 14px;
-      color: var(--primary);
-    }
-
-    .semanal-bar {
-      height: 8px;
-      background: var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-
-    .semanal-fill {
-      height: 100%;
-      background: var(--primary);
-      border-radius: 4px;
-      transition: width 0.3s;
-    }
-
-    .semanal-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .semanal-btn {
-      padding: 8px 16px;
-      background: var(--primary);
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 13px;
-      transition: all 0.2s;
-    }
-
-    .semanal-btn:hover {
-      transform: scale(1.05);
-    }
-
-    .semanal-btn.complete {
-      background: var(--success);
-    }
-
-    /* ADD FORM */
-    .add-form {
-      display: none;
-      padding: 16px;
-      background: var(--bg-dark);
-      border-radius: 10px;
-      margin-top: 16px;
-    }
-
-    .add-form.show {
-      display: block;
-    }
-
-    .add-form input, .add-form select {
-      width: 100%;
-      padding: 12px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 14px;
-      margin-bottom: 10px;
-      font-family: 'Rajdhani', sans-serif;
-    }
-
-    .add-form input:focus, .add-form select:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .add-form button {
-      width: 100%;
-      padding: 12px;
-      background: var(--primary);
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .add-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px;
-      background: transparent;
-      border: 2px dashed var(--border);
-      border-radius: 10px;
-      color: var(--text-dim);
-      cursor: pointer;
-      margin-top: 12px;
-      transition: all 0.2s;
-      width: 100%;
-    }
-
-    .add-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    /* TOAST */
-    .toast {
-      position: fixed;
-      bottom: 100px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: var(--bg-card);
-      border: 1px solid var(--primary);
-      padding: 16px 24px;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-      z-index: 1000;
-      opacity: 0;
-      transition: all 0.3s;
-      max-width: 90%;
-      text-align: center;
-    }
-
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
-    .toast.success {
-      border-color: var(--success);
-    }
-
-    .toast.error {
-      border-color: var(--danger);
-    }
-
-    /* LOADING */
-    .loading {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-    }
-
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 3px solid var(--border);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* NAV BAR */
-    .nav-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: var(--bg-card);
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-around;
-      padding: 12px 0;
-      z-index: 100;
-    }
-
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 11px;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .nav-item:hover, .nav-item.active {
-      color: var(--primary);
-    }
-
-    .nav-item span {
-      font-size: 20px;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 500px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .toggle-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .meditation-stats {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Shadow System</title>
+<meta name="theme-color" content="#8b5cf6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--p:#8b5cf6;--pd:#7c3aed;--pl:#a78bfa;--pg:rgba(139,92,246,.4);
+--bg:#06060b;--bg2:#0d0d14;--bg3:#14141e;--bg4:#1c1c2a;--bg5:#252536;
+--t:#e2e8f0;--td:#94a3b8;--t3:#64748b;
+--ok:#22c55e;--no:#ef4444;--warn:#f59e0b;--info:#3b82f6;
+--bd:#1e1e2e;--r:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--t);min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at top,rgba(139,92,246,.08)0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(59,130,246,.04)0%,transparent 50%);pointer-events:none;z-index:-1}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:4px}
+input,select,textarea,button{font-family:inherit}
+
+/* LOGIN */
+#LS{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999}
+.lb{background:var(--bg3);border:1px solid var(--bd);border-radius:20px;padding:40px 32px;width:90%;max-width:380px;text-align:center;box-shadow:0 0 80px rgba(139,92,246,.15)}
+.lb h1{font-family:'Orbitron';font-size:22px;color:var(--p);text-shadow:0 0 30px var(--pg);margin-bottom:4px;letter-spacing:2px}
+.lb .sub{color:var(--td);font-size:14px;margin-bottom:28px}
+.lb input{width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--bd);border-radius:10px;color:var(--t);font-size:16px;margin-bottom:14px;transition:border .2s}
+.lb input:focus{outline:none;border-color:var(--p);box-shadow:0 0 12px var(--pg)}
+.lb button{width:100%;padding:14px;background:linear-gradient(135deg,var(--p),var(--pd));border:none;border-radius:10px;color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:'Orbitron';letter-spacing:3px;transition:all .3s}
+.lb button:active{transform:scale(.98)}
+.lerr{color:var(--no);margin-top:14px;font-size:14px;display:none}
+
+#app{display:none;padding-bottom:72px}
+
+/* TABS */
+.tabs{display:flex;background:var(--bg2);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:50;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1;min-width:70px;padding:14px 8px 12px;text-align:center;font-size:11px;font-weight:600;color:var(--t3);cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;white-space:nowrap}
+.tab.act{color:var(--p);border-bottom-color:var(--p)}
+.tab span{display:block;font-size:18px;margin-bottom:2px}
+
+.tpanel{display:none;padding:16px;max-width:600px;margin:0 auto}
+.tpanel.act{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* CARDS */
+.card{background:var(--bg3);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:14px;overflow:hidden;transition:border-color .2s}
+.card:hover{border-color:var(--bg5)}
+.card-h{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer;user-select:none}
+.card-h h3{font-family:'Orbitron';font-size:12px;letter-spacing:1px;display:flex;align-items:center;gap:8px}
+.card-h .badge{background:rgba(139,92,246,.15);color:var(--p);font-family:'Orbitron';font-size:10px;padding:2px 8px;border-radius:12px}
+.card-h .arr{transition:transform .3s;font-size:12px;color:var(--td)}
+.card-h.closed .arr{transform:rotate(-90deg)}
+.card-b{padding:0 16px 16px}
+.card-b.closed{display:none}
+
+/* PROFILE */
+.prof-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.avatar{width:64px;height:64px;background:linear-gradient(135deg,var(--p),var(--pd));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron';font-size:26px;font-weight:900;box-shadow:0 0 25px var(--pg);flex-shrink:0;animation:pulse 3s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 25px var(--pg)}50%{box-shadow:0 0 40px var(--pg)}}
+.pinfo h2{font-family:'Orbitron';font-size:18px;margin-bottom:2px}
+.pinfo .rk{color:var(--p);font-weight:700;font-size:14px}
+.pinfo .tit{color:var(--td);font-size:12px;font-style:italic}
+.xp-s{margin-bottom:16px}
+.xp-h{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;color:var(--td)}
+.xp-h strong{color:var(--t)}
+.xpbar{height:10px;background:var(--bg);border-radius:5px;overflow:hidden}
+.xpfill{height:100%;background:linear-gradient(90deg,var(--p),var(--pl));border-radius:5px;transition:width .6s ease;position:relative}
+.xpfill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);animation:shm 2.5s infinite}
+@keyframes shm{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sitem{background:var(--bg);padding:12px;border-radius:10px;text-align:center}
+.sitem .sv{font-family:'Orbitron';font-size:17px;color:var(--p)}
+.sitem .sl{font-size:11px;color:var(--td);margin-top:2px}
+.ident{background:var(--bg);padding:12px 16px;border-radius:10px;margin-top:12px;text-align:center;font-style:italic;color:var(--pl);font-size:14px;border-left:3px solid var(--p)}
+
+/* MISSIONS */
+.mi{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg);border-radius:10px;margin-bottom:8px;cursor:pointer;transition:all .15s;overflow:hidden}
+.mi:hover{background:var(--bg4);transform:translateX(3px)}
+.mi:active{transform:scale(.98)}
+.mi.done{opacity:.5}.mi.done .mn{text-decoration:line-through}
+.mchk{width:22px;height:22px;border:2px solid var(--bd);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;transition:all .2s}
+.mi.done .mchk{background:var(--ok);border-color:var(--ok);color:#fff}
+.minfo{flex:1;min-width:0}.mn{font-weight:600;font-size:15px}.mm{font-size:11px;color:var(--td)}
+.mxp{font-family:'Orbitron';font-size:13px;color:var(--ok);flex-shrink:0}
+.mi.done .mxp{opacity:.4}
+.mi-actions{display:flex;gap:6px;flex-shrink:0}
+.mi-btn{width:28px;height:28px;border:none;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;transition:all .15s}
+.mi-btn:hover{transform:scale(1.1)}
+.mi-btn.edit{background:var(--bg5);color:var(--td)}
+.mi-btn.del{background:rgba(239,68,68,.15);color:var(--no)}
+
+/* MEDITATION */
+.timer-display{font-family:'Orbitron';font-size:48px;color:var(--p);text-shadow:0 0 30px var(--pg);margin-bottom:12px;letter-spacing:4px;text-align:center}
+.timer-bar{height:6px;background:var(--bg);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.timer-fill{height:100%;background:linear-gradient(90deg,var(--p),var(--pl));border-radius:3px;transition:width .5s}
+.timer-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.tbtn{padding:10px 20px;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;transition:all .2s;font-family:'Rajdhani'}
+.tbtn:active{transform:scale(.95)}
+.tbtn.start{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff}
+.tbtn.stop{background:var(--no);color:#fff}
+.tbtn.reg{background:var(--ok);color:#fff}
+.tbtn.sec{background:var(--bg5);color:var(--td)}
+.med-quick{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.mqbtn{padding:8px 16px;background:var(--bg);border:1px solid var(--bd);border-radius:8px;color:var(--td);cursor:pointer;font-size:13px;font-weight:600;transition:all .15s}
+.mqbtn:hover,.mqbtn.act{border-color:var(--p);color:var(--p)}
+.med-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.mst{background:var(--bg);padding:10px;border-radius:8px;text-align:center}
+.mst .v{font-family:'Orbitron';font-size:15px;color:var(--p)}
+.mst .l{font-size:10px;color:var(--td);margin-top:2px}
+
+/* MOOD */
+.mood-grid{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.mood-btn{padding:12px 18px;background:var(--bg);border:2px solid var(--bd);border-radius:12px;cursor:pointer;text-align:center;transition:all .2s;min-width:70px}
+.mood-btn:hover,.mood-btn.act{border-color:var(--p);background:var(--bg4);transform:scale(1.05)}
+.mood-btn .emoji{font-size:24px;display:block;margin-bottom:4px}
+.mood-btn .label{font-size:11px;color:var(--td)}
+
+/* EMERGENCY */
+.emer-btn{width:100%;padding:18px;background:linear-gradient(135deg,#dc2626,#b91c1c);border:2px solid #ef4444;border-radius:14px;color:#fff;font-family:'Orbitron';font-size:14px;letter-spacing:2px;cursor:pointer;text-transform:uppercase;box-shadow:0 0 30px rgba(239,68,68,.2)}
+.emer-btn:active{transform:scale(.98)}
+#emer-mode{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:200;padding:24px;overflow-y:auto}
+.emer-content{max-width:500px;margin:0 auto;text-align:center;padding-top:40px}
+.emer-content h2{font-family:'Orbitron';color:var(--no);font-size:20px;margin-bottom:20px;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+.emer-quote{background:var(--bg3);padding:20px;border-radius:14px;margin-bottom:20px;font-size:18px;color:var(--pl);font-style:italic;border-left:4px solid var(--p)}
+.emer-step{display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg3);border-radius:10px;margin-bottom:8px;font-size:15px}
+.emer-step .num{width:30px;height:30px;background:var(--p);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron';font-size:12px;flex-shrink:0}
+.emer-timer{font-family:'Orbitron';font-size:36px;color:var(--warn);margin:20px 0}
+.emer-ok{padding:16px 32px;background:var(--ok);border:none;border-radius:12px;color:#fff;font-weight:700;font-size:16px;cursor:pointer;margin:6px}
+.emer-fail{padding:16px 32px;background:var(--no);border:none;border-radius:12px;color:#fff;font-weight:700;font-size:16px;cursor:pointer;margin:6px}
+
+/* COMMITMENT */
+.commit-box{background:var(--bg);padding:16px;border-radius:10px;text-align:center}
+.commit-box .phrase{font-style:italic;color:var(--pl);margin-bottom:12px;font-size:15px;line-height:1.5}
+.commit-btn{padding:12px 24px;background:var(--p);border:none;border-radius:10px;color:#fff;font-weight:700;cursor:pointer;font-size:14px}
+
+/* WISDOM */
+.wisdom{background:var(--bg);padding:14px 16px;border-radius:10px;border-left:3px solid var(--p);margin-bottom:8px}
+.wisdom .wq{font-style:italic;color:var(--pl);font-size:14px;margin-bottom:4px}
+.wisdom .wa{color:var(--td);font-size:12px}
+
+/* SEMANAL */
+.wi{padding:14px;background:var(--bg);border-radius:10px;margin-bottom:8px}
+.wi.done{opacity:.5}
+.wi-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.wi-name{font-weight:600;font-size:14px}
+.wi-prog{font-family:'Orbitron';font-size:12px;color:var(--p)}
+.wi-bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin-bottom:10px}
+.wi-fill{height:100%;background:linear-gradient(90deg,var(--p),var(--pl));border-radius:3px;transition:width .4s}
+.wi-acts{display:flex;gap:6px;flex-wrap:wrap}
+.wi-btn{padding:6px 14px;background:var(--p);border:none;border-radius:6px;color:#fff;font-weight:600;cursor:pointer;font-size:12px}
+.wi-btn:active{transform:scale(.95)}
+.wi-btn.alt{background:var(--info)}
+.wi-btn.sec{background:var(--bg5);color:var(--td)}
+
+/* BOSS */
+.bi{display:flex;align-items:center;gap:14px;padding:14px;background:var(--bg);border-radius:10px;margin-bottom:8px;border-left:3px solid var(--no);transition:all .15s}
+.bi:hover{background:var(--bg4)}
+.bi.done{border-left-color:var(--ok);opacity:.5}
+.bi-icon{font-size:28px;flex-shrink:0}
+.bi-info{flex:1;min-width:0}
+.bi-name{font-weight:700;font-size:15px;margin-bottom:2px}
+.bi-cond{font-size:11px;color:var(--td)}
+.bi-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.bi-xp{font-family:'Orbitron';font-size:12px;color:var(--warn)}
+.bi-btn{padding:6px 12px;border:none;border-radius:6px;color:#fff;font-weight:700;cursor:pointer;font-size:11px}
+.bi-btn:active{transform:scale(.95)}
+.bi-btn.atk{background:var(--no)}
+.bi-btn.edt{background:var(--bg5);color:var(--td)}
+
+/* CONQUISTA */
+.ci{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg);border-radius:10px;margin-bottom:6px}
+.ci.locked{opacity:.3}
+.ci-icon{font-size:24px;flex-shrink:0}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-weight:600;font-size:14px}
+.ci-desc{font-size:11px;color:var(--td)}
+.ci-xp{font-family:'Orbitron';font-size:11px;color:var(--ok);flex-shrink:0}
+
+/* TITULO */
+.ti{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg);border-radius:10px;margin-bottom:6px;border:1px solid transparent}
+.ti.eq{border-color:var(--p);background:rgba(139,92,246,.06)}
+.ti.locked{opacity:.3}
+.ti-icon{font-size:22px;flex-shrink:0}
+.ti-info{flex:1;min-width:0}
+.ti-name{font-weight:600;font-size:13px}
+.ti-desc{font-size:11px;color:var(--td)}
+.ti-btn{padding:4px 12px;background:var(--p);border:none;border-radius:6px;color:#fff;font-size:10px;cursor:pointer;font-weight:700;flex-shrink:0}
+
+/* RECORDE */
+.ri{display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--bg);border-radius:8px;margin-bottom:6px}
+.ri-icon{font-size:18px;flex-shrink:0}
+.ri-info{flex:1;min-width:0}
+.ri-name{font-size:12px;color:var(--td)}
+.ri-val{font-family:'Orbitron';font-size:15px;color:var(--warn);flex-shrink:0}
+
+/* REVIEW */
+.rev{padding:14px;background:var(--bg);border-radius:10px;margin-bottom:8px;border-left:3px solid var(--p)}
+.rev-head{font-size:11px;color:var(--td);margin-bottom:6px;font-family:'Orbitron';letter-spacing:.5px}
+.rev-line{font-size:13px;margin-bottom:4px;line-height:1.4}
+.rev-line strong{color:var(--pl)}
+
+/* P3: TOGGLES */
+.tg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.tg-item{display:flex;align-items:center;justify-content:space-between;padding:12px;background:var(--bg);border-radius:8px}
+.tg-name{font-weight:600;font-size:13px}
+.tg-sw{width:44px;height:24px;background:var(--bd);border-radius:12px;position:relative;cursor:pointer;transition:background .3s}
+.tg-sw.on{background:var(--p)}
+.tg-sw::after{content:'';position:absolute;top:2px;left:2px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform .3s}
+.tg-sw.on::after{transform:translateX(20px)}
+
+/* P3: DIARIO */
+.di-entry{padding:14px;background:var(--bg);border-radius:10px;margin-bottom:8px;border-left:3px solid var(--p)}
+.di-date{font-size:11px;color:var(--td);margin-bottom:6px;font-family:'Orbitron';letter-spacing:.5px}
+.di-text{font-size:14px;line-height:1.5}
+.di-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.di-tag{font-size:10px;padding:2px 8px;background:rgba(139,92,246,.1);color:var(--p);border-radius:10px}
+
+/* P3: HEATMAP */
+.hm-wrap{overflow-x:auto;padding:8px 0}
+.hm-grid{display:flex;gap:3px;min-width:max-content}
+.hm-col{display:flex;flex-direction:column;gap:3px}
+.hm-cell{width:14px;height:14px;border-radius:3px;background:var(--bg)}
+.hm-cell[data-l="1"]{background:rgba(139,92,246,.2)}
+.hm-cell[data-l="2"]{background:rgba(139,92,246,.4)}
+.hm-cell[data-l="3"]{background:rgba(139,92,246,.6)}
+.hm-cell[data-l="4"]{background:var(--p);box-shadow:0 0 6px var(--pg)}
+
+/* P3: ANALYTICS */
+.an-bars{display:flex;align-items:flex-end;gap:3px;height:80px;margin:12px 0}
+.an-bar{flex:1;border-radius:3px 3px 0 0;background:var(--p);min-width:4px;transition:height .4s;opacity:.7}
+.an-bar:hover{opacity:1}
+.pilar-row{margin-bottom:8px}
+.pilar-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px}
+.pilar-bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden}
+.pilar-fill{height:100%;background:var(--p);border-radius:3px;transition:width .4s}
+
+/* P3: TIMELINE */
+.tl-item{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;background:var(--bg);border-radius:8px;margin-bottom:6px}
+.tl-icon{font-size:18px;flex-shrink:0;margin-top:2px}
+.tl-info{flex:1;min-width:0}
+.tl-title{font-size:13px;font-weight:600}
+.tl-meta{font-size:10px;color:var(--td)}
+.tl-xp{font-family:'Orbitron';font-size:11px;flex-shrink:0}
+.tl-xp.pos{color:var(--ok)}
+.tl-xp.neg{color:var(--no)}
+
+/* P3: SONO */
+.sono-item{display:flex;align-items:center;gap:12px;padding:10px;background:var(--bg);border-radius:8px;margin-bottom:6px}
+.sono-icon{font-size:18px}
+.sono-info{flex:1}
+.sono-date{font-size:11px;color:var(--td)}
+.sono-val{font-family:'Orbitron';font-size:14px;color:var(--info)}
+
+/* P3: RECAIDA */
+.rec-stat{background:var(--bg);padding:12px;border-radius:8px;text-align:center}
+.rec-stat .rv{font-family:'Orbitron';font-size:20px;color:var(--warn)}
+.rec-stat .rl{font-size:11px;color:var(--td);margin-top:2px}
+
+/* FORMS */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}
+.modal-bg.show{display:flex}
+.modal{background:var(--bg3);border:1px solid var(--bd);border-radius:20px 20px 0 0;padding:24px;width:100%;max-width:500px;max-height:85vh;overflow-y:auto;animation:slideUp .3s ease}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal h3{font-family:'Orbitron';font-size:14px;margin-bottom:16px;text-align:center}
+.fg{margin-bottom:12px}
+.fg label{display:block;font-size:12px;color:var(--td);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.fg input,.fg select,.fg textarea{width:100%;padding:12px;background:var(--bg);border:1px solid var(--bd);border-radius:8px;color:var(--t);font-size:14px}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--p)}
+.fg textarea{resize:vertical;min-height:60px}
+.fg select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mbtn{width:100%;padding:14px;background:linear-gradient(135deg,var(--p),var(--pd));border:none;border-radius:10px;color:#fff;font-weight:700;font-size:15px;cursor:pointer;margin-top:4px}
+.mbtn:active{transform:scale(.98)}
+.mbtn.danger{background:linear-gradient(135deg,var(--no),#b91c1c)}
+.mbtn.sec{background:var(--bg5);color:var(--td)}
+.add-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;background:transparent;border:2px dashed var(--bd);border-radius:10px;color:var(--td);cursor:pointer;margin-top:8px;width:100%;font-size:14px;transition:all .2s}
+.add-btn:hover{border-color:var(--p);color:var(--p)}
+
+/* TOAST */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--bg3);border:1px solid var(--p);padding:14px 20px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.5);z-index:400;opacity:0;transition:all .3s;max-width:90%;text-align:center;font-size:14px}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast.ok{border-color:var(--ok)}.toast.err{border-color:var(--no)}.toast.wrn{border-color:var(--warn)}
+
+.skel{background:linear-gradient(90deg,var(--bg) 25%,var(--bg4) 50%,var(--bg) 75%);background-size:200% 100%;animation:skelAni 1.5s infinite;border-radius:8px;height:20px;margin-bottom:8px}
+@keyframes skelAni{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skel.h{height:40px}
+
+.reward-popup{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
+.reward-box{background:var(--bg3);border:2px solid var(--p);border-radius:20px;padding:32px;max-width:360px;width:100%;text-align:center;box-shadow:0 0 60px var(--pg);animation:popIn .4s ease}
+@keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+.reward-box h2{font-family:'Orbitron';color:var(--p);font-size:18px;margin-bottom:8px}
+.reward-days{font-family:'Orbitron';font-size:36px;color:var(--warn);margin:12px 0}
+.reward-xp{color:var(--ok);font-size:18px;font-weight:700;margin-bottom:16px}
+.reward-btn{padding:14px 32px;background:var(--p);border:none;border-radius:10px;color:#fff;font-family:'Orbitron';font-size:14px;cursor:pointer}
+
+.empty{text-align:center;padding:24px;color:var(--td)}
+.empty-icon{font-size:36px;margin-bottom:8px;opacity:.5}
+
+@media(max-width:400px){.sgrid{grid-template-columns:1fr 1fr}.timer-display{font-size:36px}.fg-row{grid-template-columns:1fr}.tg-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-  <!-- LOGIN SCREEN -->
-  <div id="login-screen">
-    <div class="login-box">
-      <h1>⚔️ SHADOW SYSTEM</h1>
-      <p>Digite a senha para acessar</p>
-      <input type="password" id="password-input" placeholder="Senha" autocomplete="off">
-      <button onclick="login()">ENTRAR</button>
-      <p class="login-error" id="login-error">Senha incorreta!</p>
-    </div>
-  </div>
 
-  <!-- MAIN APP -->
-  <div id="app">
-    <div class="header">
-      <h1>⚔️ SHADOW SYSTEM</h1>
-      <p class="subtitle">Level Up Your Life</p>
-    </div>
+<div id="LS"><div class="lb">
+<h1>⚔️ SHADOW SYSTEM</h1><p class="sub">Identifique-se, Hunter</p>
+<input type="password" id="pw" placeholder="Senha" autocomplete="off">
+<button onclick="login()">ENTRAR</button>
+<p class="lerr" id="lerr">⚠️ Senha incorreta</p>
+</div></div>
 
-    <!-- PROFILE -->
-    <div class="profile-card" id="profile-card">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
+<div id="app">
 
-    <!-- DAILY MISSIONS -->
-    <div class="section">
-      <div class="section-header" onclick="toggleSection(this)">
-        <h3>📋 MISSÕES DIÁRIAS</h3>
-        <span class="toggle-icon">▼</span>
-      </div>
-      <div class="section-content" id="daily-missions">
-        <div class="loading"><div class="spinner"></div></div>
-      </div>
-    </div>
+<div class="tabs">
+<div class="tab act" onclick="switchTab(0)"><span>🏠</span>Home</div>
+<div class="tab" onclick="switchTab(1)"><span>📅</span>Semanal</div>
+<div class="tab" onclick="switchTab(2)"><span>💀</span>Bosses</div>
+<div class="tab" onclick="switchTab(3)"><span>🏆</span>Conquistas</div>
+<div class="tab" onclick="switchTab(4)"><span>⚙️</span>Config</div>
+</div>
 
-    <!-- MEDITATION -->
-    <div class="section">
-      <div class="section-header" onclick="toggleSection(this)">
-        <h3>🧘 MEDITAÇÃO</h3>
-        <span class="toggle-icon">▼</span>
-      </div>
-      <div class="section-content" id="meditation-section">
-        <div class="meditation-input">
-          <input type="number" id="med-minutes" placeholder="20" value="20">
-          <button onclick="registerMeditation()">REGISTRAR</button>
-        </div>
-        <div class="meditation-stats" id="meditation-stats">
-          <div class="loading"><div class="spinner"></div></div>
-        </div>
-      </div>
-    </div>
+<!-- TAB 0: HOME -->
+<div class="tpanel act" id="t0">
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>👤 STATUS</h3><span class="arr">▼</span></div><div class="card-b" id="profile-body"><div class="skel h"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>🤝 COMPROMISSO</h3><span class="arr">▼</span></div><div class="card-b" id="commit-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>📋 MISSÕES DIÁRIAS</h3><span class="arr">▼</span></div><div class="card-b" id="daily-body"><div class="skel"></div><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>🧘 MEDITAÇÃO</h3><span class="arr">▼</span></div><div class="card-b" id="med-body"><div class="skel h"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>🎯 FOCO DO DIA</h3><span class="arr">▼</span></div><div class="card-b" id="focus-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>😶 COMO ESTOU</h3><span class="arr">▼</span></div><div class="card-b" id="mood-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>📜 SABEDORIA</h3><span class="arr">▼</span></div><div class="card-b" id="wisdom-body"><div class="skel"></div></div></div>
+<div style="padding:0 0 16px"><button class="emer-btn" onclick="openEmergency()">🚨 MODO EMERGÊNCIA</button></div>
+</div>
 
-    <!-- WEEKLY MISSIONS -->
-    <div class="section">
-      <div class="section-header" onclick="toggleSection(this)">
-        <h3>📅 SEMANAIS</h3>
-        <span class="toggle-icon">▼</span>
-      </div>
-      <div class="section-content" id="weekly-missions">
-        <div class="loading"><div class="spinner"></div></div>
-      </div>
-    </div>
+<!-- TAB 1: SEMANAL -->
+<div class="tpanel" id="t1">
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>📅 SEMANAIS</h3><div style="display:flex;align-items:center;gap:8px"><span class="badge" id="wb">--</span><span class="arr">▼</span></div></div><div class="card-b" id="weekly-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>📊 REVIEW SEMANAL</h3><span class="arr">▼</span></div><div class="card-b" id="review-body"><div class="skel"></div></div></div>
+</div>
 
-    <!-- BOSSES -->
-    <div class="section">
-      <div class="section-header" onclick="toggleSection(this)">
-        <h3>💀 BOSSES</h3>
-        <span class="toggle-icon">▼</span>
-      </div>
-      <div class="section-content" id="bosses-section">
-        <div class="loading"><div class="spinner"></div></div>
-      </div>
-    </div>
+<!-- TAB 2: BOSSES -->
+<div class="tpanel" id="t2">
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>💀 BOSSES ATIVOS</h3><span class="arr">▼</span></div><div class="card-b" id="bosses-active"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h closed" onclick="tc(this)"><h3>✅ DERROTADOS</h3><span class="arr">▼</span></div><div class="card-b closed" id="bosses-done"><div class="skel"></div></div></div>
+</div>
 
-    <!-- CONQUISTAS -->
-    <div class="section">
-      <div class="section-header collapsed" onclick="toggleSection(this)">
-        <h3>🏆 CONQUISTAS</h3>
-        <span class="toggle-icon">▼</span>
-      </div>
-      <div class="section-content collapsed" id="conquistas-section">
-        <div class="loading"><div class="spinner"></div></div>
-      </div>
-    </div>
+<!-- TAB 3: CONQUISTAS -->
+<div class="tpanel" id="t3">
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>🏆 CONQUISTAS</h3><div style="display:flex;align-items:center;gap:8px"><span class="badge" id="cb">--</span><span class="arr">▼</span></div></div><div class="card-b" id="conq-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>🏷️ TÍTULOS</h3><span class="arr">▼</span></div><div class="card-b" id="titulos-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>🏅 RECORDES</h3><span class="arr">▼</span></div><div class="card-b" id="recordes-body"><div class="skel"></div></div></div>
+</div>
 
-    <!-- TOGGLES -->
-    <div class="section">
-      <div class="section-header collapsed" onclick="toggleSection(this)">
-        <h3>⚙️ ATIVIDADES</h3>
-        <span class="toggle-icon">▼</span>
-      </div>
-      <div class="section-content collapsed" id="toggles-section">
-        <div class="loading"><div class="spinner"></div></div>
-      </div>
-    </div>
-  </div>
+<!-- TAB 4: CONFIG -->
+<div class="tpanel" id="t4">
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>⚙️ ATIVIDADES (TOGGLES)</h3><span class="arr">▼</span></div><div class="card-b" id="toggles-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>📜 BIBLIOTECA DE SABEDORIA</h3><span class="arr">▼</span></div><div class="card-b" id="sab-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>📓 DIÁRIO DO OBSERVADOR</h3><span class="arr">▼</span></div><div class="card-b" id="diario-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>💤 SONO</h3><span class="arr">▼</span></div><div class="card-b" id="sono-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>😶 MOOD HISTÓRICO</h3><span class="arr">▼</span></div><div class="card-b" id="mood-hist-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>⚠️ PADRÕES DE RECAÍDA</h3><span class="arr">▼</span></div><div class="card-b" id="recaidas-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>📅 HEATMAP</h3><span class="arr">▼</span></div><div class="card-b" id="heatmap-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>📈 ANALYTICS</h3><span class="arr">▼</span></div><div class="card-b" id="analytics-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>📋 TIMELINE</h3><span class="arr">▼</span></div><div class="card-b" id="timeline-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="tc(this)"><h3>💀 HISTÓRICO DE FALHAS</h3><span class="arr">▼</span></div><div class="card-b" id="falhas-body"><div class="skel"></div></div></div>
+<div class="card"><div class="card-h" onclick="logout()" style="justify-content:center"><h3 style="color:var(--no)">🚪 SAIR</h3></div></div>
+</div>
 
-  <!-- TOAST -->
-  <div class="toast" id="toast"></div>
+</div>
 
-  <!-- NAV BAR -->
-  <div class="nav-bar" id="nav-bar" style="display: none;">
-    <div class="nav-item active" onclick="scrollToSection('profile-card')">
-      <span>👤</span>
-      Status
-    </div>
-    <div class="nav-item" onclick="scrollToSection('daily-missions')">
-      <span>📋</span>
-      Diárias
-    </div>
-    <div class="nav-item" onclick="scrollToSection('meditation-section')">
-      <span>🧘</span>
-      Meditar
-    </div>
-    <div class="nav-item" onclick="scrollToSection('bosses-section')">
-      <span>💀</span>
-      Bosses
-    </div>
-    <div class="nav-item" onclick="refreshAll()">
-      <span>🔄</span>
-      Atualizar
-    </div>
-  </div>
+<!-- EMERGENCY -->
+<div id="emer-mode"><div class="emer-content">
+<h2>🚨 MODO EMERGÊNCIA 🚨</h2>
+<div class="emer-quote" id="emer-quote">"Para quem esse impulso veio?"</div>
+<div style="text-align:left;margin-bottom:24px">
+<div class="emer-step"><div class="num">1</div>Respire: 4s inspira — 7s segura — 8s solta</div>
+<div class="emer-step"><div class="num">2</div>Jogue água gelada no rosto</div>
+<div class="emer-step"><div class="num">3</div>Sinta seus pés no chão</div>
+<div class="emer-step"><div class="num">4</div>Coloque o celular longe</div></div>
+<div class="emer-timer" id="emer-timer">00:00</div>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+<button class="emer-ok" onclick="endEmergency('vitoria')">✅ PASSOU</button>
+<button class="emer-fail" onclick="endEmergency('derrota')">💀 CAÍ</button></div>
+</div></div>
 
-  <script>
-    // ============================================================
-    // CONFIG
-    // ============================================================
-    const CONFIG = {
-      user: 'Batista',
-      password: '17Mindset22.',
-      supabaseUrl: 'https://hqircciopclwoyhgdnlv.supabase.co',
-      supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxaXJjY2lvcGNsd295aGdkbmx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTU1MDEsImV4cCI6MjA4ODkzMTUwMX0.fCQ3wDwdyDydEngta1kkxrw8sWJi-PyHieVaCkCkzYM'
-    };
+<!-- ALL MODALS -->
+<div class="modal-bg" id="m-edit-mi"><div class="modal"><h3>✏️ EDITAR MISSÃO</h3>
+<div class="fg"><label>Nome</label><input id="em-n"></div>
+<div class="fg-row"><div class="fg"><label>Pilar</label><select id="em-p"><option value="mente">🧠 Mente</option><option value="espirito">🧘 Espírito</option><option value="corpo">💪 Corpo</option><option value="ouro">💰 Ouro</option><option value="work">🎬 Work</option></select></div>
+<div class="fg"><label>Modo</label><select id="em-m"><option value="acao">Ação</option><option value="evitacao">Evitação</option></select></div></div>
+<div class="fg-row"><div class="fg"><label>XP</label><input type="number" id="em-x" value="15"></div><div class="fg"><label>Penalidade</label><input type="number" id="em-pe" value="30"></div></div>
+<button class="mbtn" onclick="saveEditMi()">SALVAR</button><button class="mbtn sec" onclick="cm('m-edit-mi')" style="margin-top:8px">CANCELAR</button></div></div>
 
-    // ============================================================
-    // SUPABASE RPC CALL
-    // ============================================================
-    async function rpc(fnName, params = {}) {
-      const res = await fetch(`${CONFIG.supabaseUrl}/rest/v1/rpc/${fnName}`, {
-        method: 'POST',
-        headers: {
-          'apikey': CONFIG.supabaseKey,
-          'Authorization': `Bearer ${CONFIG.supabaseKey}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(params)
-      });
-      return res.json();
-    }
+<div class="modal-bg" id="m-add-mi"><div class="modal"><h3>➕ NOVA DIÁRIA</h3>
+<div class="fg"><label>Nome</label><input id="am-n" placeholder="Ex: Ler 15 min"></div>
+<div class="fg-row"><div class="fg"><label>Pilar</label><select id="am-p"><option value="mente">🧠 Mente</option><option value="espirito">🧘 Espírito</option><option value="corpo">💪 Corpo</option><option value="ouro">💰 Ouro</option><option value="work">🎬 Work</option></select></div>
+<div class="fg"><label>Modo</label><select id="am-m"><option value="acao">Ação</option><option value="evitacao">Evitação</option></select></div></div>
+<div class="fg-row"><div class="fg"><label>XP</label><input type="number" id="am-x" value="15"></div><div class="fg"><label>Penalidade</label><input type="number" id="am-pe" value="30"></div></div>
+<button class="mbtn" onclick="addMi()">CRIAR</button><button class="mbtn sec" onclick="cm('m-add-mi')" style="margin-top:8px">CANCELAR</button></div></div>
 
-    // ============================================================
-    // LOGIN
-    // ============================================================
-    function login() {
-      const pwd = document.getElementById('password-input').value;
-      if (pwd === CONFIG.password) {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('app').style.display = 'block';
-        document.getElementById('nav-bar').style.display = 'flex';
-        localStorage.setItem('shadow_logged', 'true');
-        loadAll();
-      } else {
-        document.getElementById('login-error').style.display = 'block';
-        document.getElementById('password-input').value = '';
-      }
-    }
+<div class="modal-bg" id="m-fail"><div class="modal"><h3>💀 AUTOOBSERVAÇÃO</h3>
+<p style="text-align:center;color:var(--td);margin-bottom:16px;font-size:13px">Sem julgamento. Observe.</p>
+<div class="fg"><label>Antes</label><textarea id="fl-a" placeholder="Tédio, solidão..."></textarea></div>
+<div class="fg"><label>Durante</label><textarea id="fl-d" placeholder="Prazer, culpa..."></textarea></div>
+<div class="fg"><label>Depois</label><textarea id="fl-dp" placeholder="Vazio, arrependimento..."></textarea></div>
+<div class="fg"><label>Gatilho</label><input id="fl-g" placeholder="O que disparou?"></div>
+<div class="fg"><label>Resistiu?</label><select id="fl-r"><option value="false">Não</option><option value="true">Sim</option></select></div>
+<div class="fg"><label>Aprendizado</label><textarea id="fl-ap" placeholder="O que tiro disso?"></textarea></div>
+<button class="mbtn" onclick="submitFail()">REGISTRAR</button><button class="mbtn sec" onclick="cm('m-fail')" style="margin-top:8px">CANCELAR</button></div></div>
 
-    // Check saved login
-    if (localStorage.getItem('shadow_logged') === 'true') {
-      document.getElementById('login-screen').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      document.getElementById('nav-bar').style.display = 'flex';
-      loadAll();
-    }
+<div class="modal-bg" id="m-add-sem"><div class="modal"><h3>➕ NOVA SEMANAL</h3>
+<div class="fg"><label>Nome</label><input id="as-n" placeholder="Ex: Postar 2 vídeos"></div>
+<div class="fg-row"><div class="fg"><label>Categoria</label><select id="as-c"><option value="conteudo">🎬 Conteúdo</option><option value="entrega_cliente">📄 Entrega</option><option value="atividade_fisica">💪 Exercício</option><option value="estudo">📚 Estudo</option><option value="custom">⚡ Custom</option></select></div>
+<div class="fg"><label>Quantidade</label><input type="number" id="as-q" value="1" min="1"></div></div>
+<button class="mbtn" onclick="createWeekly()">CRIAR</button><button class="mbtn sec" onclick="cm('m-add-sem')" style="margin-top:8px">CANCELAR</button></div></div>
 
-    // Enter key login
-    document.getElementById('password-input').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') login();
-    });
+<div class="modal-bg" id="m-edit-sem"><div class="modal"><h3>✏️ EDITAR SEMANAL</h3>
+<div class="fg"><label>Nome</label><input id="es-n"></div>
+<div class="fg"><label>Quantidade alvo</label><input type="number" id="es-q" min="1"></div>
+<button class="mbtn" onclick="saveEditSem()">SALVAR</button><button class="mbtn sec" onclick="cm('m-edit-sem')" style="margin-top:8px">CANCELAR</button></div></div>
 
-    // ============================================================
-    // LOAD ALL DATA
-    // ============================================================
-    async function loadAll() {
-      await Promise.all([
-        loadProfile(),
-        loadMissions(),
-        loadMeditation(),
-        loadWeekly(),
-        loadBosses(),
-        loadConquistas(),
-        loadToggles()
-      ]);
-    }
+<div class="modal-bg" id="m-boss"><div class="modal"><h3 id="bmt">💀 BOSS</h3>
+<div class="fg"><label>Nome</label><input id="bs-n" placeholder="Ex: Sombra da Fantasia"></div>
+<div class="fg-row"><div class="fg"><label>Pilar</label><select id="bs-p"><option value="mente">🧠 Mente</option><option value="espirito">🧘 Espírito</option><option value="corpo">💪 Corpo</option><option value="ouro">💰 Ouro</option><option value="work">🎬 Work</option></select></div>
+<div class="fg"><label>XP</label><input type="number" id="bs-x" value="200"></div></div>
+<div class="fg"><label>Condição</label><input id="bs-c" placeholder="Ex: 30 dias sem pornografia"></div>
+<button class="mbtn" onclick="saveBoss()">SALVAR</button><button class="mbtn sec" onclick="cm('m-boss')" style="margin-top:8px">CANCELAR</button></div></div>
 
-    function refreshAll() {
-      showToast('🔄 Atualizando...');
-      loadAll().then(() => showToast('✅ Atualizado!', 'success'));
-    }
+<div class="modal-bg" id="m-review"><div class="modal"><h3>📊 REVIEW</h3>
+<div class="fg"><label>O que foi bem?</label><textarea id="rv-b"></textarea></div>
+<div class="fg"><label>O que melhorar?</label><textarea id="rv-m"></textarea></div>
+<div class="fg"><label>Padrão identificado</label><input id="rv-p" placeholder="Ex: Caio à noite quando..."></div>
+<div class="fg"><label>Foco próxima semana</label><input id="rv-f"></div>
+<div class="fg"><label>Nota (1-10)</label><input type="number" id="rv-n" value="5" min="1" max="10"></div>
+<button class="mbtn" onclick="saveReview()">SALVAR (+50 XP)</button><button class="mbtn sec" onclick="cm('m-review')" style="margin-top:8px">CANCELAR</button></div></div>
 
-    // ============================================================
-    // PROFILE
-    // ============================================================
-    async function loadProfile() {
-      const data = await rpc('fn_ss_status');
-      
-      const xpPercent = Math.round((data.xp_atual / data.xp_proximo) * 100);
-      
-      document.getElementById('profile-card').innerHTML = `
-        <div class="profile-top">
-          <div class="profile-avatar">${data.hunter_rank}</div>
-          <div class="profile-info">
-            <h2>${data.nome}</h2>
-            <div class="rank">⚔️ Rank ${data.hunter_rank} — Level ${data.hunter_level}</div>
-            <div class="title">"${data.titulo_hunter}"</div>
-          </div>
-        </div>
-        
-        <div class="xp-section">
-          <div class="xp-header">
-            <span>XP</span>
-            <span>${data.xp_atual} / ${data.xp_proximo}</span>
-          </div>
-          <div class="xp-bar">
-            <div class="xp-fill" style="width: ${xpPercent}%"></div>
-          </div>
-        </div>
-        
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="value">🔥 ${data.streak_atual}</div>
-            <div class="label">Streak (×${data.multiplicador})</div>
-          </div>
-          <div class="stat-item">
-            <div class="value">🧘 ${data.horas_meditacao}h</div>
-            <div class="label">${data.meditacao_rank_nome}</div>
-          </div>
-          <div class="stat-item">
-            <div class="value">🏆 ${data.conquistas}</div>
-            <div class="label">Conquistas</div>
-          </div>
-          <div class="stat-item">
-            <div class="value">💀 ${data.bosses}</div>
-            <div class="label">Bosses</div>
-          </div>
-        </div>
-      `;
-    }
+<div class="modal-bg" id="m-diario"><div class="modal"><h3>📓 NOVA ENTRADA</h3>
+<div class="fg"><label>Como estou agora?</label><input id="dj-c" placeholder="Ansioso, calmo, irritado..."></div>
+<div class="fg"><label>O que disparou?</label><input id="dj-g" placeholder="Situação, pessoa..."></div>
+<div class="fg"><label>Para quem esse sentimento veio?</label><input id="dj-p" placeholder="Para o ego que..."></div>
+<div class="fg"><label>Observei ou fugi?</label><select id="dj-o"><option value="observei">👁️ Observei</option><option value="fugi">🏃 Fugi</option><option value="parcial">⚡ Parcial</option></select></div>
+<div class="fg"><label>O que ficou?</label><textarea id="dj-f" placeholder="Insight, paz, clareza..."></textarea></div>
+<div class="fg"><label>Notas livres</label><textarea id="dj-n"></textarea></div>
+<button class="mbtn" onclick="saveDiario()">SALVAR (+10 XP)</button><button class="mbtn sec" onclick="cm('m-diario')" style="margin-top:8px">CANCELAR</button></div></div>
 
-    // ============================================================
-    // DAILY MISSIONS
-    // ============================================================
-    async function loadMissions() {
-      const data = await rpc('fn_ss_missoes_hoje');
-      
-      let html = '';
-      for (const m of data.diarias) {
-        const status = m.feita ? 'completed' : '';
-        const check = m.feita ? '✓' : '';
-        html += `
-          <div class="mission-item ${status}" onclick="completeMission('${m.nome}', ${m.feita})">
-            <div class="mission-check">${check}</div>
-            <div class="mission-info">
-              <div class="mission-name">${m.nome}</div>
-              <div class="mission-meta">${m.pilar} • ${m.modo}</div>
-            </div>
-            <div class="mission-xp">+${m.xp}</div>
-          </div>
-        `;
-      }
-      
-      document.getElementById('daily-missions').innerHTML = html || '<p style="text-align:center;color:var(--text-dim)">Nenhuma missão</p>';
-    }
+<div class="modal-bg" id="m-sab"><div class="modal"><h3>📜 NOVA FRASE</h3>
+<div class="fg"><label>Frase</label><textarea id="sb-f" placeholder="A frase..."></textarea></div>
+<div class="fg-row"><div class="fg"><label>Autor</label><input id="sb-a" value="Batista"></div>
+<div class="fg"><label>Categoria</label><select id="sb-c"><option value="pessoal">⚔️ Pessoal</option><option value="maharshi">🧘 Maharshi</option><option value="covey">📘 Covey</option><option value="adams">🕊️ Adams</option><option value="neurociencia">🧠 Neuro</option><option value="quetzal">🦅 Quetzal</option></select></div></div>
+<button class="mbtn" onclick="addSab()">SALVAR</button><button class="mbtn sec" onclick="cm('m-sab')" style="margin-top:8px">CANCELAR</button></div></div>
 
-    async function completeMission(name, alreadyDone) {
-      if (alreadyDone) {
-        showToast('Missão já completada hoje!');
-        return;
-      }
-      
-      const result = await rpc('fn_ss_completar', { p_missao_nome: name });
-      
-      if (result.erro) {
-        showToast(result.erro, 'error');
-      } else {
-        showToast(`✅ ${result.missao} — +${result.xp.xp_ganho} XP`, 'success');
-        loadMissions();
-        loadProfile();
-      }
-    }
+<div class="toast" id="toast"></div>
 
-    async function failMission(name) {
-      const result = await rpc('fn_ss_falhar', { p_missao_nome: name });
-      
-      if (result.erro) {
-        showToast(result.erro, 'error');
-      } else {
-        showToast(`💀 ${result.missao} — -${result.xp_perdido} XP`, 'error');
-        loadMissions();
-        loadProfile();
-      }
-    }
+<div class="reward-popup" id="reward-popup"><div class="reward-box">
+<h2>🎁 DAILY REWARD</h2><p style="color:var(--td)">Dias consecutivos:</p>
+<div class="reward-days" id="rw-d">1</div><div class="reward-xp" id="rw-x">+5 XP</div>
+<p id="rw-m" style="color:var(--td);font-size:13px;margin-bottom:16px"></p>
+<button class="reward-btn" onclick="closeReward()">COLETAR</button>
+</div></div>
 
-    // ============================================================
-    // MEDITATION
-    // ============================================================
-    async function loadMeditation() {
-      const data = await rpc('fn_ss_status');
-      
-      document.getElementById('meditation-stats').innerHTML = `
-        <div class="med-stat">
-          <div class="value">${data.horas_meditacao}h</div>
-          <div class="label">Total</div>
-        </div>
-        <div class="med-stat">
-          <div class="value">${data.sessoes_meditacao}</div>
-          <div class="label">Sessões</div>
-        </div>
-        <div class="med-stat">
-          <div class="value">${data.meditacao_rank_nome}</div>
-          <div class="label">Rank</div>
-        </div>
-      `;
-    }
+<script>
+const C={pw:'17Mindset22.',url:'https://hqircciopclwoyhgdnlv.supabase.co',key:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxaXJjY2lvcGNsd295aGdkbmx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTU1MDEsImV4cCI6MjA4ODkzMTUwMX0.fCQ3wDwdyDydEngta1kkxrw8sWJi-PyHieVaCkCkzYM'};
 
-    async function registerMeditation() {
-      const minutes = parseInt(document.getElementById('med-minutes').value) || 20;
-      
-      const result = await rpc('fn_ss_meditacao', { p_minutos: minutes });
-      
-      if (result.erro) {
-        showToast(result.erro, 'error');
-      } else {
-        let msg = `🧘 ${minutes}min — +${result.xp_total} XP`;
-        if (result.milestone) {
-          msg += `\n🏆 MILESTONE: ${result.milestone.mensagem}`;
-        }
-        showToast(msg, 'success');
-        loadMeditation();
-        loadProfile();
-        loadMissions();
-      }
-    }
+async function rpc(fn,p={}){try{const r=await fetch(`${C.url}/rest/v1/rpc/${fn}`,{method:'POST',headers:{'apikey':C.key,'Authorization':`Bearer ${C.key}`,'Content-Type':'application/json'},body:JSON.stringify(p)});return await r.json()}catch(e){return{erro:e.message}}}
 
-    // ============================================================
-    // WEEKLY MISSIONS
-    // ============================================================
-    async function loadWeekly() {
-      const data = await rpc('fn_ss_semana');
-      
-      let html = '';
-      if (data.missoes && data.missoes.length > 0) {
-        for (const m of data.missoes) {
-          const progress = (m.quantidade_feita / m.quantidade_alvo) * 100;
-          const isComplete = m.status === 'completa';
-          
-          html += `
-            <div class="semanal-item">
-              <div class="semanal-header">
-                <div class="semanal-name">${isComplete ? '✅' : '⬜'} ${m.nome}</div>
-                <div class="semanal-progress-text">${m.progresso}</div>
-              </div>
-              <div class="semanal-bar">
-                <div class="semanal-fill" style="width: ${progress}%"></div>
-              </div>
-              ${!isComplete ? `
-                <div class="semanal-actions">
-                  <button class="semanal-btn" onclick="advanceWeekly('${m.nome}')">+1</button>
-                </div>
-              ` : ''}
-            </div>
-          `;
-        }
-      } else {
-        html = '<p style="text-align:center;color:var(--text-dim)">Nenhuma missão semanal definida</p>';
-      }
-      
-      html += `
-        <button class="add-btn" onclick="toggleAddSemanal()">
-          + Adicionar Semanal
-        </button>
-        <div class="add-form" id="add-semanal-form">
-          <input type="text" id="semanal-nome" placeholder="Nome (ex: Postar 2 vídeos)">
-          <select id="semanal-categoria">
-            <option value="conteudo">🎬 Conteúdo</option>
-            <option value="entrega_cliente">📄 Entrega Cliente</option>
-            <option value="atividade_fisica">💪 Atividade Física</option>
-            <option value="caminhada">🚶 Caminhada</option>
-            <option value="corrida">🏃 Corrida</option>
-            <option value="meditacao_extra">🧘 Meditação Extra</option>
-            <option value="jejum">🍽️ Jejum</option>
-            <option value="estudo">📚 Estudo</option>
-            <option value="automacao">🔧 Automação</option>
-            <option value="custom">⚡ Custom</option>
-          </select>
-          <input type="number" id="semanal-qtd" placeholder="Quantidade" value="1">
-          <button onclick="createWeekly()">CRIAR</button>
-        </div>
-      `;
-      
-      document.getElementById('weekly-missions').innerHTML = html;
-    }
+// Utils
+const $=id=>document.getElementById(id);
+function esc(s){return(s||'').replace(/'/g,"\\'")}
+function fmt(s){return`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`}
+function pi(p){return{mente:'🧠',espirito:'🧘',corpo:'💪',ouro:'💰',work:'🎬'}[p]||'📋'}
+function toast(m,t=''){const el=$('toast');el.textContent=m;el.className='toast show '+t;setTimeout(()=>el.className='toast',3500)}
+function om(id){$(id).classList.add('show')}
+function cm(id){$(id).classList.remove('show')}
+function tc(h){h.classList.toggle('closed');h.nextElementSibling.classList.toggle('closed')}
 
-    function toggleAddSemanal() {
-      document.getElementById('add-semanal-form').classList.toggle('show');
-    }
+const RANKS={E:'Despertar',D:'Aprendiz',C:'Guerreiro',B:'Caçador',A:'Mestre',S:'Soberano'};
+const IDENTS={E:'"Começando a obedecer a si mesmo"',D:'"Medito todos os dias"',C:'"Não negocio com minha mente"',B:'"A dor não me controla"',A:'"Ajo sem apego ao resultado"',S:'"Sou aquilo que resta quando tudo some"'};
+const RI={maior_streak:'🔥',maior_streak_nofap:'🛡️',maior_meditacao_unica:'🧘',mais_xp_um_dia:'⚡',dias_perfeitos_seguidos:'💎',total_emergencias_vencidas:'🚨',total_diario_entradas:'📓',total_missoes_completas:'⚔️',melhor_semana_xp:'📈',total_horas_sono_media:'💤',login_consecutivo_max:'📅'};
 
-    async function createWeekly() {
-      const nome = document.getElementById('semanal-nome').value;
-      const categoria = document.getElementById('semanal-categoria').value;
-      const qtd = parseInt(document.getElementById('semanal-qtd').value) || 1;
-      
-      if (!nome) {
-        showToast('Digite o nome da missão', 'error');
-        return;
-      }
-      
-      const result = await rpc('fn_ss_criar_semanal', {
-        p_nome: nome,
-        p_categoria: categoria,
-        p_quantidade: qtd
-      });
-      
-      if (result.erro) {
-        showToast(result.erro, 'error');
-      } else {
-        showToast(`✅ Semanal criada: ${result.nome}`, 'success');
-        document.getElementById('semanal-nome').value = '';
-        document.getElementById('add-semanal-form').classList.remove('show');
-        loadWeekly();
-      }
-    }
+// Login
+function login(){if($('pw').value===C.pw){$('LS').style.display='none';$('app').style.display='block';localStorage.setItem('ss','1');initApp()}else{$('lerr').style.display='block';$('pw').value=''}}
+function logout(){localStorage.removeItem('ss');location.reload()}
+if(localStorage.getItem('ss')==='1'){$('LS').style.display='none';$('app').style.display='block';initApp()}
+$('pw').addEventListener('keypress',e=>{if(e.key==='Enter')login()});
 
-    async function advanceWeekly(nome) {
-      const result = await rpc('fn_ss_completar_semanal', {
-        p_nome: nome,
-        p_quantidade: 1
-      });
-      
-      if (result.erro) {
-        showToast(result.erro, 'error');
-      } else {
-        let msg = `📅 ${result.nome}: ${result.progresso}`;
-        if (result.completa) {
-          msg = `✅ ${result.nome} COMPLETA! +${result.xp_ganho} XP`;
-        }
-        showToast(msg, 'success');
-        loadWeekly();
-        loadProfile();
-      }
-    }
+let _p=null;
+async function initApp(){await Promise.all([loadProfile(),loadCommit(),loadMissions(),loadMedUI(),loadFocus(),loadMood(),loadWisdom()]);checkDR()}
 
-    // ============================================================
-    // BOSSES
-    // ============================================================
-    async function loadBosses() {
-      const data = await rpc('fn_ss_bosses');
-      
-      let html = '';
-      for (const b of data.bosses) {
-        const status = b.completo ? 'completed' : '';
-        
-        html += `
-          <div class="boss-item ${status}">
-            <div class="boss-icon">💀</div>
-            <div class="boss-info">
-              <div class="boss-name">${b.nome}</div>
-              <div class="boss-condition">${b.condicao}</div>
-              <div class="boss-progress">${b.progresso}</div>
-            </div>
-            <div class="boss-xp">+${b.xp}</div>
-            ${!b.completo ? `<button class="boss-btn" onclick="defeatBoss('${b.nome}')">DERROTAR</button>` : ''}
-          </div>
-        `;
-      }
-      
-      document.getElementById('bosses-section').innerHTML = html;
-    }
+// Tabs
+let tl={0:1,1:0,2:0,3:0,4:0};
+function switchTab(i){document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('act',j===i));document.querySelectorAll('.tpanel').forEach((p,j)=>p.classList.toggle('act',j===i));
+if(!tl[i]){tl[i]=1;if(i===1){loadWeekly();loadRevs()}if(i===2)loadBosses();if(i===3){loadConq();loadTitulos();loadRecs()}if(i===4){loadToggles();loadSabFull();loadDiario();loadSono();loadMoodHist();loadRecaidas();loadHeatmap();loadAnalytics();loadTimeline();loadFalhas()}}}
 
-    async function defeatBoss(nome) {
-      if (!confirm(`Derrotar boss: ${nome}?`)) return;
-      
-      const result = await rpc('fn_ss_completar_boss', { p_nome: nome });
-      
-      if (result.erro) {
-        showToast(result.erro, 'error');
-      } else {
-        showToast(`💀 BOSS DERROTADO: ${result.boss} — +${result.xp} XP`, 'success');
-        loadBosses();
-        loadProfile();
-      }
-    }
+// Profile
+async function loadProfile(){const d=await rpc('fn_ss_status');if(d.erro)return;_p=d;const pct=Math.min(Math.round((d.xp_atual/d.xp_proximo)*100),100);
+$('profile-body').innerHTML=`<div class="prof-top"><div class="avatar">${d.hunter_rank}</div><div class="pinfo"><h2>${d.nome}</h2><div class="rk">⚔️ Rank ${d.hunter_rank} — ${RANKS[d.hunter_rank]||''} — Lv.${d.hunter_level}</div><div class="tit">"${d.titulo_hunter}"</div></div></div><div class="xp-s"><div class="xp-h"><span>XP</span><strong>${d.xp_atual}/${d.xp_proximo}</strong></div><div class="xpbar"><div class="xpfill" style="width:${pct}%"></div></div></div><div class="sgrid"><div class="sitem"><div class="sv">🔥${d.streak_atual}</div><div class="sl">×${d.multiplicador}</div></div><div class="sitem"><div class="sv">🧘${d.horas_meditacao}h</div><div class="sl">${d.meditacao_rank_nome||'--'}</div></div><div class="sitem"><div class="sv">🏆${d.conquistas}</div><div class="sl">Conquistas</div></div><div class="sitem"><div class="sv">💀${d.bosses}</div><div class="sl">Bosses</div></div></div>${d.penalty_zone?'<div style="background:rgba(239,68,68,.1);border:1px solid var(--no);padding:10px;border-radius:8px;margin-top:12px;text-align:center;color:var(--no);font-weight:700">⚠️ PENALTY ZONE</div>':''}<div class="ident">${IDENTS[d.hunter_rank]||''}</div>`}
 
-    // ============================================================
-    // CONQUISTAS
-    // ============================================================
-    async function loadConquistas() {
-      const data = await rpc('fn_ss_conquistas_lista');
-      
-      let html = '';
-      for (const c of data.conquistas) {
-        const status = c.desbloqueada ? '' : 'locked';
-        
-        html += `
-          <div class="conquista-item ${status}">
-            <div class="conquista-icon">${c.desbloqueada ? '🏆' : '🔒'}</div>
-            <div class="conquista-info">
-              <div class="conquista-name">${c.nome}</div>
-              <div class="conquista-desc">${c.descricao}</div>
-            </div>
-            ${c.desbloqueada ? `<div class="conquista-xp">+${c.xp_bonus}</div>` : ''}
-          </div>
-        `;
-      }
-      
-      document.getElementById('conquistas-section').innerHTML = html;
-    }
+// Compromisso
+async function loadCommit(){const d=await rpc('fn_ss_compromisso_hoje');$('commit-body').innerHTML=d.assumido?`<div class="commit-box"><div style="color:var(--ok);font-weight:700">✅ Assumido</div><div class="phrase" style="margin-top:8px">"${d.frase}"</div></div>`:`<div class="commit-box"><div class="phrase">"Eu não negocio com minha mente."</div><button class="commit-btn" onclick="doCommit()">ASSUMIR</button></div>`}
+async function doCommit(){const r=await rpc('fn_ss_compromisso_assumir');if(r.sucesso){toast('🤝 +5 XP','ok');loadCommit();loadProfile()}else toast(r.erro||'Erro','err')}
 
-    // ============================================================
-    // TOGGLES
-    // ============================================================
-    async function loadToggles() {
-      const data = await rpc('fn_ss_consultar_toggles');
-      
-      let html = '<div class="toggle-grid">';
-      for (const t of data.toggles) {
-        const active = t.ativo ? 'active' : '';
-        
-        html += `
-          <div class="toggle-item">
-            <div class="toggle-name">${t.nome}</div>
-            <div class="toggle-switch ${active}" onclick="toggleActivity('${t.grupo}')"></div>
-          </div>
-        `;
-      }
-      html += '</div>';
-      
-      document.getElementById('toggles-section').innerHTML = html;
-    }
+// Missions
+async function loadMissions(){const d=await rpc('fn_ss_missoes_hoje');if(!d.diarias)return;let h='';for(const m of d.diarias){const st=m.feita?'done':'';h+=`<div class="mi ${st}"><div class="mchk" onclick="event.stopPropagation();compMi('${esc(m.nome)}',${m.feita})">${m.feita?'✓':''}</div><div class="minfo" onclick="event.stopPropagation();${m.feita?'':`compMi('${esc(m.nome)}',false)`}"><div class="mn">${m.nome}</div><div class="mm">${pi(m.pilar)} ${m.pilar} • ${m.modo}</div></div><div class="mxp">+${m.xp}</div><div class="mi-actions"><button class="mi-btn edit" onclick="event.stopPropagation();editMi('${esc(m.nome)}','${m.pilar}','${m.modo}',${m.xp},${m.xp_penalidade||10})">✏️</button>${m.feita?'':`<button class="mi-btn del" onclick="event.stopPropagation();failMi('${esc(m.nome)}')">✕</button>`}</div></div>`}h+=`<button class="add-btn" onclick="om('m-add-mi')">➕ Nova Missão</button>`;$('daily-body').innerHTML=h}
+async function compMi(n,d){if(d)return toast('Já completa!');const r=await rpc('fn_ss_completar',{p_missao_nome:n});if(r.erro)return toast(r.erro,'err');toast(`✅ ${r.missao} +${r.xp?.xp_ganho||0}XP`,'ok');loadMissions();loadProfile()}
+let _fn='';function failMi(n){_fn=n;om('m-fail')}
+async function submitFail(){const r=await rpc('fn_ss_falhar_observacao',{p_missao_nome:_fn,p_sentimento_antes:$('fl-a').value||null,p_sentimento_durante:$('fl-d').value||null,p_sentimento_depois:$('fl-dp').value||null,p_gatilho:$('fl-g').value||null,p_tentou_resistir:$('fl-r').value==='true',p_aprendizado:$('fl-ap').value||null});cm('m-fail');if(r.erro)return toast(r.erro,'err');toast(`💀 ${r.missao}`,'wrn');['fl-a','fl-d','fl-dp','fl-g','fl-ap'].forEach(i=>$(i).value='');loadMissions();loadProfile()}
+let _en='';function editMi(n,p,m,x,pe){_en=n;$('em-n').value=n;$('em-p').value=p;$('em-m').value=m;$('em-x').value=x;$('em-pe').value=pe;om('m-edit-mi')}
+async function saveEditMi(){const r=await rpc('fn_ss_editar_diaria',{p_nome_atual:_en,p_novo_nome:$('em-n').value,p_novo_pilar:$('em-p').value,p_novo_modo:$('em-m').value,p_novo_xp:+$('em-x').value,p_nova_penalidade:+$('em-pe').value});cm('m-edit-mi');if(r.sucesso){toast('✅ Editada','ok');loadMissions()}else toast(r.erro||'Erro','err')}
+async function addMi(){const n=$('am-n').value;if(!n)return toast('Nome!','err');const r=await rpc('fn_ss_adicionar_diaria',{p_nome:n,p_pilar:$('am-p').value,p_modo:$('am-m').value,p_xp:+$('am-x').value||15,p_penalidade:+$('am-pe').value||30});cm('m-add-mi');if(r.sucesso){toast('✅ Criada','ok');$('am-n').value='';loadMissions()}else toast(r.erro||'Erro','err')}
 
-    async function toggleActivity(grupo) {
-      const result = await rpc('fn_ss_toggle', { p_grupo: grupo });
-      
-      showToast(result.mensagem, 'success');
-      loadToggles();
-    }
+// Meditation
+let mt=null,ms=0,mtar=1200,mr=false;
+function loadMedUI(){$('med-body').innerHTML=`<div style="text-align:center"><div class="timer-display" id="td">20:00</div><div class="timer-bar"><div class="timer-fill" id="tf" style="width:0%"></div></div><div class="med-quick"><button class="mqbtn" onclick="smt(10,this)">10m</button><button class="mqbtn act" onclick="smt(20,this)">20m</button><button class="mqbtn" onclick="smt(30,this)">30m</button><button class="mqbtn" onclick="smt(45,this)">45m</button><button class="mqbtn" onclick="smt(60,this)">60m</button></div><div class="timer-btns" id="tb"><button class="tbtn start" onclick="startM()">▶ INICIAR</button><button class="tbtn sec" onclick="regMan()">📝 MANUAL</button></div></div><div class="med-stats" id="ms2"><div class="skel"></div></div>`;loadMS()}
+async function loadMS(){if(!$('ms2'))return loadMedUI();const d=_p||await rpc('fn_ss_status');$('ms2').innerHTML=`<div class="mst"><div class="v">${d.horas_meditacao||0}h</div><div class="l">Total</div></div><div class="mst"><div class="v">${d.sessoes_meditacao||0}</div><div class="l">Sessões</div></div><div class="mst"><div class="v">${d.meditacao_rank_nome||'--'}</div><div class="l">Rank</div></div>`}
+function smt(m,el){mtar=m*60;ms=0;mr=false;if(mt){clearInterval(mt);mt=null}$('td').textContent=fmt(mtar);$('tf').style.width='0%';document.querySelectorAll('.mqbtn').forEach(b=>b.classList.remove('act'));if(el)el.classList.add('act');$('tb').innerHTML=`<button class="tbtn start" onclick="startM()">▶ INICIAR</button><button class="tbtn sec" onclick="regMan()">📝 MANUAL</button>`}
+function startM(){mr=true;ms=0;$('tb').innerHTML=`<button class="tbtn stop" onclick="stopM()">⏸ PAUSAR</button><button class="tbtn reg" onclick="finM()">✅ FINALIZAR</button>`;mt=setInterval(()=>{ms++;const r=Math.max(mtar-ms,0);$('td').textContent=fmt(r);$('tf').style.width=Math.min((ms/mtar)*100,100)+'%';if(r<=0){clearInterval(mt);mt=null;finM()}},1000)}
+function stopM(){if(mt){clearInterval(mt);mt=null;mr=false}$('tb').innerHTML=`<button class="tbtn start" onclick="resM()">▶ CONTINUAR</button><button class="tbtn reg" onclick="finM()">✅ FIN (${Math.floor(ms/60)}m)</button>`}
+function resM(){mr=true;$('tb').innerHTML=`<button class="tbtn stop" onclick="stopM()">⏸ PAUSAR</button><button class="tbtn reg" onclick="finM()">✅ FINALIZAR</button>`;mt=setInterval(()=>{ms++;const r=Math.max(mtar-ms,0);$('td').textContent=fmt(r);$('tf').style.width=Math.min((ms/mtar)*100,100)+'%';if(r<=0){clearInterval(mt);mt=null;finM()}},1000)}
+async function finM(){if(mt){clearInterval(mt);mt=null}const mins=Math.max(Math.round(ms/60),1);await regMed(mins);ms=0;mr=false;$('td').textContent=fmt(mtar);$('tf').style.width='0%';$('tb').innerHTML=`<button class="tbtn start" onclick="startM()">▶ INICIAR</button><button class="tbtn sec" onclick="regMan()">📝 MANUAL</button>`}
+function regMan(){const m=prompt('Minutos?','20');if(m&&+m>0)regMed(+m)}
+async function regMed(mins){const r=await rpc('fn_ss_meditacao',{p_minutos:mins});if(r.erro)return toast(r.erro,'err');let msg=`🧘 ${mins}min +${r.xp_total}XP`;if(r.milestone)msg+=` 🏆 ${r.milestone.mensagem}`;toast(msg,'ok');loadMS();loadProfile();loadMissions()}
 
-    // ============================================================
-    // UTILS
-    // ============================================================
-    function toggleSection(header) {
-      header.classList.toggle('collapsed');
-      header.nextElementSibling.classList.toggle('collapsed');
-    }
+// Focus
+async function loadFocus(){const d=await rpc('fn_ss_foco_hoje');if(!d.definido){$('focus-body').innerHTML=`<div class="fg"><input id="f1" placeholder="⚡ Prioridade 1"></div><div class="fg"><input id="f2" placeholder="⚡ 2 (opcional)"></div><div class="fg"><input id="f3" placeholder="⚡ 3 (opcional)"></div><button class="mbtn" onclick="setFoc()">DEFINIR</button>`}else{let h='';for(const i of d.itens)h+=`<div class="foci ${i.completo?'done':''}" onclick="compFoc(${i.ordem})"><div class="mchk">${i.completo?'✓':''}</div><span>${i.descricao}</span></div>`;if(d.todas_completas)h+=`<div style="text-align:center;color:var(--ok);font-weight:700;margin-top:8px">🎯 +30 XP</div>`;$('focus-body').innerHTML=h}}
+async function setFoc(){const i=$('f1').value;if(!i)return toast('Preencha!','err');const r=await rpc('fn_ss_foco_definir',{p_item1:i,p_item2:$('f2').value||null,p_item3:$('f3').value||null});if(r.sucesso){toast('🎯 +5 XP','ok');loadFocus();loadProfile()}}
+async function compFoc(o){const r=await rpc('fn_ss_foco_completar_item',{p_ordem:o});if(r.sucesso){toast(r.todas_completas?'🎯 COMPLETO! +30XP':'✅','ok');loadFocus();loadProfile()}}
 
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
+// Mood
+function loadMood(){$('mood-body').innerHTML=`<div class="mood-grid"><div class="mood-btn" onclick="doMood('reativo')"><span class="emoji">😤</span><span class="label">Reativo</span></div><div class="mood-btn" onclick="doMood('neutro')"><span class="emoji">😐</span><span class="label">Neutro</span></div><div class="mood-btn" onclick="doMood('presente')"><span class="emoji">😌</span><span class="label">Presente</span></div><div class="mood-btn" onclick="doMood('profundo')"><span class="emoji">🧘</span><span class="label">Profundo</span></div></div>`}
+async function doMood(m){const h=new Date().getHours();const r=await rpc('fn_ss_mood_registrar',{p_mood:m,p_intensidade:5,p_periodo:h<12?'manha':h<18?'tarde':'noite'});if(r.sucesso)toast(`${r.motivacao||'Registrado'}`,'ok')}
 
-    function showToast(message, type = '') {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.className = 'toast show ' + type;
-      
-      setTimeout(() => {
-        toast.className = 'toast';
-      }, 3000);
-    }
-  </script>
+// Wisdom
+async function loadWisdom(){const d=await rpc('fn_ss_sabedoria_random');if(d.frase)$('wisdom-body').innerHTML=`<div class="wisdom"><div class="wq">"${d.frase}"</div><div class="wa">— ${d.autor}</div></div><button class="add-btn" onclick="loadWisdom()" style="margin-top:0;font-size:12px">🔄 Outra</button>`}
+
+// Emergency
+let eT=null,eS=0;
+function openEmergency(){$('emer-mode').style.display='block';eS=0;$('emer-timer').textContent='00:00';eT=setInterval(()=>{eS++;$('emer-timer').textContent=fmt(eS)},1000);const q=["Para quem esse impulso veio?","Não há problemas. Nunca houve.","Observe sem reagir.","O impulso é do ego."];$('emer-quote').textContent='"'+q[Math.floor(Math.random()*q.length)]+'"'}
+async function endEmergency(res){if(eT){clearInterval(eT);eT=null}$('emer-mode').style.display='none';const g=prompt('Gatilho?');await rpc('fn_ss_emergencia_registrar',{p_tipo:'impulso',p_resultado:res,p_gatilho:g,p_tempo_segundos:eS});toast(res==='vitoria'?'🛡️ Venceu! +25XP':'💀 Levanta.',res==='vitoria'?'ok':'wrn');loadProfile()}
+
+// Daily Reward
+async function checkDR(){const r=await rpc('fn_ss_daily_reward');if(r.erro)return;$('rw-d').textContent=r.dias_consecutivos;$('rw-x').textContent=`+${r.xp_ganho} XP`;$('rw-m').textContent=r.motivacao||'';$('reward-popup').style.display='flex';loadProfile()}
+function closeReward(){$('reward-popup').style.display='none'}
+
+// =================== P2: WEEKLY ===================
+async function loadWeekly(){const d=await rpc('fn_ss_semana');if(!d||!d.missoes){$('weekly-body').innerHTML=`<div class="empty"><div class="empty-icon">📅</div><p>Nenhuma</p></div><button class="add-btn" onclick="om('m-add-sem')">➕ Criar</button>`;$('wb').textContent='0';return}const dn=d.missoes.filter(m=>m.status==='completa').length;$('wb').textContent=`${dn}/${d.missoes.length}`;let h='';for(const m of d.missoes){const pct=Math.min((m.quantidade_feita/m.quantidade_alvo)*100,100);const done=m.status==='completa';h+=`<div class="wi ${done?'done':''}"><div class="wi-top"><div class="wi-name">${done?'✅':'⬜'} ${m.nome}</div><div class="wi-prog">${m.progresso}</div></div><div class="wi-bar"><div class="wi-fill" style="width:${pct}%"></div></div>${done?'':`<div class="wi-acts"><button class="wi-btn" onclick="advW('${esc(m.nome)}',1)">+1</button><button class="wi-btn alt" onclick="advW('${esc(m.nome)}',3)">+3</button><button class="wi-btn alt" onclick="advW('${esc(m.nome)}',5)">+5</button><button class="wi-btn sec" onclick="editSem('${esc(m.nome)}',${m.quantidade_alvo})">✏️</button></div>`}</div>`}h+=`<button class="add-btn" onclick="om('m-add-sem')">➕ Criar</button>`;$('weekly-body').innerHTML=h}
+async function advW(n,q){const r=await rpc('fn_ss_completar_semanal',{p_nome:n,p_quantidade:q});if(r.erro)return toast(r.erro,'err');toast(r.completa?`✅ ${r.nome} +${r.xp_ganho}XP`:`📅 ${r.nome}: ${r.progresso}`,'ok');loadWeekly();loadProfile()}
+async function createWeekly(){const n=$('as-n').value;if(!n)return toast('Nome!','err');const r=await rpc('fn_ss_criar_semanal',{p_nome:n,p_categoria:$('as-c').value,p_quantidade:+$('as-q').value||1});cm('m-add-sem');if(r.erro)return toast(r.erro,'err');toast(`✅ ${r.nome}`,'ok');$('as-n').value='';loadWeekly()}
+let _esn='';function editSem(n,q){_esn=n;$('es-n').value=n;$('es-q').value=q;om('m-edit-sem')}
+async function saveEditSem(){await rpc('fn_ss_editar_semanal_nome',{p_nome_atual:_esn,p_novo_nome:$('es-n').value||null,p_nova_qtd:+$('es-q').value||null});cm('m-edit-sem');toast('✅','ok');loadWeekly()}
+
+// Reviews
+async function loadRevs(){const d=await rpc('fn_ss_review_listar',{p_limit:5});let h=`<button class="mbtn" onclick="om('m-review')" style="margin-bottom:16px">📊 Review (+50 XP)</button>`;if(d.reviews&&d.reviews.length>0){for(const r of d.reviews)h+=`<div class="rev"><div class="rev-head">Sem ${r.semana} — ${r.nota}/10</div><div class="rev-line"><strong>✅</strong> ${r.o_que_foi_bem||'—'}</div><div class="rev-line"><strong>⚠️</strong> ${r.o_que_melhorar||'—'}</div>${r.padrao_identificado?`<div class="rev-line"><strong>🔍</strong> ${r.padrao_identificado}</div>`:''}</div>`}$('review-body').innerHTML=h}
+async function saveReview(){const r=await rpc('fn_ss_review_salvar',{p_o_que_foi_bem:$('rv-b').value,p_o_que_melhorar:$('rv-m').value,p_padrao:$('rv-p').value||null,p_foco_proxima:$('rv-f').value||null,p_nota:+$('rv-n').value||5});cm('m-review');if(r.sucesso){toast('📊 +50 XP','ok');loadRevs();loadProfile()}}
+
+// =================== P2: BOSSES ===================
+let _bn='';
+async function loadBosses(){const d=await rpc('fn_ss_bosses');if(!d||!d.bosses)return;const act=d.bosses.filter(b=>!b.completo),don=d.bosses.filter(b=>b.completo);let h='';if(!act.length)h=`<div class="empty"><div class="empty-icon">💀</div><p>Nenhum</p></div>`;for(const b of act)h+=`<div class="bi"><div class="bi-icon">💀</div><div class="bi-info"><div class="bi-name">${b.nome}</div><div class="bi-cond">${b.condicao||'—'}</div></div><div class="bi-right"><div class="bi-xp">+${b.xp}</div><button class="bi-btn atk" onclick="defBoss('${esc(b.nome)}')">⚔️</button><button class="bi-btn edt" onclick="editBoss('${esc(b.nome)}','${b.pilar||'mente'}',${b.xp},'${esc(b.condicao||'')}')">✏️</button></div></div>`;h+=`<button class="add-btn" onclick="addBoss()">➕ Novo</button>`;$('bosses-active').innerHTML=h;let hd='';if(!don.length)hd='<div class="empty"><p>Nenhum derrotado</p></div>';for(const b of don)hd+=`<div class="bi done"><div class="bi-icon">☠️</div><div class="bi-info"><div class="bi-name">${b.nome}</div></div><div class="bi-xp">+${b.xp}</div></div>`;$('bosses-done').innerHTML=hd}
+async function defBoss(n){if(!confirm('⚔️ Derrotar: '+n+'?'))return;const r=await rpc('fn_ss_completar_boss',{p_nome:n});if(r.erro)return toast(r.erro,'err');toast(`💀 ${r.boss} +${r.xp}XP`,'ok');loadBosses();loadProfile()}
+function addBoss(){_bn='';$('bmt').textContent='➕ NOVO BOSS';$('bs-n').value='';$('bs-c').value='';om('m-boss')}
+function editBoss(n,p,x,c){_bn=n;$('bmt').textContent='✏️ EDITAR';$('bs-n').value=n;$('bs-p').value=p;$('bs-x').value=x;$('bs-c').value=c;om('m-boss')}
+async function saveBoss(){const n=$('bs-n').value;if(!n)return toast('Nome!','err');if(_bn)await rpc('fn_ss_editar_boss_dados',{p_nome_atual:_bn,p_novo_nome:n,p_novo_pilar:$('bs-p').value,p_novo_xp:+$('bs-x').value,p_nova_condicao:$('bs-c').value});else await rpc('fn_ss_criar_boss',{p_nome:n,p_pilar:$('bs-p').value,p_xp:+$('bs-x').value,p_condicao:$('bs-c').value});cm('m-boss');toast('✅','ok');loadBosses()}
+
+// =================== P2: CONQUISTAS ===================
+async function loadConq(){const d=await rpc('fn_ss_conquistas_lista');if(!d||!d.conquistas)return;const u=d.conquistas.filter(c=>c.desbloqueada).length;$('cb').textContent=`${u}/${d.conquistas.length}`;let h='';for(const c of d.conquistas)h+=`<div class="ci ${c.desbloqueada?'':'locked'}"><div class="ci-icon">${c.desbloqueada?'🏆':'🔒'}</div><div class="ci-info"><div class="ci-name">${c.nome}</div><div class="ci-desc">${c.descricao}</div></div>${c.desbloqueada?`<div class="ci-xp">+${c.xp_bonus}</div>`:''}</div>`;$('conq-body').innerHTML=h}
+
+async function loadTitulos(){const d=await rpc('fn_ss_titulos_listar');if(!d||!d.titulos)return;let h=`<button class="mbtn sec" onclick="chkTit()" style="margin-bottom:12px">🔍 Verificar</button>`;for(const t of d.titulos){const cl=t.equipado?'eq':t.desbloqueado?'':'locked';h+=`<div class="ti ${cl}"><div class="ti-icon">${t.icone||'🏷️'}</div><div class="ti-info"><div class="ti-name">${t.nome}</div><div class="ti-desc">${t.condicao||''}</div></div>${t.desbloqueado&&!t.equipado?`<button class="ti-btn" onclick="eqTit('${esc(t.nome)}')">EQUIPAR</button>`:''}${t.equipado?'<span style="color:var(--p);font-size:10px;font-weight:700">ATIVO</span>':''}</div>`}$('titulos-body').innerHTML=h}
+async function eqTit(n){await rpc('fn_ss_titulo_equipar',{p_titulo_nome:n});toast('🏷️ Equipado','ok');loadTitulos();loadProfile()}
+async function chkTit(){const r=await rpc('fn_ss_verificar_titulos');if(r&&r.length>0)toast(`🎉 ${r.map(t=>t.icone+' '+t.nome).join(', ')}`,'ok');else toast('Nenhum novo','wrn');loadTitulos()}
+
+async function loadRecs(){const d=await rpc('fn_ss_recordes_listar');if(!d||!d.recordes)return;let h='';for(const r of d.recordes)h+=`<div class="ri"><div class="ri-icon">${RI[r.tipo]||'🏅'}</div><div class="ri-info"><div class="ri-name">${r.descricao||r.tipo}</div></div><div class="ri-val">${r.valor}</div></div>`;$('recordes-body').innerHTML=h}
+
+// =================== P3: TOGGLES ===================
+async function loadToggles(){const d=await rpc('fn_ss_consultar_toggles');if(!d||!d.toggles)return;let h='<div class="tg-grid">';for(const t of d.toggles)h+=`<div class="tg-item"><div class="tg-name">${t.nome}</div><div class="tg-sw ${t.ativo?'on':''}" onclick="doToggle('${t.grupo}')"></div></div>`;h+='</div>';$('toggles-body').innerHTML=h}
+async function doToggle(g){const r=await rpc('fn_ss_toggle',{p_grupo:g});toast(r.mensagem||'OK','ok');loadToggles()}
+
+// =================== P3: SABEDORIA FULL ===================
+async function loadSabFull(){const d=await rpc('fn_ss_sabedoria_listar');if(!d||!d.frases)return;let h=`<button class="add-btn" onclick="om('m-sab')" style="margin-bottom:12px">➕ Nova Frase</button>`;const cats=[...new Set(d.frases.map(f=>f.categoria))];for(const c of cats){const fs=d.frases.filter(f=>f.categoria===c);h+=`<div style="margin-bottom:12px"><div style="font-size:11px;color:var(--td);text-transform:uppercase;margin-bottom:6px;letter-spacing:1px">${c} (${fs.length})</div>`;for(const f of fs.slice(0,5))h+=`<div class="wisdom" style="border-left-color:${f.favorita?'var(--warn)':'var(--bd)'}"><div class="wq">"${f.frase}"</div><div class="wa">— ${f.autor} <span style="cursor:pointer" onclick="favSab('${f.id}')">⭐</span></div></div>`;if(fs.length>5)h+=`<div style="font-size:11px;color:var(--t3);text-align:center">+${fs.length-5} mais...</div>`;h+='</div>'}$('sab-body').innerHTML=h}
+async function addSab(){const f=$('sb-f').value;if(!f)return toast('Frase!','err');await rpc('fn_ss_sabedoria_adicionar',{p_frase:f,p_autor:$('sb-a').value||'Batista',p_categoria:$('sb-c').value});cm('m-sab');toast('📜 Adicionada','ok');$('sb-f').value='';loadSabFull()}
+async function favSab(id){await rpc('fn_ss_sabedoria_favoritar',{p_frase_id:id});toast('⭐','ok');loadSabFull()}
+
+// =================== P3: DIÁRIO ===================
+async function loadDiario(){const d=await rpc('fn_ss_diario_listar',{p_dias:14});let h=`<button class="add-btn" onclick="om('m-diario')" style="margin-bottom:12px">📓 Nova Entrada (+10 XP)</button>`;if(d.entradas&&d.entradas.length>0){for(const e of d.entradas)h+=`<div class="di-entry"><div class="di-date">${e.data} • ${e.observei_ou_fugi||''}</div><div class="di-text">${e.como_estou||''}</div>${e.gatilho?`<div style="font-size:12px;color:var(--td);margin-top:4px">Gatilho: ${e.gatilho}</div>`:''}${e.o_que_ficou?`<div style="font-size:12px;color:var(--td)">Ficou: ${e.o_que_ficou}</div>`:''}</div>`}else h+=`<div class="empty"><div class="empty-icon">📓</div><p>Nenhuma entrada</p></div>`;$('diario-body').innerHTML=h}
+async function saveDiario(){const r=await rpc('fn_ss_diario_salvar',{p_como_estou:$('dj-c').value,p_gatilho:$('dj-g').value||null,p_para_quem_veio:$('dj-p').value||null,p_observei_ou_fugi:$('dj-o').value,p_o_que_ficou:$('dj-f').value||null,p_notas:$('dj-n').value||null});cm('m-diario');if(r.sucesso){toast('📓 +10 XP','ok');['dj-c','dj-g','dj-p','dj-f','dj-n'].forEach(i=>$(i).value='');loadDiario();loadProfile()}}
+
+// =================== P3: SONO ===================
+async function loadSono(){const d=await rpc('fn_ss_sono_historico',{p_dias:7});let h=`<div class="fg-row" style="margin-bottom:12px"><div class="fg"><label>Dormiu</label><input type="time" id="sn-d" value="23:00"></div><div class="fg"><label>Acordou</label><input type="time" id="sn-a" value="06:00"></div></div><div class="fg-row" style="margin-bottom:12px"><div class="fg"><label>Horas</label><input type="number" id="sn-h" value="7" step="0.5"></div><div class="fg"><label>Qualidade 1-5</label><input type="number" id="sn-q" value="3" min="1" max="5"></div></div><button class="mbtn" onclick="regSono()" style="margin-bottom:16px">💤 REGISTRAR</button>`;if(d.logs&&d.logs.length>0){h+=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">Média: ${d.media_horas}h | Qualidade: ${d.media_qualidade}/5</div>`;for(const s of d.logs)h+=`<div class="sono-item"><div class="sono-icon">💤</div><div class="sono-info"><div class="sono-date">${s.data} — Q:${s.qualidade}/5</div></div><div class="sono-val">${s.horas}h</div></div>`}$('sono-body').innerHTML=h}
+async function regSono(){const r=await rpc('fn_ss_sono_registrar',{p_hora_dormiu:$('sn-d').value,p_hora_acordou:$('sn-a').value,p_horas_total:+$('sn-h').value,p_qualidade:+$('sn-q').value});if(r.sucesso){toast(`💤 ${r.motivacao||'Registrado'}`,'ok');loadSono()}}
+
+// =================== P3: MOOD HIST ===================
+async function loadMoodHist(){const d=await rpc('fn_ss_mood_historico',{p_dias:14});if(!d.moods||!d.moods.length){$('mood-hist-body').innerHTML='<div class="empty"><p>Sem dados</p></div>';return}const emojis={reativo:'😤',neutro:'😐',presente:'😌',profundo:'🧘'};let h=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">Mais comum: ${emojis[d.mood_mais_comum]||''} ${d.mood_mais_comum||'—'} | Média intensidade: ${d.media_intensidade}/10</div>`;for(const m of d.moods.slice(0,10))h+=`<div class="ri"><div class="ri-icon">${emojis[m.mood]||'😐'}</div><div class="ri-info"><div class="ri-name">${m.data} ${m.periodo} ${m.meditou?'🧘':''}</div></div><div style="font-size:13px;color:var(--p)">${m.mood}</div></div>`;$('mood-hist-body').innerHTML=h}
+
+// =================== P3: RECAÍDAS ===================
+async function loadRecaidas(){const d=await rpc('fn_ss_recaida_padroes',{p_tipo:'pornografia'});let h=`<div class="sgrid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px"><div class="rec-stat"><div class="rv">${d.total_recaidas||0}</div><div class="rl">Total</div></div><div class="rec-stat"><div class="rv">${d.media_dias_entre_recaidas||0}d</div><div class="rl">Média entre</div></div><div class="rec-stat"><div class="rv">${_p?.streak_nofap||'?'}</div><div class="rl">Streak</div></div></div>`;if(d.gatilhos_comuns&&d.gatilhos_comuns.length){h+=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">⚠️ Gatilhos:</div>`;for(const g of d.gatilhos_comuns)h+=`<div class="ri"><div class="ri-icon">⚠️</div><div class="ri-info"><div class="ri-name">${g.gatilho}</div></div><div class="ri-val">${g.vezes}x</div></div>`}if(d.horarios_risco&&d.horarios_risco.length){h+=`<div style="font-size:12px;color:var(--td);margin:12px 0 8px">🕐 Horários risco:</div>`;for(const hr of d.horarios_risco)h+=`<div class="ri"><div class="ri-icon">🕐</div><div class="ri-info"><div class="ri-name">${hr.hora}h</div></div><div class="ri-val">${hr.vezes}x</div></div>`}$('recaidas-body').innerHTML=h}
+
+// =================== P3: HEATMAP ===================
+async function loadHeatmap(){const d=await rpc('fn_ss_heatmap',{p_dias:90});if(!d.heatmap){$('heatmap-body').innerHTML='<div class="empty"><p>Sem dados</p></div>';return}let h='<div class="hm-wrap"><div style="display:flex;gap:3px">';let col=[];for(let i=0;i<d.heatmap.length;i++){col.push(d.heatmap[i]);if(col.length===7||i===d.heatmap.length-1){h+='<div class="hm-col">';for(const c of col)h+=`<div class="hm-cell" data-l="${c.intensidade}" title="${c.data}: ${c.completas}"></div>`;h+='</div>';col=[]}}h+='</div></div>';h+=`<div style="display:flex;align-items:center;gap:6px;margin-top:8px;justify-content:flex-end"><span style="font-size:10px;color:var(--td)">Menos</span><div class="hm-cell" style="display:inline-block;width:12px;height:12px"></div><div class="hm-cell" data-l="1" style="display:inline-block;width:12px;height:12px"></div><div class="hm-cell" data-l="2" style="display:inline-block;width:12px;height:12px"></div><div class="hm-cell" data-l="3" style="display:inline-block;width:12px;height:12px"></div><div class="hm-cell" data-l="4" style="display:inline-block;width:12px;height:12px"></div><span style="font-size:10px;color:var(--td)">Mais</span></div>`;$('heatmap-body').innerHTML=h}
+
+// =================== P3: ANALYTICS ===================
+async function loadAnalytics(){const[xp,pl]=await Promise.all([rpc('fn_ss_analytics_xp',{p_dias:14}),rpc('fn_ss_analytics_pilares')]);let h=`<div class="sgrid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px"><div class="sitem"><div class="sv">${xp.xp_total_periodo||0}</div><div class="sl">XP 14d</div></div><div class="sitem"><div class="sv">${xp.media_diaria||0}</div><div class="sl">Média/dia</div></div><div class="sitem"><div class="sv">${pl.total||0}</div><div class="sl">XP Total</div></div></div>`;
+if(pl.pilares){const names={espirito:'🧘 Espírito',corpo:'💪 Corpo',mente:'🧠 Mente',ouro:'💰 Ouro',work:'🎬 Work'};h+=`<div style="font-size:11px;color:var(--td);margin-bottom:8px;text-transform:uppercase">Pilares</div>`;for(const[k,v] of Object.entries(pl.pilares))h+=`<div class="pilar-row"><div class="pilar-label"><span>${names[k]||k}</span><span style="color:var(--p)">${v.percentual}%</span></div><div class="pilar-bar"><div class="pilar-fill" style="width:${v.percentual}%"></div></div></div>`}
+if(xp.xp_por_dia&&xp.xp_por_dia.length){const mx=Math.max(...xp.xp_por_dia.map(d=>d.ganho||1));h+=`<div style="font-size:11px;color:var(--td);margin:16px 0 8px;text-transform:uppercase">XP/dia</div><div class="an-bars">`;for(const day of xp.xp_por_dia){const ht=Math.max(4,(day.ganho/mx)*100);h+=`<div class="an-bar" style="height:${ht}%" title="${day.data}: +${day.ganho}"></div>`}h+='</div>'}
+$('analytics-body').innerHTML=h}
+
+// =================== P3: TIMELINE ===================
+async function loadTimeline(){const d=await rpc('fn_ss_timeline',{p_dias:7});if(!d.timeline||!d.timeline.length){$('timeline-body').innerHTML='<div class="empty"><div class="empty-icon">📋</div><p>Sem atividade</p></div>';return}let h='';for(const i of d.timeline.slice(0,25)){const tm=i.timestamp?String(i.timestamp).substring(11,16):'';h+=`<div class="tl-item"><div class="tl-icon">${i.icone}</div><div class="tl-info"><div class="tl-title">${i.titulo}</div><div class="tl-meta">${i.data} ${tm} ${i.detalhe?'• '+i.detalhe:''}</div></div>${i.xp_ganho>0?`<div class="tl-xp pos">+${i.xp_ganho}</div>`:''}${i.xp_perdido>0?`<div class="tl-xp neg">-${i.xp_perdido}</div>`:''}</div>`}$('timeline-body').innerHTML=h}
+
+// =================== P3: FALHAS ===================
+async function loadFalhas(){const d=await rpc('fn_ss_historico_falhas',{p_dias:30});if(!d.falhas||!d.falhas.length){$('falhas-body').innerHTML='<div class="empty"><div class="empty-icon">💀</div><p>Nenhuma falha registrada</p></div>';return}let h=`<div style="font-size:12px;color:var(--td);margin-bottom:8px">Total: ${d.total} falhas em ${d.periodo_dias} dias</div>`;if(d.gatilhos_comuns&&d.gatilhos_comuns.length){h+=`<div style="font-size:11px;color:var(--warn);margin-bottom:8px">Gatilhos mais comuns:</div>`;for(const g of d.gatilhos_comuns)h+=`<div class="ri"><div class="ri-icon">⚠️</div><div class="ri-info"><div class="ri-name">${g.gatilho}</div></div><div class="ri-val">${g.vezes}x</div></div>`}h+='<div style="margin-top:12px">';for(const f of d.falhas.slice(0,10)){h+=`<div class="di-entry" style="border-left-color:var(--no)"><div class="di-date">${f.data} • ${f.missao}</div>${f.gatilho?`<div class="di-text">Gatilho: ${f.gatilho}</div>`:''}${f.sentimento_antes?`<div style="font-size:12px;color:var(--td)">Antes: ${f.sentimento_antes}</div>`:''}${f.sentimento_depois?`<div style="font-size:12px;color:var(--td)">Depois: ${f.sentimento_depois}</div>`:''}${f.aprendizado?`<div style="font-size:12px;color:var(--pl)">💡 ${f.aprendizado}</div>`:''}</div>`}h+='</div>';$('falhas-body').innerHTML=h}
+
+</script>
 </body>
 </html>
-
